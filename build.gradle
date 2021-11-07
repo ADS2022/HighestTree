@@ -1,20 +1,38 @@
 plugins {
     id 'java'
+    id 'application'
 }
 
-group 'com.feup.ads.highesttree'
+group 'fe.up.pt'
 version '1.0-SNAPSHOT'
 
 repositories {
     mavenCentral()
 }
 
+application {
+    mainClassName = 'Main'
+}
+
 dependencies {
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.7.0'
+    testImplementation 'org.mockito:mockito-inline:4.0.0'
+    testImplementation 'org.mockito:mockito-junit-jupiter:4.0.0'
+
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.7.0'
-    testImplementation group: 'org.mockito', name: 'mockito-core', version: '4.0.0'
+
+    implementation 'org.mockito:mockito-core:4.0.0'
+    implementation 'org.mockito:mockito-all:1.10.19'
+    implementation 'org.junit.jupiter:junit-jupiter:5.8.1'
+
 }
 
 test {
+    /**
+     * There’s one last step we need to do for Gradle in order to correctly use JUnit 5.
+     * We need to tell Gradle to use the JUnit Platform when running the tests,
+     * by adding useJUnitPlatform() to the test section.
+     * Go to to see more about it: https://blog.jetbrains.com/idea/2020/09/writing-tests-with-junit-5/
+     * */
     useJUnitPlatform()
 }
