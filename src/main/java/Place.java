@@ -1,0 +1,211 @@
+import java.util.Objects;
+
+public class Place {
+    private String country;
+    private String city;
+    private String district;
+    private String parish;
+    private String street;
+    private Source source;
+    private String description;
+    private SuperDate superDate;
+    private boolean isSensitive;
+
+    public Place(String country,
+                 String city,
+                 String district,
+                 String parish,
+                 String street,
+                 Source source,
+                 String description,
+                 SuperDate superDate,
+                 boolean isSensitive) {
+        setCountry(country);
+        setCity(city);
+        setDistrict(district);
+        setParish(parish);
+        setStreet(street);
+        setSource(source);
+        setDescription(description);
+        setSuperDate(superDate);
+        setSensitive(isSensitive);
+    }
+
+    public Place(String country,
+                 String city,
+                 String district,
+                 String parish,
+                 String street,
+                 String description,
+                 boolean isSensitive) {
+        setCountry(country);
+        setCity(city);
+        setDistrict(district);
+        setParish(parish);
+        setStreet(street);
+        setDescription(description);
+        setSensitive(isSensitive);
+    }
+
+    public Place(String country,
+                 String city,
+                 String district,
+                 String parish,
+                 String description,
+                 boolean isSensitive) {
+        setCountry(country);
+        setCity(city);
+        setDistrict(district);
+        setParish(parish);
+        setDescription(description);
+        setSensitive(isSensitive);
+    }
+
+    public Place(String country,
+                 String city,
+                 boolean isSensitive) {
+        setCountry(country);
+        setCity(city);
+        setSensitive(isSensitive);
+    }
+
+    public String getCountry() {
+        return country;
+    }
+
+    public void setCountry(String country) {
+        if (country == null || country.length() <= 0)
+            throw new IllegalArgumentException();
+        else
+            this.country = country;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        if (city == null || city.length() <= 0)
+            throw new IllegalArgumentException();
+        else
+            this.city = city;
+    }
+
+    public String getDistrict() {
+        return district;
+    }
+
+    public void setDistrict(String district) {
+        if (district == null || district.length() <= 0)
+            throw new IllegalArgumentException();
+        else
+            this.district = district;
+    }
+
+    public String getParish() {
+        return parish;
+    }
+
+    public void setParish(String parish) {
+        if (parish == null || parish.length() <= 0)
+            throw new IllegalArgumentException();
+        else
+            this.parish = parish;
+    }
+
+    public String getStreet() {
+        return street;
+    }
+
+    public void setStreet(String street) {
+        if (street == null || street.length() <= 0)
+            throw new IllegalArgumentException();
+        else
+            this.street = street;
+    }
+
+    public Source getSource() {
+        return source;
+    }
+
+    public void setSource(Source source) {
+        if (source == null)
+            throw new IllegalArgumentException();
+        else
+            this.source = source;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        if (description == null || description.length() <= 0)
+            throw new IllegalArgumentException();
+        else
+            this.description = description;
+    }
+
+    public SuperDate getSuperDate() {
+        return superDate;
+    }
+
+    public void setSuperDate(SuperDate superDate) {
+        if (superDate == null)
+            throw new IllegalArgumentException();
+        else
+            this.superDate = superDate;
+    }
+
+    public boolean isSensitive() {
+        return isSensitive;
+    }
+
+    public void setSensitive(boolean sensitive) {
+        isSensitive = sensitive;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Place)) return false;
+        Place place = (Place) o;
+        return isSensitive() == place.isSensitive() &&
+                Objects.equals(getCountry(), place.getCountry()) &&
+                Objects.equals(getCity(), place.getCity()) &&
+                Objects.equals(getDistrict(), place.getDistrict()) &&
+                Objects.equals(getParish(), place.getParish()) &&
+                Objects.equals(getStreet(), place.getStreet()) &&
+                Objects.equals(getSource(), place.getSource()) &&
+                Objects.equals(getDescription(), place.getDescription()) &&
+                Objects.equals(getSuperDate(), place.getSuperDate());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getCountry(),
+                getCity(),
+                getDistrict(),
+                getParish(),
+                getStreet(),
+                getSource(),
+                getDescription(),
+                getSuperDate(),
+                isSensitive());
+    }
+
+    @Override
+    public String toString() {
+        return "Place{" +
+                "country='" + country + '\'' +
+                ", city='" + city + '\'' +
+                ", district='" + district + '\'' +
+                ", parish='" + parish + '\'' +
+                ", street='" + street + '\'' +
+                ", source=" + source +
+                ", description='" + description + '\'' +
+                ", superDate=" + superDate +
+                ", isSensitive=" + isSensitive +
+                '}';
+    }
+}

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="PlaceTest" tests="21" skipped="0" failures="0" errors="0" timestamp="2021-11-07T12:40:46" hostname="MacBook-Pro-do-Francisco-Bastos.local" time="0.03">
+  <properties/>
+  <testcase name="setDistrict()" classname="PlaceTest" time="0.001"/>
+  <testcase name="getDistrict()" classname="PlaceTest" time="0.0"/>
+  <testcase name="testToString()" classname="PlaceTest" time="0.001"/>
+  <testcase name="setCountry()" classname="PlaceTest" time="0.001"/>
+  <testcase name="getSuperDate()" classname="PlaceTest" time="0.001"/>
+  <testcase name="getCity()" classname="PlaceTest" time="0.0"/>
+  <testcase name="setDescription()" classname="PlaceTest" time="0.001"/>
+  <testcase name="setParish()" classname="PlaceTest" time="0.001"/>
+  <testcase name="setSource()" classname="PlaceTest" time="0.001"/>
+  <testcase name="setStreet()" classname="PlaceTest" time="0.001"/>
+  <testcase name="getParish()" classname="PlaceTest" time="0.001"/>
+  <testcase name="getSource()" classname="PlaceTest" time="0.001"/>
+  <testcase name="getStreet()" classname="PlaceTest" time="0.001"/>
+  <testcase name="testHashCode()" classname="PlaceTest" time="0.0"/>
+  <testcase name="setSuperDate()" classname="PlaceTest" time="0.0"/>
+  <testcase name="testEquals()" classname="PlaceTest" time="0.003"/>
+  <testcase name="isSensitive()" classname="PlaceTest" time="0.001"/>
+  <testcase name="getDescription()" classname="PlaceTest" time="0.001"/>
+  <testcase name="setCity()" classname="PlaceTest" time="0.001"/>
+  <testcase name="getCountry()" classname="PlaceTest" time="0.001"/>
+  <testcase name="setSensitive()" classname="PlaceTest" time="0.0"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
