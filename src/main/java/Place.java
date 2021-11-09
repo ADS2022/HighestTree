@@ -90,6 +90,9 @@ public class Place {
         setSensitive(isSensitive);
     }
 
+    public Place() {
+    }
+
     public String getCountry() {
         return country;
     }

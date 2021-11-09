@@ -1,3 +1,16 @@
+/*
+ * Copyright (c) 2021.
+ * Created by Francisco Bastos (202103393) assembled in your computers
+ *
+ * Facebook: https://www.facebook.com/francisco.bastos.9022
+ * Instagram: https://www.instagram.com/francisco_jf_bastos/
+ * LinkedIn: https://www.linkedin.com/in/francisco-bastos-031369160/
+ * GitHub: https://github.com/FranciscoBastos
+ *
+ * “Do. Or do not. There is no try.” The Empire Strikes Back
+ *
+ */
+
 import java.util.LinkedList;
 import java.util.Objects;
 
@@ -19,6 +32,7 @@ public class Event {
                  Person personInvolved,
                  Source source,
                  boolean isSensitive) {
+        this.personsInvolved = new LinkedList<>();
         setName(name);
         setDescription(description);
         setStandardEvents(standardEvents);
@@ -29,13 +43,16 @@ public class Event {
         setSensitive(isSensitive);
     }
 
+    public Event() {
+    }
+
     public Events getStandardEvents() {
         return standardEvents;
     }
 
     public void setStandardEvents(Events event) {
-        if (standardEvents == null)
-            throw new IllegalArgumentException();
+        if (event == null)
+            throw new NullPointerException();
         else
             this.standardEvents = event;
     }
@@ -90,10 +107,10 @@ public class Event {
 
     public void insertPerson(Person person) {
         if (person == null)
-            throw new IllegalArgumentException();
-        else if (!this.personsInvolved.contains(person)) {
+            throw new NullPointerException();
+        else if (!(this.personsInvolved.contains(person)))
             this.personsInvolved.add(person);
-        } else
+        else
             throw new IllegalArgumentException();
     }
 
