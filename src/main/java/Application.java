@@ -1,46 +1,53 @@
+/*
+ * Copyright (c) 2021.
+ * Created by Francisco Bastos (202103393) assembled in your computers
+ *
+ * Facebook: https://www.facebook.com/francisco.bastos.9022
+ * Instagram: https://www.instagram.com/francisco_jf_bastos/
+ * LinkedIn: https://www.linkedin.com/in/francisco-bastos-031369160/
+ * GitHub: https://github.com/FranciscoBastos
+ *
+ * “Do. Or do not. There is no try.” The Empire Strikes Back
+ *
+ */
+
+import java.util.Arrays;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Application {
+
+    private static final int VIEW_MODE = 1;
+    private static final int EDIT_MODE = 2;
+
     public static void main(String[] args) {
-        System.out.println("Helloooooooooooooooooooooo World!");
+        System.out.println("Application loading up");
 
-
-
-        // User selects View or Edit mode
-        Boolean userLoop = true;
-        Boolean editMode = false;
-        int view = 1;
-        int edit = 2;
-
-        while (userLoop){
-
-            Scanner scanner = new Scanner(System.in);
+        Scanner input = new Scanner(System.in);
+        int choice;
+        while (true) {
             System.out.println("Select a mode:");
-            System.out.println("View (" + view + ") | Edit (" + edit + ")");
-
-            // Retrieve the user's input
-            // DEFECT : if input not in [0-9] interval, there is an error
-            int input = scanner.nextInt();
+            System.out.println("View (" + VIEW_MODE + ") | Edit (" + EDIT_MODE + ") | 0 to exit");
+            choice = input.nextInt();
             try {
-                if ( true ) {
-                    if (input == view ){
-                        System.out.println("You have selected " + view);
-                        userLoop = false;
-                    } else if ( input == edit ){
-                        System.out.println("You have selected " + edit);
-                        editMode = true;
-                        userLoop = false;
+                switch (choice) {
+                    case 0 -> {
+                        System.out.println("Exiting Program...");
+                        System.exit(0);
                     }
-                } else {
-                    System.out.println("ONE or TWO!!! ٩(º_º)۶");
+                    case 1 ->
+                            // do something
+                            System.out.println("You have selected " + VIEW_MODE);
+                    case 2 ->
+                            // ..something else
+                            System.out.println("You have selected " + EDIT_MODE);
+                    default -> System.out.println("ONE or TWO!!! ٩(º_º)۶");
                 }
-            } catch (InputMismatchException e){
+            } catch (InputMismatchException e) {
+                System.out.println(Arrays.toString(e.getStackTrace()));
                 System.out.println("ONE or TWO!!! ٩(º_º)۶ !!! No characters allowed !!!");
             }
-
-        }//userLoop = 0
-
+        }
 
     }
 }

@@ -1,3 +1,16 @@
+/*
+ * Copyright (c) 2021.
+ * Created by Francisco Bastos (202103393) assembled in your computers
+ *
+ * Facebook: https://www.facebook.com/francisco.bastos.9022
+ * Instagram: https://www.instagram.com/francisco_jf_bastos/
+ * LinkedIn: https://www.linkedin.com/in/francisco-bastos-031369160/
+ * GitHub: https://github.com/FranciscoBastos
+ *
+ * “Do. Or do not. There is no try.” The Empire Strikes Back
+ *
+ */
+
 import java.util.Objects;
 
 public class Place {
@@ -12,8 +25,8 @@ public class Place {
     private boolean isSensitive;
 
     public Place(String country,
-                 String city,
                  String district,
+                 String city,
                  String parish,
                  String street,
                  Source source,
@@ -32,10 +45,11 @@ public class Place {
     }
 
     public Place(String country,
-                 String city,
                  String district,
+                 String city,
                  String parish,
                  String street,
+                 Source source,
                  String description,
                  boolean isSensitive) {
         setCountry(country);
@@ -43,29 +57,36 @@ public class Place {
         setDistrict(district);
         setParish(parish);
         setStreet(street);
+        setSource(source);
         setDescription(description);
         setSensitive(isSensitive);
     }
 
     public Place(String country,
-                 String city,
                  String district,
+                 String city,
                  String parish,
+                 Source source,
                  String description,
                  boolean isSensitive) {
         setCountry(country);
         setCity(city);
         setDistrict(district);
         setParish(parish);
+        setSource(source);
         setDescription(description);
         setSensitive(isSensitive);
     }
 
     public Place(String country,
                  String city,
+                 Source source,
+                 String description,
                  boolean isSensitive) {
         setCountry(country);
         setCity(city);
+        setSource(source);
+        setDescription(description);
         setSensitive(isSensitive);
     }
 
@@ -129,10 +150,11 @@ public class Place {
     }
 
     public void setSource(Source source) {
-        if (source == null)
+        /*if (source == null)
             throw new IllegalArgumentException();
         else
-            this.source = source;
+         */
+        this.source = source;
     }
 
     public String getDescription() {
@@ -151,10 +173,11 @@ public class Place {
     }
 
     public void setSuperDate(SuperDate superDate) {
-        if (superDate == null)
+       /* if (superDate == null)
             throw new IllegalArgumentException();
         else
-            this.superDate = superDate;
+        */
+        this.superDate = superDate;
     }
 
     public boolean isSensitive() {
@@ -202,9 +225,9 @@ public class Place {
                 ", district='" + district + '\'' +
                 ", parish='" + parish + '\'' +
                 ", street='" + street + '\'' +
-                ", source=" + source +
+                // ", source=" + source +
                 ", description='" + description + '\'' +
-                ", superDate=" + superDate +
+                // ", superDate=" + superDate +
                 ", isSensitive=" + isSensitive +
                 '}';
     }
