@@ -24,6 +24,8 @@ class PlaceTest {
     private Source testSource;
     private SuperDate testSuperDate;
 
+    private Place impossiblePlace;
+
     @BeforeEach
     void setUp() {
         this.testSource = new Source();
@@ -66,6 +68,24 @@ class PlaceTest {
     @AfterEach
     void tearDown() {
         System.out.println("Do something after each test");
+    }
+
+    @Test
+    void impossiblePlaceTest() {
+        try {
+            this.impossiblePlace = new Place("",
+                    "",
+                    "",
+                    "",
+                    "",
+                    testSource,
+                    "",
+                    testSuperDate,
+                    true);
+            Assertions.assertNull(impossiblePlace.toString());
+        } catch (Exception e) {
+            System.out.println("It should not create a place");
+        }
     }
 
     @Test
