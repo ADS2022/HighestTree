@@ -22,8 +22,7 @@ public class Date implements SuperDate {
         // Empty constructor
     }
 
-    public Date(String century,
-                String year,
+    public Date(String year,
                 String month,
                 String day) {
         setYear(year);

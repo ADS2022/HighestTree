@@ -153,11 +153,10 @@ public class Place {
     }
 
     public void setSource(Source source) {
-        /*if (source == null)
+        if (source == null)
             throw new IllegalArgumentException();
         else
-         */
-        this.source = source;
+            this.source = source;
     }
 
     public String getDescription() {
@@ -176,11 +175,10 @@ public class Place {
     }
 
     public void setSuperDate(SuperDate superDate) {
-       /* if (superDate == null)
+        if (superDate == null)
             throw new IllegalArgumentException();
         else
-        */
-        this.superDate = superDate;
+            this.superDate = superDate;
     }
 
     public boolean isSensitive() {

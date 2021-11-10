@@ -44,6 +44,7 @@ public class Event {
     }
 
     public Event() {
+        // Empty constructor
     }
 
     public Events getStandardEvents() {

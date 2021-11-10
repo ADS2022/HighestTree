@@ -31,7 +31,7 @@ class EventTest {
     @BeforeEach
     void setUp() {
         this.testSource = new Source();
-        this.testSuperDate = new SuperDate();
+        this.testSuperDate = new Date("1999", "09", "30");
         this.testPerson = new Person();
 
         this.testPlace = new Place("Portugal",
@@ -140,14 +140,13 @@ class EventTest {
 
     @Test
     void insertPerson() {
-        Person newTestPerson = new Person();
-        this.testEvent1.insertPerson(newTestPerson);
-        int expectedSize = 2;
-        int actualSize = this.testEvent1.getPersonsInvolved().size();
-
-        Assertions.assertEquals(expectedSize, actualSize);
-
         try {
+            Person newTestPerson = new Person();
+            this.testEvent1.insertPerson(newTestPerson);
+            int expectedSize = 2;
+            int actualSize = this.testEvent1.getPersonsInvolved().size();
+
+            Assertions.assertEquals(expectedSize, actualSize);
             this.testEvent1.insertPerson(newTestPerson);
             Assertions.assertEquals(expectedSize, actualSize);
         } catch (Exception e) {

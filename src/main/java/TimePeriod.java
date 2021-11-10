@@ -45,6 +45,10 @@ public class TimePeriod implements SuperDate {
             this.endDate = endDate;
     }
 
+    public Date getEndDate() {
+        return endDate;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

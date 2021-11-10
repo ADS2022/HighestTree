@@ -29,7 +29,7 @@ class PlaceTest {
     @BeforeEach
     void setUp() {
         this.testSource = new Source();
-        this.testSuperDate = new SuperDate();
+        this.testSuperDate = new Date("1999", "09", "30");
 
         this.testPlace1 = new Place("Portugal",
                 "Porto",
