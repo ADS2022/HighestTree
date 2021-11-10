@@ -81,7 +81,7 @@ This section explains the design choices of the various
 
 The main components of our system are described in the image below.
 
-![Classes_BL1_Freeze_Classes_3](https://github.com/ADS2022/HighestTree/blob/master/img/Classes_BL1_Freeze_Classes_3.png)
+![Classes_BL1_Freeze_Classes_1](https://github.com/ADS2022/HighestTree/blob/master/img/Classes_BL1_Freeze_Classes_1.png)
 ![Classes_BL1_Freeze_Classes_2](https://github.com/ADS2022/HighestTree/blob/master/img/Classes_BL1_Freeze_Classes_2.png)
 
 
