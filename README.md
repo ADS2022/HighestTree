@@ -11,44 +11,50 @@
 
 ## 1. Introduction
 
-The aim of this project is to have a product to support the work of historians in recording the who, what, when, where of a particular genealogy tree. 
-The product aims to help with research plans by providing a method to trace the birth, marriage and death records of individuals and they'r relationships with other individuals, places and events. 
+The aim of this project is to have a product to support the work of historians in recording the who, what, when, whereof a particular genealogy tree. 
+The product aims to help with research plans by providing a method to trace the birth, marriage, and death records of individuals and their relationships with other individuals, places, and events. 
 
+
+### 1.1 Problem descrition
+
+Genealogy is long-term research goal built in short-term steps. It's main spotlight are the individuals and theyr background in time and geography. It's a research objective where the user can keep adding in more information, while maitinnig the links between the individuals, places and events.
+
+For the purpose of this work, the relationship between people can be tought of as horizontal (as in maried, or had children with) and vertical  (child of, parent to, adopted by). A brief example of the type of ramifications that can occur is presented in the following image. 
+
+![FamilyTreeExample](https://github.com/ADS2022/HighestTree/blob/master/img/FamilyTreeExample.png)
 
 
 ## 2. Goals
 
-The system should:
+This exercise was presented as a series of bullet points of features or ideas for the system under development. These were broken down into the following requirements.
 
-**SReq_01**	The system can record and display persons
+**SReq_01**	The system can record and display persons.
 
-**SReq_02**	The system can record and display important events
+**SReq_02**	The system can record and display events.
 
-**SReq_03**	The system can record and display places
+**SReq_03**	The system can record and display places.
 
-**SReq_04**	The system can record types of relationships
+~~**SReq_04**	The system can record types of relationships.~~
 
-**SReq_05**	The individual records "person" are interelatable between themselfes trough relationships. 
+**SReq_05**	The individual records "person" are interelatable between themselves through "relationships".
 
-**SReq_06**	When recording a new individual through the user-interface, The system pre-fills fields that it can infer.
+**SReq_06**	When recording a new individual through the user interface, the system pre-fills fields that it can infer.
 
-INFO: the surname may be guessed if the individual is already assigned to a set of parents; the gender may be guessed if the the first name is the same of other individuals with an assigned gender.
+**SReq_07**	The system can record types of events.
 
-**SReq_07**	The system can record types of events
+**SReq_08**	Events can have a special purpose field that is specific to its individual nature.
 
-**SReq_08**	Events can have a special purpose field that is specific to it's individual nature.
+**SReq_09**	Events can have a connection to a place.
 
-**SReq_09**	Events can have a conection to a place.
+**SReq_10**	The places entry have different levels of granularity (Only Country, City, District, Parish... or a combination of some).
 
-**SReq_10**	Places entry have different levels of granularity (Only Country, City, District, Parish... or a combination of some).
+**SReq_11**	System can insert dates onto records as a time period or a specific date.
 
-**SReq_11**	System can select if dates are a time period or specific.
+**SReq_12**	The Date entry (time period or specific date) can be partially filled, e.g, only the year and month are known. 
 
-**SReq_12**	Dates (period begining and end, or specific date) entries can be partially filled. (Only the year, month, day... in decresing order).
+**SReq_13**	Individuals, events, and places are described by the researchers in free text.
 
-**SReq_13**	Individuals, events and places may be described by the researchers in free text.
-
-**SReq_14**	Individuals, events, places and relationships can have additional field specifying where each piece of information was acquired.
+**SReq_14**	Individuals, events, places ~~and relationships~~ can have a additional field specifying where each piece of information was acquired.
 
 **SReq_15**	The system is able to query existing individuals by filtering information using rules based on each of the available fields and relationships.
 
@@ -62,11 +68,11 @@ INFO: the surname may be guessed if the individual is already assigned to a set 
 
 **SReq_20**	It is possible to add different export formats to the system.
 
-**SReq_21**	The system can export the genealogy information to formats that allow a graphical visualization Note: such as the DOT language (graphviz).
+**SReq_21**	The system can export the genealogy information to formats that allow a graphical visualization (such as the DOT language (graphviz)).
 
 **SReq_22**	Any field in a record can be set as sensitive information, and decide when exporting if sensitive information should be part of the output or not.
 
-**SReq_23**	When exporting, the system as a choise to output, or not, fields marked as sensitive information.
+**SReq_23**	When exporting, the system as a choice to output, or not, fields marked as sensitive information.
 
 **SReq_24**	System can be used in view-only mode.
 
@@ -74,24 +80,33 @@ INFO: the surname may be guessed if the individual is already assigned to a set 
 
 
 ## 3. Design 
-This section explains the design choices of the various 
-features developed in this project.
+This section exposes the design decisions made during the ongoing phases of development of this project.
  
 ### 3.1. Domain
 
-The main components of our system are described in the image below.
+#### 3.1.1 First approach 
+As a first step into the solution, the group modeled the classes in a database manner, while discussing the implementation, kinds of relationships, and possible patterns that could be applied. 
+
+As a result one can see the main components of our system as described in the image below.
 
 ![Classes_BL1_Freeze_Classes_1](https://github.com/ADS2022/HighestTree/blob/master/img/Classes_BL1_Freeze_Classes_1.png)
+
+Additionally, some time was spent thinking about the solution to SReq_11 "System can insert dates onto records as a time period or a specific date." The solution that was devised was a superClass that can take two dates as parameters, but the user can insert only one date if the specific date is known. For a time period, the user can add two partial, or complete, dates.
+
+In this phase, the group also discussed options to store queries for SReq_16	"The system can save queries to be reused." As a simple solution, a specific classes for storing and calling query strings. 
+
 ![Classes_BL1_Freeze_Classes_2](https://github.com/ADS2022/HighestTree/blob/master/img/Classes_BL1_Freeze_Classes_2.png)
 
 
 ### 3.2. Patterns
 
-This section presents the patterns used in this project, including a description
-of the problem that led to the use of the pattern, details about its implementation,
-and consequences.
+This section presents the study of the design patterns considered for this project. 
 
-The group first started by having a look at the requierments of the system versus the patterns given in class. Having identified some patterns that might be useful for the case in study, we proceeded to investigate further on the mentioned patterns. 
+The group first started by having a look at the requirements of the system versus the patterns given in class. Having identified some patterns that might be useful for the case in study, we proceeded to investigate further on the mentioned patterns. 
+
+In this round of implementation, several problems were elected for the use of design patterns. The group focused mainly on the relationship tree between 'person' records. Several design patterns were studied and discussed. It has yet to be identified the correct approach. 
+
+For the eventual patterns used in this project, the group shall include detailed descriptions of the problems, implementation, and consequences whirling the use of the same.
 
 
 #### 3.3.1. Composite
@@ -161,4 +176,9 @@ It is a structural design pattern. At first glace, the composite pattern got ele
 - **Implementation**
   
 - **Consequences**
+
+
+## 4. Next "sprint" 
+
+In the next sprint work will be focused on SReq_01, SReq_05 and the structured tree that will result from such relationships. 
 
