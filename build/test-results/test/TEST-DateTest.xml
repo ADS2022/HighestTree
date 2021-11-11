@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="DateTest" tests="8" skipped="0" failures="0" errors="0" timestamp="2021-11-11T19:38:06" hostname="MacBook-Pro-do-Francisco-Bastos.local" time="0.009">
+  <properties/>
+  <testcase name="getDay()" classname="DateTest" time="0.001"/>
+  <testcase name="testToString()" classname="DateTest" time="0.001"/>
+  <testcase name="getYear()" classname="DateTest" time="0.001"/>
+  <testcase name="impossibleDate()" classname="DateTest" time="0.002"/>
+  <testcase name="testHashCode()" classname="DateTest" time="0.0"/>
+  <testcase name="returnDateString()" classname="DateTest" time="0.0"/>
+  <testcase name="testEquals()" classname="DateTest" time="0.0"/>
+  <testcase name="getMonth()" classname="DateTest" time="0.001"/>
+  <system-out><![CDATA[It should not create a date with missing fields
+Do something after each test
+It should not create a date with missing fields
+Do something after each test
+It should not create a date with missing fields
+Do something after each test
+It should not create a date with missing fields
+It should not create a date
+Do something after each test
+It should not create a date with missing fields
+Do something after each test
+It should not create a date with missing fields
+Do something after each test
+It should not create a date with missing fields
+Do something after each test
+It should not create a date with missing fields
+Do something after each test
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

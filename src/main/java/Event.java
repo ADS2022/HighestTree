@@ -43,6 +43,23 @@ public class Event {
         setSensitive(isSensitive);
     }
 
+    public Event(String name,
+                 String description,
+                 Events standardEvents,
+                 SuperDate superDate,
+                 Place place,
+                 Source source,
+                 boolean isSensitive) {
+        this.personsInvolved = new LinkedList<>();
+        setName(name);
+        setDescription(description);
+        setStandardEvents(standardEvents);
+        setSuperDate(superDate);
+        setPlace(place);
+        setSource(source);
+        setSensitive(isSensitive);
+    }
+
     public Event() {
         // Empty constructor
     }

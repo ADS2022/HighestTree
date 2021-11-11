@@ -247,10 +247,11 @@ class PlaceTest {
     @Test
     void testToString() {
         String actualToString = this.testPlace1.toString();
-        String expectedToString = "Place{country='Portugal', " +
-                "city='V.N.Gaia', district='Porto', " +
-                "parish='Pedroso', street='Av. Dr. Moreira de Sousa 1041 5ºesq.', " +
-                "description='My place', isSensitive=true}";
+        String expectedToString = "Place{country='Portugal'," +
+                " city='V.N.Gaia', district='Porto', parish='Pedroso'," +
+                " street='Av. Dr. Moreira de Sousa 1041 5ºesq.'," +
+                " description='My place'," +
+                " superDate=Date{year='1999', month='09', day='30'}, isSensitive=true}";
         Assertions.assertEquals(actualToString, expectedToString);
     }
 }

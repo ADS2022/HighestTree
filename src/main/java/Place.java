@@ -228,7 +228,7 @@ public class Place {
                 ", street='" + street + '\'' +
                 // ", source=" + source +
                 ", description='" + description + '\'' +
-                // ", superDate=" + superDate +
+                ", superDate=" + superDate +
                 ", isSensitive=" + isSensitive +
                 '}';
     }

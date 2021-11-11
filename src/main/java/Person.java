@@ -12,7 +12,6 @@
  */
 
 import java.util.LinkedList;
-import java.util.List;
 import java.util.Objects;
 
 /**
@@ -28,26 +27,36 @@ public class Person {
     private Source source;
     private String description;
     private SuperDate superDate;
-    private List<Person> parents;
-    private List<Person> spouses;
+    private LinkedList<Person> parents;
+    private LinkedList<Person> partner;
     private boolean sensitive;
 
     public Person() {
         // Empty constructor
     }
 
-    public Person(int id, String firstName, String lastName, String nationality, LinkedList<Event> events, Source source, String description, SuperDate superDate, List<Person> parents, List<Person> relationships, boolean sensitive) {
-        this.id = id;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.nationality = nationality;
-        this.events = events;
-        this.source = source;
-        this.description = description;
-        this.superDate = superDate;
-        this.parents = parents;
-        this.spouses = relationships;
-        this.sensitive = sensitive;
+    public Person(String firstName,
+                  String lastName,
+                  String nationality,
+                  Event anEvent,
+                  Source source,
+                  String description,
+                  SuperDate superDate,
+                  LinkedList<Person> parents,
+                  LinkedList<Person> relationships,
+                  boolean sensitive) {
+        this.events = new LinkedList<>();
+        setId();
+        setFirstName(firstName);
+        setLastName(lastName);
+        setNationality(nationality);
+        associateEvents(anEvent);
+        setSource(source);
+        setDescription(description);
+        setSuperDate(superDate);
+        setParents(parents);
+        setPartner(relationships);
+        setSensitive(sensitive);
     }
 
     public int getId() {
@@ -93,15 +102,6 @@ public class Person {
         return events;
     }
 
-    /*
-    * public void insertPerson(Person person) {
-        if (person == null)
-            throw new NullPointerException();
-        else if (!(this.personsInvolved.contains(person)))
-            this.personsInvolved.add(person);
-        else
-            throw new IllegalArgumentException();
-    }*/
     public void associateEvents(Event event) {
         if (event == null)
             throw new NullPointerException();
@@ -143,20 +143,36 @@ public class Person {
             this.superDate = superDate;
     }
 
-    public List<Person> getParents() {
+    public static LinkedList<Person> getAncestors(Person targetPerson, LinkedList<Person> ancestors) {
+        if (targetPerson.getParents() != null) {
+            for (Person parent : targetPerson.getParents()) {
+                ancestors.add(parent);
+                ancestors = getAncestors(parent, ancestors);
+            }
+        }
+        return ancestors;
+    }
+
+    public LinkedList<Person> getParents() {
         return parents;
     }
 
-    public void setParents(List<Person> parents) {
-        this.parents = parents;
+    public void setParents(LinkedList<Person> parents) {
+        if (parents == null)
+            throw new NullPointerException();
+        else
+            this.parents = parents;
     }
 
-    public List<Person> getSpouses() {
-        return spouses;
+    public void setPartner(LinkedList<Person> partner) {
+        if (partner == null)
+            throw new NullPointerException();
+        else
+            this.partner = partner;
     }
 
-    public void setSpouses(List<Person> spouses) {
-        this.spouses = spouses;
+    public LinkedList<Person> getPartners() {
+        return partner;
     }
 
     public boolean isSensitive() {
@@ -170,7 +186,8 @@ public class Person {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof Person person)) return false;
+        if (!(o instanceof Person)) return false;
+        Person person = (Person) o;
         return getId() == person.getId() &&
                 isSensitive() == person.isSensitive() &&
                 Objects.equals(getFirstName(), person.getFirstName()) &&
@@ -179,7 +196,9 @@ public class Person {
                 Objects.equals(getEvents(), person.getEvents()) &&
                 Objects.equals(getSource(), person.getSource()) &&
                 Objects.equals(getDescription(), person.getDescription()) &&
-                Objects.equals(getSuperDate(), person.getSuperDate());
+                Objects.equals(getSuperDate(), person.getSuperDate()) &&
+                Objects.equals(getParents(), person.getParents()) &&
+                Objects.equals(getPartners(), person.getPartners());
     }
 
     @Override
@@ -192,6 +211,8 @@ public class Person {
                 getSource(),
                 getDescription(),
                 getSuperDate(),
+                getParents(),
+                getPartners(),
                 isSensitive());
     }
 
@@ -203,9 +224,11 @@ public class Person {
                 ", lastName='" + lastName + '\'' +
                 ", nationality='" + nationality + '\'' +
                 ", events=" + events +
-                ", source=" + source +
+                //", source=" + source +
                 ", description='" + description + '\'' +
                 ", superDate=" + superDate +
+                ", parents=" + parents +
+                ", partner=" + partner +
                 ", sensitive=" + sensitive +
                 '}';
     }

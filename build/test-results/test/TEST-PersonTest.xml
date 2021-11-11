@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="PersonTest" tests="12" skipped="1" failures="0" errors="0" timestamp="2021-11-11T19:38:06" hostname="MacBook-Pro-do-Francisco-Bastos.local" time="0.026">
+  <properties/>
+  <testcase name="getAllAncestors()" classname="PersonTest" time="0.001"/>
+  <testcase name="testToString()" classname="PersonTest" time="0.001">
+    <skipped/>
+  </testcase>
+  <testcase name="getPartners()" classname="PersonTest" time="0.001"/>
+  <testcase name="getNationality()" classname="PersonTest" time="0.001"/>
+  <testcase name="getId()" classname="PersonTest" time="0.001"/>
+  <testcase name="getFirstName()" classname="PersonTest" time="0.001"/>
+  <testcase name="getParents()" classname="PersonTest" time="0.001"/>
+  <testcase name="getEvents()" classname="PersonTest" time="0.004"/>
+  <testcase name="getLastName()" classname="PersonTest" time="0.0"/>
+  <testcase name="testEquals()" classname="PersonTest" time="0.001"/>
+  <testcase name="isSensitive()" classname="PersonTest" time="0.001"/>
+  <testcase name="getDescription()" classname="PersonTest" time="0.001"/>
+  <system-out><![CDATA[Do something after each test
+Do something after each test
+Do something after each test
+Do something after each test
+Do something after each test
+Do something after each test
+Number of relationships => 2
+Do something after each test
+Do something after each test
+Do something after each test
+Do something after each test
+Do something after each test
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
