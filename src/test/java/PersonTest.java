@@ -1,19 +1,11 @@
-/*
- * Copyright (c) 2021.
- * Created by Francisco Bastos (202103393) assembled in your computers
- *
- * Facebook: https://www.facebook.com/francisco.bastos.9022
- * Instagram: https://www.instagram.com/francisco_jf_bastos/
- * LinkedIn: https://www.linkedin.com/in/francisco-bastos-031369160/
- * GitHub: https://github.com/FranciscoBastos
- *
- * “Do. Or do not. There is no try.” The Empire Strikes Back
- *
- */
-
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class PersonTest {
 
@@ -26,54 +18,55 @@ class PersonTest {
     }
 
     @Test
-    void getId() {
+    void getAllAncestors(){
+        Person parent11 = new Person();
+        Person parent21 = new Person();
+        Person parent12 = new Person();
+        Person parent22 = new Person();
+        Person parent1 = new Person();
+        Person parent2 = new Person();
+        Person targetPerson = new Person();
+
+        List<Person> parentsOfParent1 = new ArrayList<>();
+        parentsOfParent1.add(parent11);
+        parentsOfParent1.add(parent12);
+        parent1.setParents(parentsOfParent1);
+
+        List<Person> parentsOfParent2 = new ArrayList<>();
+        parentsOfParent2.add(parent21);
+        parentsOfParent2.add(parent22);
+        parent2.setParents(parentsOfParent2);
+
+        List<Person> parentsOfTargetPerson = new ArrayList<>();
+        parentsOfTargetPerson.add(parent1);
+        parentsOfTargetPerson.add(parent2);
+        targetPerson.setParents(parentsOfTargetPerson);
+
+        List<Person> ancestors = new ArrayList<>();
+        ancestors = getAncestors(targetPerson, ancestors);
+
+        List<Person> trueAncestorList = new ArrayList<>();
+        trueAncestorList.add(parent1);
+        trueAncestorList.add(parent11);
+        trueAncestorList.add(parent12);
+        trueAncestorList.add(parent2);
+        trueAncestorList.add(parent21);
+        trueAncestorList.add(parent22);
+
+        assertEquals(trueAncestorList,ancestors);
+
     }
 
-    @Test
-    void getFirstName() {
-    }
+    private List<Person> getAncestors(Person targetPerson, List<Person> ancestors) {
+        if(targetPerson.getParents() != null) {
+            for (Person parent :
+                    targetPerson.getParents()) {
+                ancestors.add(parent);
+                ancestors = getAncestors(parent, ancestors);
 
-    @Test
-    void getLastName() {
-    }
+            }
+        }
+        return ancestors;
 
-    @Test
-    void getNationality() {
-    }
-
-    @Test
-    void getEvents() {
-    }
-
-    @Test
-    void associateEvents() {
-    }
-
-    @Test
-    void getSource() {
-    }
-
-    @Test
-    void getDescription() {
-    }
-
-    @Test
-    void getSuperDate() {
-    }
-
-    @Test
-    void isSensitive() {
-    }
-
-    @Test
-    void testEquals() {
-    }
-
-    @Test
-    void testHashCode() {
-    }
-
-    @Test
-    void testToString() {
     }
 }

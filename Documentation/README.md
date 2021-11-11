@@ -14,4 +14,16 @@ up by a third party to provide their artifacts for downloading (for example, rep
 * Source: [TuturialPoints](https://www.tutorialspoint.com/maven/maven_repositories.html)
 * Source: [Apache Maven Project](https://maven.apache.org/guides/introduction/introduction-to-repositories.html)
 
+## Architecture
+### Persons and their Relationships to another
+* Problem: Design the Person-Relationships without redundancies
+* Solution: Each Person Object is associated to its parents and its spouses.
+* Consequences: 
+  * The Family Tree is easy to traverse bottom-up (get the ancestors of a person) but more difficult to traverse top-down (get the children of a person), 
+    because a person only knows about its parents but not its children.
+  * spouses are still redundant
+    
+
+![Person UML](../img/Person_UML.png)
+
 

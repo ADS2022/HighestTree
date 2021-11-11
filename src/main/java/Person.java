@@ -12,8 +12,13 @@
  */
 
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Objects;
 
+/**
+ * parents: a person can have 0 to 2 known parents
+ * relationships: a person can be in a relationship with other persons
+ */
 public class Person {
     private int id;
     private String firstName;
@@ -23,31 +28,26 @@ public class Person {
     private Source source;
     private String description;
     private SuperDate superDate;
+    private List<Person> parents;
+    private List<Person> spouses;
     private boolean sensitive;
 
     public Person() {
         // Empty constructor
     }
 
-    public Person(int id,
-                  String firstName,
-                  String lastName,
-                  String nationality,
-                  Event event,
-                  Source source,
-                  String description,
-                  SuperDate superDate,
-                  boolean sensitive) {
-        this.events = new LinkedList<>();
-        setId();
-        setFirstName(firstName);
-        setLastName(lastName);
-        setNationality(nationality);
-        associateEvents(event);
-        setSource(source);
-        setDescription(description);
-        setSuperDate(superDate);
-        setSensitive(sensitive);
+    public Person(int id, String firstName, String lastName, String nationality, LinkedList<Event> events, Source source, String description, SuperDate superDate, List<Person> parents, List<Person> relationships, boolean sensitive) {
+        this.id = id;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.nationality = nationality;
+        this.events = events;
+        this.source = source;
+        this.description = description;
+        this.superDate = superDate;
+        this.parents = parents;
+        this.spouses = relationships;
+        this.sensitive = sensitive;
     }
 
     public int getId() {
@@ -143,6 +143,22 @@ public class Person {
             this.superDate = superDate;
     }
 
+    public List<Person> getParents() {
+        return parents;
+    }
+
+    public void setParents(List<Person> parents) {
+        this.parents = parents;
+    }
+
+    public List<Person> getSpouses() {
+        return spouses;
+    }
+
+    public void setSpouses(List<Person> spouses) {
+        this.spouses = spouses;
+    }
+
     public boolean isSensitive() {
         return sensitive;
     }
@@ -154,8 +170,7 @@ public class Person {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof Person)) return false;
-        Person person = (Person) o;
+        if (!(o instanceof Person person)) return false;
         return getId() == person.getId() &&
                 isSensitive() == person.isSensitive() &&
                 Objects.equals(getFirstName(), person.getFirstName()) &&
