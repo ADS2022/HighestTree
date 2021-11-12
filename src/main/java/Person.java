@@ -26,7 +26,6 @@ public class Person {
     private LinkedList<Event> events;
     private Source source;
     private String description;
-    private SuperDate superDate;
     private LinkedList<Person> parents;
     private LinkedList<Person> partner;
     private boolean sensitive;
@@ -41,7 +40,6 @@ public class Person {
                   Event anEvent,
                   Source source,
                   String description,
-                  SuperDate superDate,
                   LinkedList<Person> parents,
                   LinkedList<Person> relationships,
                   boolean sensitive) {
@@ -53,7 +51,6 @@ public class Person {
         associateEvents(anEvent);
         setSource(source);
         setDescription(description);
-        setSuperDate(superDate);
         setParents(parents);
         setPartner(relationships);
         setSensitive(sensitive);
@@ -132,17 +129,6 @@ public class Person {
         this.description = description;
     }
 
-    public SuperDate getSuperDate() {
-        return superDate;
-    }
-
-    public void setSuperDate(SuperDate superDate) {
-        if (superDate == null)
-            throw new NullPointerException();
-        else
-            this.superDate = superDate;
-    }
-
     public static LinkedList<Person> getAncestors(Person targetPerson, LinkedList<Person> ancestors) {
         if (targetPerson.getParents() != null) {
             for (Person parent : targetPerson.getParents()) {
@@ -196,7 +182,6 @@ public class Person {
                 Objects.equals(getEvents(), person.getEvents()) &&
                 Objects.equals(getSource(), person.getSource()) &&
                 Objects.equals(getDescription(), person.getDescription()) &&
-                Objects.equals(getSuperDate(), person.getSuperDate()) &&
                 Objects.equals(getParents(), person.getParents()) &&
                 Objects.equals(getPartners(), person.getPartners());
     }
@@ -210,7 +195,6 @@ public class Person {
                 getEvents(),
                 getSource(),
                 getDescription(),
-                getSuperDate(),
                 getParents(),
                 getPartners(),
                 isSensitive());
@@ -226,7 +210,6 @@ public class Person {
                 ", events=" + events +
                 //", source=" + source +
                 ", description='" + description + '\'' +
-                ", superDate=" + superDate +
                 ", parents=" + parents +
                 ", partner=" + partner +
                 ", sensitive=" + sensitive +

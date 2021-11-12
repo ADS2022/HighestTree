@@ -74,39 +74,58 @@ This exercise was presented as a series of bullet points of features or ideas fo
 
 **SReq_23**	When exporting, the system as a choice to output, or not, fields marked as sensitive information.
 
-**SReq_24**	System can be used in view-only mode.
+**SReq_24**    System can be used in view-only mode.
 
-**SReq_25**	System can be used in edit-mode.
+**SReq_25**    System can be used in edit-mode.
 
+## 3. Design
 
-## 3. Design 
 This section exposes the design decisions made during the ongoing phases of development of this project.
- 
+
 ### 3.1. Domain
 
-#### 3.1.1 First approach 
-As a first step into the solution, the group modeled the classes in a database manner, while discussing the implementation, kinds of relationships, and possible patterns that could be applied. 
+#### 3.1.1 First approach
+
+As a first step into the solution, the group modeled the classes in a database manner, while discussing the
+implementation, kinds of relationships, and possible patterns that could be applied.
+
+Additionally, some time was spent thinking about the solution to SReq_11 "System can insert dates onto records as a time
+period or a specific date." The solution that was devised was a superClass that can take two dates as parameters, but
+the user can insert only one date if the specific date is known. For a time period, the user can add two partial, or
+complete, dates.
+
+In this phase, the group also discussed options to store queries for SReq_16 "The system can save queries to be reused."
+As a simple solution, a specific classes for storing and calling query strings.
 
 As a result one can see the main components of our system as described in the image below.
 
-![Classes_BL1_Freeze_Classes_1](https://github.com/ADS2022/HighestTree/blob/master/img/Classes_BL1_Freeze_Classes_1.png)
+![Classes_BL1_Freeze_Classes_4](https://github.com/ADS2022/HighestTree/blob/master/img/Classes_BL1_Freeze_Classes_4.drawio.svg)
 
-Additionally, some time was spent thinking about the solution to SReq_11 "System can insert dates onto records as a time period or a specific date." The solution that was devised was a superClass that can take two dates as parameters, but the user can insert only one date if the specific date is known. For a time period, the user can add two partial, or complete, dates.
+### Persons and their Relationships to another
 
-In this phase, the group also discussed options to store queries for SReq_16	"The system can save queries to be reused." As a simple solution, a specific classes for storing and calling query strings. 
+* Problem: Design the Person-Relationships without redundancies
+* Solution: Each Person Object is associated to its parents and its spouses.
+* Consequences:
+  * The Family Tree is easy to traverse bottom-up (get the ancestors of a person) but more difficult to traverse
+    top-down (get the children of a person), because a person only knows about its parents but not its children.
+  * spouses are still redundant
 
-![Classes_BL1_Freeze_Classes_2](https://github.com/ADS2022/HighestTree/blob/master/img/Classes_BL1_Freeze_Classes_2.png)
-
+![Person UML](https://github.com/ADS2022/HighestTree/blob/master/img/Person_UML.png)
 
 ### 3.2. Patterns
 
-This section presents the study of the design patterns considered for this project. 
+This section presents the study of the design patterns considered for this project.
 
-The group first started by having a look at the requirements of the system versus the patterns given in class. Having identified some patterns that might be useful for the case in study, we proceeded to investigate further on the mentioned patterns. 
+The group first started by having a look at the requirements of the system versus the patterns given in class. Having
+identified some patterns that might be useful for the case in study, we proceeded to investigate further on the
+mentioned patterns.
 
-In this round of implementation, several problems were elected for the use of design patterns. The group focused mainly on the relationship tree between 'person' records. Several design patterns were studied and discussed. It has yet to be identified the correct approach. 
+In this round of implementation, several problems were elected for the use of design patterns. The group focused mainly
+on the relationship tree between 'person' records. Several design patterns were studied and discussed. It has yet to be
+identified the correct approach.
 
-For the eventual patterns used in this project, the group shall include detailed descriptions of the problems, implementation, and consequences whirling the use of the same.
+For the eventual patterns used in this project, the group shall include detailed descriptions of the problems,
+implementation, and consequences whirling the use of the same.
 
 
 #### 3.3.1. Composite
@@ -132,7 +151,6 @@ It is a structural design pattern. At first glace, the composite pattern got ele
 
 
 #### 3.3.2. Factory Method
--
 - **The Pattern**
  
 - **Implementation**

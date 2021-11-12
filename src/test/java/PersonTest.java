@@ -95,7 +95,6 @@ class PersonTest {
                 this.testEvent1,
                 this.testSource,
                 "A software developer",
-                this.testSuperDate,
                 parentTestPerson1,
                 partnerTestPerson1,
                 true);

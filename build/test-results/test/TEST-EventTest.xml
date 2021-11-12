@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="EventTest" tests="13" skipped="0" failures="0" errors="0" timestamp="2021-11-11T19:38:06" hostname="MacBook-Pro-do-Francisco-Bastos.local" time="0.048">
+<testsuite name="EventTest" tests="13" skipped="0" failures="0" errors="0" timestamp="2021-11-12T10:08:49" hostname="MacBook-Pro-do-Francisco-Bastos.local" time="0.073">
   <properties/>
-  <testcase name="testToString()" classname="EventTest" time="0.025"/>
-  <testcase name="getSuperDate()" classname="EventTest" time="0.001"/>
+  <testcase name="testToString()" classname="EventTest" time="0.046"/>
+  <testcase name="getSuperDate()" classname="EventTest" time="0.002"/>
   <testcase name="getName()" classname="EventTest" time="0.001"/>
-  <testcase name="insertPerson()" classname="EventTest" time="0.002"/>
-  <testcase name="getSource()" classname="EventTest" time="0.0"/>
-  <testcase name="testHashCode()" classname="EventTest" time="0.001"/>
+  <testcase name="insertPerson()" classname="EventTest" time="0.001"/>
+  <testcase name="getSource()" classname="EventTest" time="0.002"/>
+  <testcase name="testHashCode()" classname="EventTest" time="0.002"/>
   <testcase name="getPersonsInvolved()" classname="EventTest" time="0.001"/>
   <testcase name="testEquals()" classname="EventTest" time="0.001"/>
   <testcase name="getStandardEvents()" classname="EventTest" time="0.001"/>
-  <testcase name="isSensitive()" classname="EventTest" time="0.001"/>
+  <testcase name="isSensitive()" classname="EventTest" time="0.002"/>
   <testcase name="impossibleEventTest()" classname="EventTest" time="0.001"/>
   <testcase name="getDescription()" classname="EventTest" time="0.001"/>
   <testcase name="getPlace()" classname="EventTest" time="0.001"/>
