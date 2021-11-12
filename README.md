@@ -28,60 +28,69 @@ Genealogy is long-term research goal built in short-term steps. It's main spotli
 background in time and geography. It's a research objective where the user can keep adding in more information, while
 maitinnig the links between the individuals, places and events.
 
-For the purpose of this work, the relationship between people can be tought of as horizontal (as in maried, or had children with) and vertical  (child of, parent to, adopted by). A brief example of the type of ramifications that can occur is presented in the following image. 
+For the purpose of this work, the relationship between people can be tought of as horizontal (as in maried, or had
+children with) and vertical  (child of, parent to, adopted by). A brief example of the type of ramifications that can
+occur is presented in the following image.
 
 ![FamilyTreeExample](https://github.com/ADS2022/HighestTree/blob/master/img/FamilyTreeExample.png)
 
-
 ## 2. Goals
 
-This exercise was presented as a series of bullet points of features or ideas for the system under development. These were broken down into the following requirements.
+This exercise was presented as a series of bullet points of features or ideas for the system under development. These
+were broken down into the following requirements.
 
-**SReq_01**	The system can record and display persons.
+**SReq_01**    The system can record and display persons.
 
-**SReq_02**	The system can record and display events.
+**SReq_02**    The system can record and display events.
 
-**SReq_03**	The system can record and display places.
+**SReq_03**    The system can record and display places.
 
-~~**SReq_04**	The system can record types of relationships.~~
+~~**SReq_04**    The system can record types of relationships.~~
 
-**SReq_05**	The individual records "person" are interelatable between themselves through "relationships".
+**SReq_05**    The individual records "person" are interelatable between themselves through "relationships".
 
-**SReq_06**	When recording a new individual through the user interface, the system pre-fills fields that it can infer.
+**SReq_06**    When recording a new individual through the user interface, the system pre-fills fields that it can
+infer.
 
-**SReq_07**	The system can record types of events.
+**SReq_07**    The system can record types of events.
 
-**SReq_08**	Events can have a special purpose field that is specific to its individual nature.
+**SReq_08**    Events can have a special purpose field that is specific to its individual nature.
 
-**SReq_09**	Events can have a connection to a place.
+**SReq_09**    Events can have a connection to a place.
 
-**SReq_10**	The places entry have different levels of granularity (Only Country, City, District, Parish... or a combination of some).
+**SReq_10**    The places entry have different levels of granularity (Only Country, City, District, Parish... or a
+combination of some).
 
-**SReq_11**	System can insert dates onto records as a time period or a specific date.
+**SReq_11**    System can insert dates onto records as a time period or a specific date.
 
-**SReq_12**	The Date entry (time period or specific date) can be partially filled, e.g, only the year and month are known. 
+**SReq_12**    The Date entry (time period or specific date) can be partially filled, e.g, only the year and month are
+known.
 
-**SReq_13**	Individuals, events, and places are described by the researchers in free text.
+**SReq_13**    Individuals, events, and places are described by the researchers in free text.
 
-**SReq_14**	Individuals, events, places ~~and relationships~~ can have a additional field specifying where each piece of information was acquired.
+**SReq_14**    Individuals, events, places ~~and relationships~~ can have a additional field specifying where each piece
+of information was acquired.
 
-**SReq_15**	The system is able to query existing individuals by filtering information using rules based on each of the available fields and relationships.
+**SReq_15**    The system is able to query existing individuals by filtering information using rules based on each of
+the available fields and relationships.
 
-**SReq_16**	The system can save queries to be reused.
+**SReq_16**    The system can save queries to be reused.
 
-**SReq_17**	The system is able to export the information gathered from a query.
+**SReq_17**    The system is able to export the information gathered from a query.
 
-**SReq_18**	The system is able to save the information gathered from a query.
+**SReq_18**    The system is able to save the information gathered from a query.
 
-**SReq_19**	The system is able to load and save records using different formats.
+**SReq_19**    The system is able to load and save records using different formats.
 
-**SReq_20**	It is possible to add different export formats to the system.
+**SReq_20**    It is possible to add different export formats to the system.
 
-**SReq_21**	The system can export the genealogy information to formats that allow a graphical visualization (such as the DOT language (graphviz)).
+**SReq_21**    The system can export the genealogy information to formats that allow a graphical visualization (such as
+the DOT language (graphviz)).
 
-**SReq_22**	Any field in a record can be set as sensitive information, and decide when exporting if sensitive information should be part of the output or not.
+**SReq_22**    Any field in a record can be set as sensitive information, and decide when exporting if sensitive
+information should be part of the output or not.
 
-**SReq_23**	When exporting, the system as a choice to output, or not, fields marked as sensitive information.
+**SReq_23**    When exporting, the system as a choice to output, or not, fields marked as sensitive information.
 
 **SReq_24**    System can be used in view-only mode.
 
@@ -115,9 +124,9 @@ As a result one can see the main components of our system as described in the im
 * **Problem:** Design the Person-Relationships without redundancies
 * **Solution:** Each Person Object is associated to its parents and its spouses.
 * **Consequences:**
-  * The Family Tree is easy to traverse bottom-up (get the ancestors of a person) but more difficult to traverse
-    top-down (get the children of a person), because a person only knows about its parents but not its children.
-  * spouses are still redundant
+    * The Family Tree is easy to traverse bottom-up (get the ancestors of a person) but more difficult to traverse
+      top-down (get the children of a person), because a person only knows about its parents but not its children.
+    * spouses are still redundant
 
 ![Person UML](https://github.com/ADS2022/HighestTree/blob/master/img/Person_UML.png)
 
@@ -126,12 +135,12 @@ As a result one can see the main components of our system as described in the im
 * **Problem:** A person can be born on a specific date or in on a time period. For example, an individual could be born
   in 1578 or in the XVI century (between 1501 and 1600).
 * **Solution:**
-  * There is an interface called SuperDate and two classes called Date and TimePeriod. Those classes implement SuperDate
-    and when creating an object that requires a date (for example an Event) it is possible to create a date or a time
-    period.
-    * This solution implements the [*template method*](https://refactoring.guru/design-patterns/template-method) pattern
-      by breaking down the date-time period logic into a series of two steps, and turning these steps into a method and
-      then call those methods inside a single template method.
+    * There is an interface called SuperDate and two classes called Date and TimePeriod. Those classes implement
+      SuperDate and when creating an object that requires a date (for example an Event) it is possible to create a date
+      or a time period.
+        * This solution implements the [*template method*](https://refactoring.guru/design-patterns/template-method)
+          pattern by breaking down the date-time period logic into a series of two steps, and turning these steps into a
+          method and then call those methods inside a single template method.
 
 ![Dates UML](https://github.com/ADS2022/HighestTree/blob/master/img/TimePeriod.png)
 
@@ -150,76 +159,30 @@ identified the correct approach.
 For the eventual patterns used in this project, the group shall include detailed descriptions of the problems,
 implementation, and consequences whirling the use of the same.
 
-
 #### 3.3.1. Composite
-It is a structural design pattern. At first glace, the composite pattern got elected for structuring our tree of records. 
 
+It is a structural design pattern. At first glace, the composite pattern got elected for structuring our tree of
+records.
 
-"This pattern creates a class that contains group of its own objects. This class provides ways to modify its group of same objects". [Source: tutorialspoint.com](https://www.tutorialspoint.com/design_pattern/composite_pattern.htm)
+"This pattern creates a class that contains group of its own objects. This class provides ways to modify its group of
+same objects". [Source: tutorialspoint.com](https://www.tutorialspoint.com/design_pattern/composite_pattern.htm)
 
-"A Composite Pattern says that just "allow clients to operate in generic manner on objects that may or may not represent a hierarchy of objects". [Source: javapoint.com](https://www.javatpoint.com/composite-pattern)
-
+"A Composite Pattern says that just "allow clients to operate in generic manner on objects that may or may not represent
+a hierarchy of objects". [Source: javapoint.com](https://www.javatpoint.com/composite-pattern)
 
 - **Problem in Context**
 
-   UNDER STUDY:
-   
-   -- Applying a method to show/hide a particular branch of the tree for visualization or export.
-   
+  UNDER STUDY:
 
-- **Implementation**
-  
-- **Consequences**
+  -- Applying a method to show/hide a particular branch of the tree for visualization or export.
 
 
-
-#### 3.3.2. Factory Method
-- **The Pattern**
- 
-- **Implementation**
-   
-- **Consequences**   
-
-    
-    
-#### 3.3.3. Observer
-- **Problem in Context**
- 
-- **The Pattern**
-   
 - **Implementation**
 
 - **Consequences**
-  
- 
 
-#### 3.3.4. Visitor
-- **Problem in Context**
-  
-- **The Pattern**
-    
-- **Implementation**
- 
-- **Consequences**
-   
+## 4. Next "sprint"
 
-#### 3.3.5. Template
-- **Problem in Context**
- 
-- **The Pattern**
-
-- **Consequences**
-
-
-#### 3.3.6. Singleton
-- **Problem in Context**
-   
-- **Implementation**
-  
-- **Consequences**
-
-
-## 4. Next "sprint" 
-
-In the next sprint work will be focused on SReq_01, SReq_05 and the structured tree that will result from such relationships. 
+In the next sprint work will be focused on SReq_01, SReq_05 and the structured tree that will result from such
+relationships. 
 
