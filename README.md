@@ -1,6 +1,7 @@
 # HighestTree
 
 ## Table of Contents
+
 [Introduction](#Introduction)
 
 [Goals](#Goals)
@@ -9,15 +10,23 @@
 
 <br>
 
+## How to run the project
+
+Due to this being the first iteration, to run the project, you should open this project in IntelliJ IDEA from existing
+Gradle sources, and then it is possible to run the tests using the built-in tools from the IDEA. If there is any problem
+opening or running the project, don't hesitate to contact us. Don't forget to import all the Gradle dependencies.
+
 ## 1. Introduction
 
-The aim of this project is to have a product to support the work of historians in recording the who, what, when, whereof a particular genealogy tree. 
-The product aims to help with research plans by providing a method to trace the birth, marriage, and death records of individuals and their relationships with other individuals, places, and events. 
-
+The aim of this project is to have a product to support the work of historians in recording the who, what, when, whereof
+a particular genealogy tree. The product aims to help with research plans by providing a method to trace the birth,
+marriage, and death records of individuals and their relationships with other individuals, places, and events.
 
 ### 1.1 Problem descrition
 
-Genealogy is long-term research goal built in short-term steps. It's main spotlight are the individuals and theyr background in time and geography. It's a research objective where the user can keep adding in more information, while maitinnig the links between the individuals, places and events.
+Genealogy is long-term research goal built in short-term steps. It's main spotlight are the individuals and theyr
+background in time and geography. It's a research objective where the user can keep adding in more information, while
+maitinnig the links between the individuals, places and events.
 
 For the purpose of this work, the relationship between people can be tought of as horizontal (as in maried, or had children with) and vertical  (child of, parent to, adopted by). A brief example of the type of ramifications that can occur is presented in the following image. 
 
@@ -103,14 +112,28 @@ As a result one can see the main components of our system as described in the im
 
 ### Persons and their Relationships to another
 
-* Problem: Design the Person-Relationships without redundancies
-* Solution: Each Person Object is associated to its parents and its spouses.
-* Consequences:
+* **Problem:** Design the Person-Relationships without redundancies
+* **Solution:** Each Person Object is associated to its parents and its spouses.
+* **Consequences:**
   * The Family Tree is easy to traverse bottom-up (get the ancestors of a person) but more difficult to traverse
     top-down (get the children of a person), because a person only knows about its parents but not its children.
   * spouses are still redundant
 
 ![Person UML](https://github.com/ADS2022/HighestTree/blob/master/img/Person_UML.png)
+
+### Date, time periods and super dates
+
+* **Problem:** A person can be born on a specific date or in on a time period. For example, an individual could be born
+  in 1578 or in the XVI century (between 1501 and 1600).
+* **Solution:**
+  * There is an interface called SuperDate and two classes called Date and TimePeriod. Those classes implement SuperDate
+    and when creating an object that requires a date (for example an Event) it is possible to create a date or a time
+    period.
+    * This solution implements the [*template method*](https://refactoring.guru/design-patterns/template-method) pattern
+      by breaking down the date-time period logic into a series of two steps, and turning these steps into a method and
+      then call those methods inside a single template method.
+
+![Dates UML](https://github.com/ADS2022/HighestTree/blob/master/img/TimePeriod.png)
 
 ### 3.2. Patterns
 
