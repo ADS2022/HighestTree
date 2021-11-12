@@ -24,9 +24,9 @@ marriage, and death records of individuals and their relationships with other in
 
 ### 1.1 Problem descrition
 
-Genealogy is long-term research goal built in short-term steps. It's main spotlight are the individuals and theyr
-background in time and geography. It's a research objective where the user can keep adding in more information, while
-maitinnig the links between the individuals, places and events.
+Genealogy is a long-term research goal with built-in short-term steps. Its main spotlights are the individuals and their
+background in time and geography. It's a research objective where the user can keep adding in more information while
+maintaining the links between the individuals, places and events.
 
 For the purpose of this work, the relationship between people can be tought of as horizontal (as in maried, or had
 children with) and vertical  (child of, parent to, adopted by). A brief example of the type of ramifications that can
@@ -47,14 +47,14 @@ were broken down into the following requirements.
 
 ~~**SReq_04**    The system can record types of relationships.~~
 
-**SReq_05**    The individual records "person" are interelatable between themselves through "relationships".
+**SReq_05**    The individual records "person" are interrelatable between themselves through "relationships".
 
 **SReq_06**    When recording a new individual through the user interface, the system pre-fills fields that it can
 infer.
 
 **SReq_07**    The system can record types of events.
 
-**SReq_08**    Events can have a special purpose field that is specific to its individual nature.
+**SReq_08**    Events can have a special purpose field that is specific to their individual nature.
 
 **SReq_09**    Events can have a connection to a place.
 
@@ -68,7 +68,7 @@ known.
 
 **SReq_13**    Individuals, events, and places are described by the researchers in free text.
 
-**SReq_14**    Individuals, events, places ~~and relationships~~ can have a additional field specifying where each piece
+**SReq_14**    Individuals, events, places ~~and relationships~~ can have an additional field specifying where each piece
 of information was acquired.
 
 **SReq_15**    The system is able to query existing individuals by filtering information using rules based on each of
