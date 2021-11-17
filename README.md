@@ -13,7 +13,7 @@
 ## How to run the project
 
 Due to this being the first iteration, to run the project, you should open this project in IntelliJ IDEA from existing
-Gradle sources, and then it is possible to run the tests using the built-in tools from the IDEA. If there is any problem
+Maven sources, and then it is possible to run the tests using the built-in tools from the IDEA. If there is any problem
 opening or running the project, don't hesitate to contact us. Don't forget to import all the Gradle dependencies.
 
 ## 1. Introduction
