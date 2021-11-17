@@ -11,57 +11,103 @@ package HighestTree.model;/*
  *
  */
 
+import mesw.ads.highesttreemaven.HighestTree.model.Date;
+import mesw.ads.highesttreemaven.HighestTree.model.Source;
+import mesw.ads.highesttreemaven.HighestTree.model.SuperDate;
 import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class SourceTest {
+    private SuperDate testSuperDate;
+
+    private Source testSource1;
+
+    private Source testSource2;
 
     @BeforeEach
     void setUp() {
+        this.testSuperDate = new Date("1999", "09", "30");
+
+        this.testSource1 = new Source(
+                "Charles Darwin",
+                this.testSuperDate,
+                "The evolution of the species",
+                "Wikepedia",
+                false
+
+        );
+
+        this.testSource2 = new Source();
     }
 
     @AfterEach
     void tearDown() {
+        System.out.println("Do something");
     }
 
     @Test
     void getId() {
+        int actual = this.testSource1.getId();
+        int expected = this.testSource1.getId();
+
+        Assertions.assertEquals(expected, actual);
     }
 
     @Test
     void getResearchersName() {
+        String actual = "Charles Darwin";
+        String expected = this.testSource1.getResearchersName();
+
+        Assertions.assertEquals(expected, actual);
     }
 
     @Test
     void getSuperDate() {
+        SuperDate expected = this.testSuperDate;
+        SuperDate actual = this.testSource1.getSuperDate();
+
+        Assertions.assertEquals(expected, actual);
     }
 
     @Test
     void getDescription() {
+        String expected = "The evolution of the species";
+        String actual = this.testSource1.getDescription();
+
+        Assertions.assertEquals(expected, actual);
     }
 
     @Test
     void getSourceOfInformation() {
+        String expected = "Wikepedia";
+        String actual = this.testSource1.getSourceOfInformation();
+
+        Assertions.assertEquals(expected, actual);
     }
 
     @Test
     void isSensitivity() {
-    }
-
-    @Test
-    void setSensitivity() {
+        Assertions.assertFalse(this.testSource1.isSensitive());
     }
 
     @Test
     void testEquals() {
-    }
-
-    @Test
-    void testHashCode() {
+        Assertions.assertFalse(this.testSource1.equals(this.testSource2));
     }
 
     @Test
     void testToString() {
+        String expected = "Source{id=" + this.testSource1.getId() +
+                ", researchersName='Charles Darwin', " +
+                "superDate=Date{year='1999', month='09', " +
+                "day='30'}, " +
+                "description='The evolution of the species', " +
+                "sourceOfInformation='Wikepedia', " +
+                "sensitivity=false}";
+        String actual = this.testSource1.toString();
+
+        Assertions.assertEquals(expected, actual);
     }
 }

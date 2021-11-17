@@ -22,11 +22,10 @@ public class Source {
     private boolean sensitivity;
 
     public Source() {
-
+        // Empty constructor
     }
 
-    public Source(int id,
-                  String researchersName,
+    public Source(String researchersName,
                   SuperDate superDate,
                   String description,
                   String sourceOfInformation,
@@ -63,7 +62,7 @@ public class Source {
     }
 
     public void setSuperDate(SuperDate superDate) {
-        if (this.superDate == null)
+        if (superDate == null)
             throw new IllegalArgumentException();
         else
             this.superDate = superDate;
@@ -91,7 +90,7 @@ public class Source {
             this.sourceOfInformation = sourceOfInformation;
     }
 
-    public boolean isSensitivity() {
+    public boolean isSensitive() {
         return sensitivity;
     }
 
@@ -105,7 +104,7 @@ public class Source {
         if (!(o instanceof Source)) return false;
         Source source = (Source) o;
         return getId() == source.getId() &&
-                isSensitivity() == source.isSensitivity() &&
+                isSensitive() == source.isSensitive() &&
                 Objects.equals(getResearchersName(), source.getResearchersName()) &&
                 Objects.equals(getSuperDate(), source.getSuperDate()) &&
                 Objects.equals(getDescription(), source.getDescription()) &&
@@ -119,7 +118,7 @@ public class Source {
                 getSuperDate(),
                 getDescription(),
                 getSourceOfInformation(),
-                isSensitivity());
+                isSensitive());
     }
 
     @Override

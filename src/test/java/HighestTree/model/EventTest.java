@@ -21,7 +21,6 @@ class EventTest {
 
     private Event testEvent1;
     private Event testEvent2;
-    // TODO TEST BETTER WHEN SOURCE, SUPER DATE AND PERSONS ARE IMPLEMENTED
     private Source testSource;
     private SuperDate testSuperDate;
     private Place testPlace;

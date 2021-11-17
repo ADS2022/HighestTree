@@ -208,7 +208,7 @@ public class Person {
                 ", lastName='" + lastName + '\'' +
                 ", nationality='" + nationality + '\'' +
                 ", events=" + events +
-                //", source=" + source +
+                ", source=" + source +
                 ", description='" + description + '\'' +
                 ", parents=" + parents +
                 ", partner=" + partner +

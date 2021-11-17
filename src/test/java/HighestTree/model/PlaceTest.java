@@ -166,7 +166,6 @@ class PlaceTest {
 
     @Test
     void getSource() {
-        // TODO TO BE TESTED AFTER IMPLEMENTATION
         Source expected1 = this.testSource;
 
         Source actual1 = testPlace1.getSource();
@@ -194,7 +193,6 @@ class PlaceTest {
 
     @Test
     void getSuperDate() {
-        // TODO TO BE TESTED AFTER IMPLEMENTATION
         SuperDate expected1 = this.testSuperDate;
 
         SuperDate actual1 = testPlace1.getSuperDate();
