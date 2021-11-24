@@ -1,4 +1,4 @@
-package mesw.ads.highesttreemaven.HighestTree.model;/*
+package mesw.ads.highesttree.HighestTree.model;/*
  * Copyright (c) 2021.
  * Created by Francisco Bastos (202103393) assembled in your computers
  *

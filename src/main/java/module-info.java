@@ -3,8 +3,8 @@ module mesw.ads.highesttreemaven {
     requires javafx.fxml;
 
 
-    opens mesw.ads.highesttreemaven to javafx.fxml;
-    exports mesw.ads.highesttreemaven;
-    exports mesw.ads.highesttreemaven.HighestTree.controller;
-    opens mesw.ads.highesttreemaven.HighestTree.controller to javafx.fxml;
+    opens mesw.ads.highesttree to javafx.fxml;
+    exports mesw.ads.highesttree;
+    exports mesw.ads.highesttree.HighestTree.controller;
+    opens mesw.ads.highesttree.HighestTree.controller to javafx.fxml;
 }

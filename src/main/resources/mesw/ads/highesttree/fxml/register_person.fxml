@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+  ~ Copyright (c)
+  ~
+  ~ 2020.
+  ~
+  ~ Made by Francisco Bastos assembled in ISEP.
+  ~
+  ~ ISEP Mail: 1191453@isep.ipp.pt
+  ~ My Mail: fjforbas@gmail.com
+  ~ gitHub: https://github.com/FranciscoBastos
+  ~ Facebook: https://www.facebook.com/francisco.bastos.9022
+  ~ Linkedin: https://www.linkedin.com/in/francisco-bastos-031369160/
+  ~
+  ~ "Let's go invent tomorrow rather than worrying about what happened yesterday"
+  -->
+
+<!-- TODO insert controller here -->
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.*?>
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
+            minWidth="-Infinity" prefHeight="553.0" prefWidth="600.0" style="-fx-background-color: #2A363F #2A363F;"
+            xmlns="http://javafx.com/javafx/17"
+            fx:controller="mesw.ads.highesttree.HighestTree.controller.PersonController">
+   <children>
+      <TextField fx:id="freelancerName_txt" layoutX="200.0" layoutY="129.0" prefHeight="34.0" prefWidth="194.0"
+                 promptText="first name" style="-fx-background-color: #2A363F; -fx-border-color: A33F1F;"
+                 stylesheets="@../styles/NewUI.css"/>
+      <TextField fx:id="freelancerEmail_txt" layoutX="200.0" layoutY="178.0" prefHeight="34.0" prefWidth="194.0"
+                 promptText="last name" style="-fx-background-color: #2A363F; -fx-border-color: A33F1F;"
+                 stylesheets="@../styles/NewUI.css"/>
+      <Button fx:id="freelancerRegisterBtn" layoutX="353.0" layoutY="451.0" mnemonicParsing="false"
+              onAction="#actionFreelancerRegisterBtn" prefHeight="34.0" prefWidth="194.0"
+              style="-fx-background-color: #8c2d19#8c2d19;" text="REGISTER" textFill="WHITE">
+         <font>
+            <Font size="15.0"/>
+         </font>
+      </Button>
+      <Button fx:id="freelancerGoBackBtn" layoutX="52.0" layoutY="451.0" mnemonicParsing="false"
+              onAction="#actionGoBackBtn" prefHeight="34.0" prefWidth="194.0"
+              style="-fx-background-color: #8c2d19#8c2d19;" text="GO BACK" textFill="WHITE">
+         <font>
+            <Font size="15.0"/>
+         </font>
+      </Button>
+      <Text fill="#8c2d19" layoutX="203.0" layoutY="86.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Freelancer Data"
+            textAlignment="CENTER" wrappingWidth="194.0">
+         <font>
+            <Font name="System Bold" size="25.0"/>
+         </font>
+      </Text>
+      <Text fill="#8c2d19" layoutX="136.0" layoutY="48.0" strokeType="OUTSIDE" strokeWidth="0.0"
+            text="REGISTER A FREELANCER" textAlignment="CENTER" wrappingWidth="331.353515625">
+         <font>
+            <Font name="System Bold" size="25.0"/>
+         </font>
+      </Text>
+      <TextArea layoutX="200.0" layoutY="225.0" prefHeight="199.0" prefWidth="194.0" promptText="description"
+                style="-fx-background-color: #2A363F; -fx-border-color: #A33F1F;" styleClass="text-field"
+                stylesheets="@../styles/NewUI.css"/>
+   </children>
+</AnchorPane>
