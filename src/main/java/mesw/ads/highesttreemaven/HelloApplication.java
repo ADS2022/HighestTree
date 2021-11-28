@@ -14,10 +14,12 @@ public class HelloApplication extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("hello-view.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 320, 240);
-        stage.setTitle("Hello!");
-        stage.setScene(scene);
+        //Javafx window title
+        stage.setTitle("HighestTree");
+
+        FXMLLoader window = new FXMLLoader(HelloApplication.class.getResource("HomeView.fxml"));
+        Scene HomeView = new Scene(window.load());
+        stage.setScene(HomeView);
         stage.show();
     }
 }
