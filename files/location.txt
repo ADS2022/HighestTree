@@ -1,0 +1,2 @@
+Location{name='', country='', district='', city='', street='', description='', isSensitive=false}
+Location{name='', country='', district='', city='', street='', description='', isSensitive=false}

@@ -16,10 +16,10 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("/fxml/register_a_place.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/fxml/registerAPlace.fxml"));
 
         Scene scene = new Scene(root);
-        scene.getStylesheets().add("styles/NewUI.css");
+        scene.getStylesheets().add("/styles/NewUI.css");
 
         primaryStage.setTitle("ADS register a place");
         primaryStage.setScene(scene);

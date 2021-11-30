@@ -2,6 +2,7 @@ package mesw.ads.highesttree.HighestTree.controller.errors;
 
 
 import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
@@ -13,14 +14,12 @@ import java.io.IOException;
 
 public class ErrorScreen1Controller {
 
-
+    @FXML
     public Button backBtn;
 
 
     public void actionBack(ActionEvent actionEvent) throws IOException {
-
-        changeScene("/fxml/register_a_place.fxml", actionEvent);
-
+        changeScene("/fxml/registerAPlace.fxml", actionEvent);
     }
 
     public void changeScene(String SceneName, ActionEvent event) throws IOException {

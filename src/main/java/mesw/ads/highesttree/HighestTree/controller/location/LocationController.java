@@ -13,6 +13,8 @@ import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import mesw.ads.highesttree.HighestTree.model.database.Reader;
+import mesw.ads.highesttree.HighestTree.model.database.Writer;
 import mesw.ads.highesttree.HighestTree.model.place.Location;
 
 import java.io.IOException;
@@ -90,17 +92,29 @@ public class LocationController implements Initializable {
             this.location = new Location(name, country, district, city, street, description);
             this.setSensitivity(isSensitive);
 
+            // Register user on the file database
+            Writer.writeToFile("files/location.txt", location.toString());
 
-            System.out.println(location.toString());
-
-            this.changeScene("/fxml/register_a_place.fxml", actionEvent);
         } catch (Exception e) {
-            this.changeScene("/fxml/error_screen_1.fxml", actionEvent);
+            this.changeScene("/fxml/errorScreen1.fxml", actionEvent);
         }
 
     }
 
     public void actionGoBackBtn(ActionEvent actionEvent) throws IOException {
-        this.changeScene("/fxml/register_a_place.fxml", actionEvent);
+        try {
+            this.changeScene("/fxml/registerAPlace.fxml", actionEvent);
+        } catch (IOException ex) {
+            this.changeScene("/fxml/errorScreen1.fxml", actionEvent);
+        }
+    }
+
+    public void actionViewPlaces(ActionEvent actionEvent) throws IOException {
+        try {
+            Reader.readFromFile("files/location.txt");
+            this.changeScene("/fxml/displayPlaces.fxml", actionEvent);
+        } catch (IOException ex) {
+            this.changeScene("/fxml/errorScreen1.fxml", actionEvent);
+        }
     }
 }
