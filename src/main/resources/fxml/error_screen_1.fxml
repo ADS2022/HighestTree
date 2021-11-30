@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.*?>
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
+            minWidth="-Infinity" prefHeight="412.0" prefWidth="389.0" style="-fx-background-color: #2A363F;"
+            xmlns="http://javafx.com/javafx/17"
+            fx:controller="mesw.ads.highesttree.HighestTree.controller.errors.ErrorScreen1Controller">
+    <children>
+        <Text fill="#a12020" fontSmoothingType="LCD" layoutX="60.0" layoutY="269.0" strokeType="OUTSIDE"
+              strokeWidth="0.0" text="Invalid arguments" textAlignment="CENTER" wrappingWidth="276.0">
+            <font>
+                <Font name="Arial Bold" size="29.0"/>
+            </font>
+        </Text>
+        <Text fill="#a12020" fontSmoothingType="LCD" layoutX="88.0" layoutY="220.0" strokeType="OUTSIDE"
+              strokeWidth="0.0" text="ERROR!!!!" textAlignment="CENTER" wrappingWidth="213.0">
+            <font>
+                <Font name="Arial Bold" size="38.0"/>
+            </font>
+        </Text>
+        <Button fx:id="backBtn" layoutX="137.0" layoutY="338.0" mnemonicParsing="false" onAction="#actionBack"
+                prefHeight="34.0" prefWidth="119.0" style="-fx-background-color: A33F1F;" text="BACK" textFill="WHITE">
+            <font>
+                <Font size="15.0"/>
+            </font>
+        </Button>
+        <ImageView fitHeight="76.0" fitWidth="213.0" layoutX="90.0" layoutY="34.0">
+            <image>
+                <Image url="@../icons/logotipo_feup.png"/>
+            </image>
+        </ImageView>
+        <Text fill="#a12020" fontSmoothingType="LCD" layoutX="27.0" layoutY="158.0" strokeType="OUTSIDE"
+              strokeWidth="0.0" text="Register a place" textAlignment="CENTER" wrappingWidth="343.0">
+            <font>
+                <Font name="Arial Bold" size="27.0"/>
+            </font>
+        </Text>
+    </children>
+</AnchorPane>

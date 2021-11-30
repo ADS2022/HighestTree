@@ -11,18 +11,8 @@ package HighestTree.model;/*
  *
  */
 
-import mesw.ads.highesttree.HighestTree.model.*;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-
-import java.util.LinkedList;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-
 class PersonTest {
+    /*
     private Person parent11;
     private Person parent21;
     private Person parent12;
@@ -43,7 +33,7 @@ class PersonTest {
 
     private Event testEvent1;
 
-    private Place testPlace;
+    private Location testLocation;
 
     @BeforeEach
     void setUp() {
@@ -62,7 +52,7 @@ class PersonTest {
 
         this.testSource = new Source();
 
-        this.testPlace = new Place("Portugal",
+        this.testLocation = new Location("Portugal",
                 "Porto",
                 "Porto",
                 "Lapa",
@@ -72,6 +62,7 @@ class PersonTest {
                 this.testSuperDate,
                 true);
 
+
         Events testStandardEvent1 = Events.BIRTH;
 
         this.testEvent1 = new Event(
@@ -79,7 +70,7 @@ class PersonTest {
                 "Birth of Francisco Bastos",
                 testStandardEvent1,
                 testSuperDate,
-                this.testPlace,
+                this.testLocation,
                 this.testSource,
                 true);
 
@@ -202,7 +193,7 @@ class PersonTest {
                         new Date("YYYY",
                                 "MM",
                                 "DD"),
-                        new Place("Country",
+                        new Location("Country",
                                 "District",
                                 "City",
                                 "Parish",
@@ -298,4 +289,5 @@ class PersonTest {
 
         Assertions.assertEquals(expected, actual);
     }
+     */
 }
