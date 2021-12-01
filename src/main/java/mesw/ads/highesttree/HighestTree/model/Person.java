@@ -1,4 +1,4 @@
-package mesw.ads.highesttreemaven.HighestTree.model;
+package mesw.ads.highesttree.HighestTree.model;
 import java.util.LinkedList;
 import java.util.Objects;
 
@@ -36,7 +36,7 @@ public class Person {
                   LinkedList<Person> relationships,
                   boolean sensitive) {
         this.events = new LinkedList<>();
-        setId();
+        setId(id);
         setFirstName(firstName);
         setLastName(lastName);
         setNationality(nationality);
@@ -62,9 +62,11 @@ public class Person {
         return id;
     }
 
-    public void setId() {
-        this.id = hashCode();
+    public void setId(int id) {
+        this.id = id;
     }
+
+
 
     public String getFirstName() {
         return firstName;
