@@ -1,21 +1,14 @@
 package mesw.ads.highesttreemaven.HighestTree.controller;
 
 import javafx.event.ActionEvent;
-import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
 import javafx.stage.Stage;
-
 import java.io.IOException;
 
-public class PersonsController {
-    @FXML
-    private Button btnSceneHome, btnPersonNew, btnPersonEdit, btnPersonDelete;
+public class PersonController {
 
     public void changeScene(String SceneName, ActionEvent event) throws IOException {
         Parent MainSceneParent = FXMLLoader.load(getClass().getResource(SceneName));
@@ -30,19 +23,14 @@ public class PersonsController {
         changeScene("/mesw/ads/highesttreemaven/HomeView.fxml", actionEvent);
     }
 
-    public void btnPersonNewPress(ActionEvent actionEvent) throws IOException {
-        System.out.println("Adding new Person record");
-        changeScene("/fxml/PersonView.fxml", actionEvent);
+    public void btnAddPersonPress(ActionEvent actionEvent) throws IOException {
+        System.out.println("Adding a new Person record");
     }
 
-    public void btnPersonEditPress(ActionEvent actionEvent) throws IOException {
-        System.out.println("Editing person record");
-        changeScene("/fxml/PersonView.fxml", actionEvent);
+    public void btnCancelPress(ActionEvent actionEvent) throws IOException {
+        System.out.println("Changing to Persons scene");
+        changeScene("/fxml/PersonsView.fxml", actionEvent);
     }
 
-    public void btnPersonDeletePress(ActionEvent actionEvent) throws IOException {
-        System.out.println("Deleting person record");
-        //changeScene("/mesw/ads/highesttreemaven/HomeView.fxml", actionEvent);
 
-    }
 }

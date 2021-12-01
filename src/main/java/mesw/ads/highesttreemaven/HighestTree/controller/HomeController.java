@@ -28,11 +28,11 @@ public class HomeController {
         }
         else if (actionEvent.getSource()==btnEventsMenu){
             System.out.println("Changing to Events scene");
-            changeScene("/fxml/PersonsView.fxml", actionEvent);
+            changeScene("/fxml/EventsView.fxml", actionEvent);
         }
         else if (actionEvent.getSource()==btnPlacesMenu){
             System.out.println("Changing to Places scene");
-            changeScene("/fxml/PersonsView.fxml", actionEvent);
+            changeScene("/fxml/PlacesView.fxml", actionEvent);
         }
 
     }

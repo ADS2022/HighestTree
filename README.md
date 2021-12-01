@@ -56,7 +56,7 @@ infer.
 
 **SReq_08**    Events can have a special purpose field that is specific to their individual nature.
 
-**SReq_09**    Events can have a connection to a place.
+**SReq_09**    Events can have a connection to a location.
 
 **SReq_10**    The places entry have different levels of granularity (Only Country, City, District, Parish... or a
 combination of some).
@@ -117,7 +117,7 @@ As a simple solution, a specific classes for storing and calling query strings.
 
 As a result one can see the main components of our system as described in the image below.
 
-![Classes_BL1_Freeze_Classes_4](https://github.com/ADS2022/HighestTree/blob/master/img/Classes_BL1_Freeze_Classes_4.drawio.svg)
+![Classes_BL1_Freeze_Classes_4](img/HighestTree-class-diagram_V2.svg)
 
 ### Persons and their Relationships to another
 
