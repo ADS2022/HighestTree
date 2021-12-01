@@ -117,7 +117,7 @@ As a simple solution, a specific classes for storing and calling query strings.
 
 As a result one can see the main components of our system as described in the image below.
 
-![Classes_BL1_Freeze_Classes_4](img/HighestTree-class-diagram.svg)
+![Classes_BL1_Freeze_Classes_4](img/HighestTree-class-diagram_V2.svg)
 
 ### Persons and their Relationships to another
 
