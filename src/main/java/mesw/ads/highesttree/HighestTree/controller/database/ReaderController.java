@@ -9,7 +9,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.TextArea;
 import javafx.stage.Stage;
-import mesw.ads.highesttree.HighestTree.model.database.Reader;
+import mesw.ads.highesttree.HighestTree.service.LocationService;
 
 import java.io.IOException;
 import java.net.URL;
@@ -32,7 +32,7 @@ public class ReaderController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        List<String> data = Reader.readFromFile("files/location.txt");
+        List<String> data = LocationService.getAllLocationsFromFileDatabase();
         for (String element : data) {
             placesTextArea.appendText(element);
             placesTextArea.appendText("\n");

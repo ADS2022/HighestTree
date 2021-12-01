@@ -13,9 +13,7 @@ import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-import mesw.ads.highesttree.HighestTree.model.database.Reader;
-import mesw.ads.highesttree.HighestTree.model.database.Writer;
-import mesw.ads.highesttree.HighestTree.model.place.Location;
+import mesw.ads.highesttree.HighestTree.service.LocationService;
 
 import java.io.IOException;
 import java.net.URL;
@@ -23,8 +21,8 @@ import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class LocationController implements Initializable {
-    // Model class
-    private Location location;
+
+    private static final String ERROR_SCREEN = "/fxml/errorScreen1.fxml";
 
     @FXML
     private TextField placeName_txt;
@@ -71,12 +69,8 @@ public class LocationController implements Initializable {
         this.fillComboBox();
     }
 
-    private void setSensitivity(String sensitivity) {
-        if ("YES".equals(sensitivity)) {
-            this.location.setSensitive(true);
-        } else {
-            this.location.setSensitive(false);
-        }
+    private boolean setSensitivity(String sensitivity) {
+        return "YES".equals(sensitivity);
     }
 
     public void actionRegisterPlaceBtn(ActionEvent actionEvent) throws IOException {
@@ -88,15 +82,16 @@ public class LocationController implements Initializable {
             String street = street_txt.getText();
             String description = descriptionTextArea.getText();
             String isSensitive = sensitiveInformation_optn.getSelectionModel().getSelectedItem();
+            boolean sensitivity = this.setSensitivity(isSensitive);
 
-            this.location = new Location(name, country, district, city, street, description);
-            this.setSensitivity(isSensitive);
+            // Service saves location
+            LocationService.save(name, country, district, city, street, description, sensitivity);
 
-            // Register user on the file database
-            Writer.writeToFile("files/location.txt", location.toString());
+            this.changeScene("/fxml/displayPlaces.fxml", actionEvent);
 
         } catch (Exception e) {
-            this.changeScene("/fxml/errorScreen1.fxml", actionEvent);
+            e.printStackTrace();
+            this.changeScene(ERROR_SCREEN, actionEvent);
         }
 
     }
@@ -105,16 +100,15 @@ public class LocationController implements Initializable {
         try {
             this.changeScene("/fxml/registerAPlace.fxml", actionEvent);
         } catch (IOException ex) {
-            this.changeScene("/fxml/errorScreen1.fxml", actionEvent);
+            this.changeScene(ERROR_SCREEN, actionEvent);
         }
     }
 
     public void actionViewPlaces(ActionEvent actionEvent) throws IOException {
         try {
-            Reader.readFromFile("files/location.txt");
             this.changeScene("/fxml/displayPlaces.fxml", actionEvent);
         } catch (IOException ex) {
-            this.changeScene("/fxml/errorScreen1.fxml", actionEvent);
+            this.changeScene(ERROR_SCREEN, actionEvent);
         }
     }
 }

@@ -3,6 +3,7 @@ package mesw.ads.highesttree.HighestTree.model.place;
 import java.util.Objects;
 
 public class Location {
+    private int id;
     private String name;
     private String country;
     private String district;
@@ -30,11 +31,10 @@ public class Location {
     }
 
     public void setName(String name) {
-        try {
+        if (name == null || name.length() == 0)
+            throw new IllegalArgumentException("The name attribute cannot be empty");
+        else
             this.name = name;
-        } catch (NullPointerException ex) {
-            System.out.println("The name cannot be null");
-        }
     }
 
     public String getCountry() {
@@ -42,7 +42,10 @@ public class Location {
     }
 
     public void setCountry(String country) {
-        this.country = country;
+        if (country == null || country.length() == 0)
+            throw new IllegalArgumentException("The country attribute cannot be empty");
+        else
+            this.country = country;
     }
 
     public String getDistrict() {
@@ -74,11 +77,11 @@ public class Location {
     }
 
     public void setDescription(String description) {
-        try {
+        if (description == null || description.length() == 0)
+            throw new IllegalArgumentException("The description attribute cannot be empty");
+        else
             this.description = description;
-        } catch (NullPointerException ex) {
-            System.out.println("The description cannot be null");
-        }
+
     }
 
     public boolean isSensitive() {
@@ -89,36 +92,41 @@ public class Location {
         isSensitive = sensitive;
     }
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof Location)) return false;
         Location location = (Location) o;
-        return isSensitive() == location.isSensitive() &&
-                getName().equals(location.getName()) &&
+        return getId() == location.getId() &&
+                isSensitive() == location.isSensitive() &&
+                Objects.equals(getName(), location.getName()) &&
                 Objects.equals(getCountry(), location.getCountry()) &&
-                Objects.equals(getDistrict(), location.getDistrict()) &&
-                Objects.equals(getCity(), location.getCity()) &&
-                Objects.equals(getStreet(), location.getStreet()) &&
-                getDescription().equals(location.getDescription());
+                getDistrict().equals(location.getDistrict()) &&
+                getCity().equals(location.getCity()) &&
+                getStreet().equals(location.getStreet()) &&
+                Objects.equals(getDescription(), location.getDescription());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getName(), getCountry(), getDistrict(),
+        return Objects.hash(getId(), getName(), getCountry(), getDistrict(),
                 getCity(), getStreet(), getDescription(), isSensitive());
     }
 
     @Override
     public String toString() {
-        return "Location{" +
-                "name='" + name + '\'' +
-                ", country='" + country + '\'' +
-                ", district='" + district + '\'' +
-                ", city='" + city + '\'' +
-                ", street='" + street + '\'' +
-                ", description='" + description + '\'' +
-                ", isSensitive=" + isSensitive +
-                '}';
+        return "The location [" + id + "] name => '" + name + '\'' +
+                ", the country => '" + country + '\'' + ", the district='" + district + '\'' +
+                ", the city='" + city + '\'' + " and the street='" + street + '\'' +
+                ". Location description {'" + description + '\'' +
+                "} is the information sensitive ? " + isSensitive + '.';
     }
 }

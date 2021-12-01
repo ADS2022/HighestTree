@@ -9,6 +9,7 @@ import org.junit.jupiter.api.Test;
 class LocationTest {
     private Location testLocation1;
     private Location testLocation2;
+    private Location impossibleLocation;
 
     @BeforeEach
     void setUp() {
@@ -35,6 +36,17 @@ class LocationTest {
     @AfterEach
     void tearDown() {
         System.out.println("Do something after each test");
+    }
+
+    @Test
+    void impossibleLocationTest() {
+        try {
+            this.impossibleLocation = new Location("", "", "", "", "", "");
+            this.impossibleLocation.setSensitive(true);
+            Assertions.assertNull(this.impossibleLocation.toString());
+        } catch (Exception e) {
+            System.out.println("This test should throw an exception");
+        }
     }
 
     @Test
@@ -136,9 +148,10 @@ class LocationTest {
     @Test
     void testToString() {
         String actualToString = this.testLocation1.toString();
-        String expectedToString = "Location{name='My place', country='Portugal', district='Porto', " +
-                "city='V.N.Gaia', street='Av. Dr. Moreira de Sousa 1041 5ºesq.', " +
-                "description='My place', isSensitive=true}";
+        String expectedToString = "The location name => 'My place', " +
+                "the country => 'Portugal', the district='Porto', the city='V.N.Gaia' " +
+                "and the street='Av. Dr. Moreira de Sousa 1041 5ºesq.'. " +
+                "Location description {'My place'} is the information sensitive ? true.";
         Assertions.assertEquals(actualToString, expectedToString);
     }
 }
