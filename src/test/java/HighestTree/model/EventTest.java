@@ -35,16 +35,14 @@ class EventTest {
         this.testSuperDate = new Date("1999", "09", "30");
         this.testPerson = new Person();
 
-        /*this.testLocation = new Location("Portugal",
+        this.testLocation = new Location(
+                "My home",
+                "Portugal",
                 "Porto",
                 "V.N.Gaia",
-                "Pedroso",
                 "Av. Dr. Moreira de Sousa 1041 5ºesq.",
-                this.testSource,
-                "My place",
-                this.testSuperDate,
-                true);
-         */
+                "My place");
+        this.testLocation.setSensitive(false);
 
         Events testStandardEvent1 = Events.MARRIAGE;
         Events testStandardEvent2 = Events.DEATH;

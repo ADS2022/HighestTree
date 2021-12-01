@@ -1,6 +1,6 @@
-package mesw.ads.highesttree.HighestTree.dao.location;
+package mesw.ads.highesttree.HighestTree.model.dao.location;
 
-import mesw.ads.highesttree.HighestTree.dao.Dao;
+import mesw.ads.highesttree.HighestTree.model.dao.Dao;
 import mesw.ads.highesttree.HighestTree.model.place.Location;
 
 import java.util.*;

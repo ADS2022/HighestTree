@@ -1,4 +1,4 @@
-package mesw.ads.highesttree.HighestTree.dao;
+package mesw.ads.highesttree.HighestTree.model.dao;
 
 import java.util.Collection;
 import java.util.Optional;

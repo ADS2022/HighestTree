@@ -1,7 +1,7 @@
 package mesw.ads.highesttree.HighestTree.service;
 
-import mesw.ads.highesttree.HighestTree.dao.Dao;
-import mesw.ads.highesttree.HighestTree.dao.location.DaoLocation;
+import mesw.ads.highesttree.HighestTree.model.dao.Dao;
+import mesw.ads.highesttree.HighestTree.model.dao.location.DaoLocation;
 import mesw.ads.highesttree.HighestTree.model.database.Reader;
 import mesw.ads.highesttree.HighestTree.model.database.Writer;
 import mesw.ads.highesttree.HighestTree.model.place.Location;

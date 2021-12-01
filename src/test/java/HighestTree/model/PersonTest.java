@@ -1,18 +1,18 @@
-package HighestTree.model;/*
- * Copyright (c) 2021.
- * Created by Francisco Bastos (202103393) assembled in your computers
- *
- * Facebook: https://www.facebook.com/francisco.bastos.9022
- * Instagram: https://www.instagram.com/francisco_jf_bastos/
- * LinkedIn: https://www.linkedin.com/in/francisco-bastos-031369160/
- * GitHub: https://github.com/FranciscoBastos
- *
- * “Do. Or do not. There is no try.” The Empire Strikes Back
- *
- */
+package HighestTree.model;
+
+import mesw.ads.highesttree.HighestTree.model.*;
+import mesw.ads.highesttree.HighestTree.model.place.Location;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
+import java.util.LinkedList;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 
 class PersonTest {
-    /*
     private Person parent11;
     private Person parent21;
     private Person parent12;
@@ -52,15 +52,14 @@ class PersonTest {
 
         this.testSource = new Source();
 
-        this.testLocation = new Location("Portugal",
-                "Porto",
+        this.testLocation = new Location(
+                "Ordem da Lapa",
+                "Portugal",
                 "Porto",
                 "Lapa",
                 "Largo da Lapa, nº1 4050-069 Porto",
-                this.testSource,
-                "Birth place of Francisco Bastos",
-                this.testSuperDate,
-                true);
+                "Birth place of Francisco Bastos");
+        this.testLocation.setSensitive(false);
 
 
         Events testStandardEvent1 = Events.BIRTH;
@@ -193,15 +192,11 @@ class PersonTest {
                         new Date("YYYY",
                                 "MM",
                                 "DD"),
-                        new Location("Country",
+                        new Location("A place", "Country",
                                 "District",
                                 "City",
-                                "Parish",
-                                "Street",
-                                this.testSource,
-                                "A nice place",
-                                new Date("YYYY", "MM", "DD"),
-                                false),
+                                "street",
+                                "description"),
                         this.testSource,
                         true
                 )
@@ -237,57 +232,23 @@ class PersonTest {
 
     @Test
     void testToString() {
-        String expected = "Person{id=-1768320971, " +
-                "firstName='Francisco José', " +
-                "lastName='Fortuna Bastos', nationality='PRT', " +
-                "events=[Event{name='Birth of Francisco Bastos', " +
-                "standardEvents=BIRTH," +
-                " description='Birth of Francisco Bastos'," +
-                " superDate=Date{year='1999'," +
-                " month='09', day='30'}," +
-                " place=Place{country='Portugal'," +
-                " city='Porto'," +
-                " district='Porto'," +
-                " parish='Lapa'," +
-                " street='Largo da Lapa, nº1 4050-069 Porto'," +
-                " description='Birth place of Francisco Bastos'," +
-                " superDate=Date{year='1999'," +
-                " month='09', day='30'}," +
-                " isSensitive=true}," +
-                " personsInvolved=[]," +
-                " source=Source{id=0," +
-                " researchersName='null'," +
-                " superDate=null," +
-                " description='null'," +
-                " sourceOfInformation='null'," +
-                " sensitivity=false}, isSensitive=true}]," +
-                " source=Source{id=0, researchersName='null'," +
-                " superDate=null, description='null'," +
-                " sourceOfInformation='null'," +
-                " sensitivity=false}," +
-                " description='A software developer'," +
-                " parents=[Person{id=0, firstName='null'," +
-                " lastName='null'," +
-                " nationality='null'," +
-                " events=null," +
-                " source=null," +
-                " description='null'," +
-                " parents=null," +
-                " partner=null," +
-                " sensitive=false}," +
-                " Person{id=0," +
-                " firstName='null'," +
-                " lastName='null'," +
-                " nationality='null', events=null," +
-                " source=null," +
-                " description='null'," +
-                " parents=null," +
-                " partner=null," +
-                " sensitive=false}]," +
-                " partner=[null], sensitive=true}";
+        String expected = "Person{id=-1768320971, firstName='Francisco José', lastName='Fortuna Bastos', " +
+                "nationality='PRT', events=[Event{name='Birth of Francisco Bastos', standardEvents=BIRTH, " +
+                "description='Birth of Francisco Bastos', superDate=Date{year='1999', month='09', day='30'}, " +
+                "place=The location [0] name => 'Ordem da Lapa', the country => 'Portugal', the district='Porto', " +
+                "the city='Lapa' and the street='Largo da Lapa, nº1 4050-069 Porto'. " +
+                "Location description {'Birth place of Francisco Bastos'} is the information sensitive ? false., " +
+                "personsInvolved=[], source=Source{id=0, researchersName='null', superDate=null, " +
+                "description='null', sourceOfInformation='null', sensitivity=false}, isSensitive=true}], " +
+                "source=Source{id=0, researchersName='null', superDate=null, description='null', " +
+                "sourceOfInformation='null', sensitivity=false}, description='A software developer', " +
+                "parents=[Person{id=0, firstName='null', lastName='null', nationality='null', events=null, " +
+                "source=null, description='null', parents=null, partner=null, sensitive=false}, " +
+                "Person{id=0, firstName='null', lastName='null', nationality='null', events=null, " +
+                "source=null, description='null', parents=null, partner=null, sensitive=false}], " +
+                "partner=[null], sensitive=true}";
         String actual = this.testPerson1.toString();
 
         Assertions.assertEquals(expected, actual);
     }
-     */
 }
