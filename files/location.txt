@@ -1,0 +1,4 @@
+The location [0] name => 'saas', the country => 'sasa', the district='', the city='' and the street=''. Location description {'saas'} is the information sensitive ? true.
+The location [1] name => 'saasas', the country => 'asassa', the district='', the city='' and the street=''. Location description {'sassa'} is the information sensitive ? false.
+The location [2] name => 'sasasa', the country => 'sasasa', the district='', the city='' and the street=''. Location description {'sasasasa'} is the information sensitive ? false.
+The location [0] name => 'sasa', the country => 'assaas', the district='', the city='' and the street=''. Location description {'sasasa'} is the information sensitive ? false.

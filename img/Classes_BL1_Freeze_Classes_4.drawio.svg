@@ -161,7 +161,7 @@
             <text x="525.5" y="263.5">+ name</text>
             <text x="525.5" y="277.5">+ description</text>
             <text x="525.5" y="291.5">+ superDate</text>
-            <text x="525.5" y="305.5">+ place</text>
+            <text x="525.5" y="305.5">+ location</text>
             <text x="525.5" y="319.5">+ personsInvolved</text>
             <text x="525.5" y="333.5">+ source</text>
             <text x="525.5" y="347.5">+ isSensitive</text>

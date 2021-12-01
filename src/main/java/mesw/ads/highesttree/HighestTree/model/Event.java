@@ -11,6 +11,8 @@ package mesw.ads.highesttree.HighestTree.model;/*
  *
  */
 
+import mesw.ads.highesttree.HighestTree.model.place.Location;
+
 import java.util.LinkedList;
 import java.util.Objects;
 
@@ -19,7 +21,7 @@ public class Event {
     private Events standardEvents;
     private String description;
     private SuperDate superDate;
-    private Place place;
+    private Location location;
     private LinkedList<Person> personsInvolved;
     private Source source;
     private boolean isSensitive;
@@ -28,7 +30,7 @@ public class Event {
                  String description,
                  Events standardEvents,
                  SuperDate superDate,
-                 Place place,
+                 Location location,
                  Person personInvolved,
                  Source source,
                  boolean isSensitive) {
@@ -37,7 +39,7 @@ public class Event {
         setDescription(description);
         setStandardEvents(standardEvents);
         setSuperDate(superDate);
-        setPlace(place);
+        setPlace(location);
         insertPerson(personInvolved);
         setSource(source);
         setSensitive(isSensitive);
@@ -47,7 +49,7 @@ public class Event {
                  String description,
                  Events standardEvents,
                  SuperDate superDate,
-                 Place place,
+                 Location location,
                  Source source,
                  boolean isSensitive) {
         this.personsInvolved = new LinkedList<>();
@@ -55,7 +57,7 @@ public class Event {
         setDescription(description);
         setStandardEvents(standardEvents);
         setSuperDate(superDate);
-        setPlace(place);
+        setPlace(location);
         setSource(source);
         setSensitive(isSensitive);
     }
@@ -108,15 +110,15 @@ public class Event {
             this.superDate = superDate;
     }
 
-    public Place getPlace() {
-        return place;
+    public Location getPlace() {
+        return location;
     }
 
-    public void setPlace(Place place) {
-        if (place == null)
+    public void setPlace(Location location) {
+        if (location == null)
             throw new IllegalArgumentException();
         else
-            this.place = place;
+            this.location = location;
     }
 
     public LinkedList<Person> getPersonsInvolved() {
@@ -186,7 +188,7 @@ public class Event {
                 ", standardEvents=" + standardEvents +
                 ", description='" + description + '\'' +
                 ", superDate=" + superDate +
-                ", place=" + place +
+                ", place=" + location +
                 ", personsInvolved=" + personsInvolved +
                 ", source=" + source +
                 ", isSensitive=" + isSensitive +

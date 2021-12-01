@@ -20,23 +20,28 @@ import org.junit.jupiter.api.Test;
 class DateTest {
 
     private Date testDate1;
-    private Date testDate2;
+    private Date impossibleDate;
     private Date testDate3;
 
     @BeforeEach
     void setUp() {
         this.testDate1 = new Date("1999", "09", "30");
         this.testDate3 = new Date("1969", "07", "16");
-        try {
-            this.testDate2 = new Date("", "12", "19");
-        } catch (Exception e) {
-            System.out.println("It should not create a date with missing fields");
-        }
     }
 
     @AfterEach
     void tearDown() {
         System.out.println("Do something after each test");
+    }
+
+    @Test
+    public void impossibleDateTest() {
+        try {
+            this.impossibleDate = new Date("", "12", "19");
+            Assertions.assertNull(this.impossibleDate.toString());
+        } catch (Exception e) {
+            System.out.println("It should not create a date with missing fields");
+        }
     }
 
     @Test
