@@ -8,6 +8,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
@@ -21,33 +22,27 @@ public class HomeController {
     private Button btnPersonsMenu, btnEventsMenu, btnPlacesMenu;
 
     public void goToPersonsMenu(ActionEvent actionEvent) throws IOException {
-
-        //HERE WE ARE TRYING TO DEBUG THE PATH TO .FXML FILE
-        /*HomeController shit = new HomeController();
-        Class class1 = shit.getClass();
-        URL url2 = class1.getResource("HomeController.java");
-        System.out.println("Value URL = " + url2);*/
-
-
-
         if(actionEvent.getSource()==btnPersonsMenu){
             System.out.println("Changing to Persons scene");
-            Stage stage = (Stage) btnPersonsMenu.getScene().getWindow();
-
-            Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("/PersonsView.fxml"));
-            Scene scene = new Scene(root);
-            stage.setScene(scene);
-            stage.show();
+            changeScene("/fxml/PersonsView.fxml", actionEvent);
         }
         else if (actionEvent.getSource()==btnEventsMenu){
             System.out.println("Changing to Events scene");
-
+            changeScene("/fxml/PersonsView.fxml", actionEvent);
         }
         else if (actionEvent.getSource()==btnPlacesMenu){
             System.out.println("Changing to Places scene");
-
+            changeScene("/fxml/PersonsView.fxml", actionEvent);
         }
 
+    }
+
+    public void changeScene(String SceneName, ActionEvent event) throws IOException {
+        Parent MainSceneParent = FXMLLoader.load(getClass().getResource(SceneName));
+        Scene MainScene = new Scene(MainSceneParent);
+        Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        window.setScene(MainScene);
+        window.show();
     }
 
 
