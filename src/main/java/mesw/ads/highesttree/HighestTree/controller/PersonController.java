@@ -72,7 +72,7 @@ public class PersonController implements Initializable {
             // Service saves location
             PersonService.save(lastName, firstName, nationality, events, source, description, parents, spouses, false);
             // Change to another scene
-            changeScene("/fxml/LocationsView.fxml", actionEvent);
+            changeScene("/fxml/PersonsView.fxml", actionEvent);
 
         } catch (Exception e) {
             e.printStackTrace();
