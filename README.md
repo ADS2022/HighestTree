@@ -143,6 +143,11 @@ As a result one can see the main components of our system as described in the im
 
 ### 3.1.2 Refactor and code smells
 
+As the good practices say, we should write code and then refactor it. We found several codes smells. A PowerPoint
+presentation regarding them can be accessed throw
+this [link](https://docs.google.com/presentation/d/1SnStiRzLfbJ_3eKdzlC02kBM3T-gWlUZPRKwiSLjrH4/edit#slide=id.gfc000407e6_0_27)
+.
+
 ### 3.1.3 Second approach
 
 ![HighestTree-class-diagram_V1](img/HighestTree-class-diagram_V1.svg)
@@ -485,7 +490,7 @@ public class LocationService {
 
 ````
 
-#### Composite
+#### Composite (Under study)
 
 * **Problem:** TODO
 * **Solution:**
