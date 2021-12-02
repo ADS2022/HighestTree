@@ -33,7 +33,7 @@
                                     <children>
                                        <AnchorPane>
                                           <children>
-                                                  <TextField prefHeight="25.0" prefWidth="369.0" promptText="Last Name" AnchorPane.bottomAnchor="2.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="2.0">
+                                                  <TextField fx:id="fldLastName" prefHeight="25.0" prefWidth="369.0" promptText="Last Name" AnchorPane.bottomAnchor="2.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="2.0">
                                                       <opaqueInsets>
                                                           <Insets />
                                                       </opaqueInsets>
@@ -42,12 +42,12 @@
                                        </AnchorPane>
                                        <AnchorPane>
                                           <children>
-                                                  <TextField prefHeight="25.0" prefWidth="369.0" promptText="First Name" AnchorPane.bottomAnchor="2.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="2.0" />
+                                                  <TextField fx:id="fldFirstName" prefHeight="25.0" prefWidth="369.0" promptText="First Name" AnchorPane.bottomAnchor="2.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="2.0" />
                                           </children>
                                        </AnchorPane>
                                        <AnchorPane>
                                           <children>
-                                                  <TextField prefHeight="25.0" prefWidth="369.0" promptText="Nationallity" AnchorPane.bottomAnchor="2.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="2.0">
+                                                  <TextField fx:id="fldNationality" prefHeight="25.0" prefWidth="369.0" promptText="Nationallity" AnchorPane.bottomAnchor="2.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="2.0">
                                                       <opaqueInsets>
                                                           <Insets />
                                                       </opaqueInsets>
@@ -80,13 +80,15 @@
                            <VBox prefHeight="247.0" prefWidth="599.0" AnchorPane.bottomAnchor="6.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                               <children>
                                       <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Description" />
-                                 <TextArea prefHeight="26.0" prefWidth="599.0" text="DescriptionField" />
+                                 <TextArea fx:id="fldDescription" prefHeight="26.0" prefWidth="599.0" text="DescriptionField" />
                                       <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Events" />
-                                 <TextArea prefHeight="32.0" prefWidth="599.0" text="EventsField" />
+                                 <TextArea fx:id="fldEvents" prefHeight="32.0" prefWidth="599.0" text="EventsField" />
                                       <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Source" />
-                                 <TextArea prefHeight="28.0" prefWidth="599.0" text="SourceField" />
-                                      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Relationships" />
-                                 <TextArea prefHeight="0.0" prefWidth="599.0" text="RelationshipsField" />
+                                 <TextArea fx:id="fldSource" prefHeight="28.0" prefWidth="599.0" text="SourceField" />
+                                      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Spouses" />
+                                 <TextArea fx:id="fldSpouses" prefHeight="0.0" prefWidth="599.0" text="SpousesField" />
+                                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Parents" />
+                                  <TextArea fx:id="fldParents" prefHeight="0.0" prefWidth="599.0" text="ParentsField" />
                               </children>
                            </VBox>
                         </children>

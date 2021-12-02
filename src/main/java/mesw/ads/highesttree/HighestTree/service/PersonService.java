@@ -17,16 +17,18 @@ public class PersonService {
     private static Dao<Person> personDao = new DaoPerson();
     private static Person person;
 
-    public static void save(String firstName,
-                            String lastName,
+    public static void save(String lastName,
+                            String firstName,
                             String nationality,
-                            Event anEvent,
-                            Source source,
+                            String events,
+                            String source,
                             String description,
-                            LinkedList<Person> parents,
-                            LinkedList<Person> relationships,
+                            String parents,
+                            String relationships,
                             boolean sensitive) {
-        person = new Person(firstName, lastName, nationality, anEvent, source, description, parents, relationships, sensitive);
+        person = new Person();
+        person.setFirstName(firstName);
+        person.setLastName(lastName);
         person.setSensitive(sensitive);
         personDao.save(person);
         // Register user on the file database
