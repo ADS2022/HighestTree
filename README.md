@@ -162,19 +162,49 @@ implementation and consequences were whirling the use of the same.
 ### Persons and their Relationships to another
 
 * **Problem:** Design the Person-Relationships without redundancies
+* **classes:** Person.java
 * **Solution:** Each Person Object is associated to its parents and its spouses.
 * **Consequences:**
     * The Family Tree is easy to traverse bottom-up (get the ancestors of a person) but more difficult to traverse
       top-down (get the children of a person), because a person only knows about its parents but not its children.
-* **Implementation:** TODO
+* **Implementation:** In the code snippet bellow you can observe a method that allows to get all the accessors of a
+  person, the same logic can be applied to the partners (spouses, boyfriend, etc...) of the person.
+  ```java
+  public class Person {
+  private int id;
+  private String firstName;
+  private String lastName;
+  private String nationality;
+  private LinkedList<Event> events;
+  private Source source;
+  private String description;
+  private LinkedList<Person> parents;
+  private LinkedList<Person> partner;
+  private boolean sensitive;
 
-![Person UML](img/Person_UML.png)
+  // standard constructors and getters and setters.
+
+    public static LinkedList<Person> getAncestors(Person targetPerson, LinkedList<Person> ancestors) {
+        if (targetPerson.getParents() != null) { 
+            for (Person parent : targetPerson.getParents()) { 
+                ancestors.add(parent);
+                ancestors = getAncestors(parent, ancestors); 
+            } 
+        } 
+      return ancestors; 
+    }
+  // other methods of the class.
+  }
+  ```
+* **Diagram:**
+
+  ![Person UML](img/Person_UML.png)
 
 ### Date, time periods and super dates
 
 * **Problem:** A person can be born on a specific date or in on a time period. For example, an individual could be born
   in 1578 or in the XVI century (between 1501 and 1600).
-* **Classes:** TODO
+* **Classes:** Date.java, SuperDate.java and TimePeriod.java
 * **Solution:**
     * There is an interface called SuperDate and two classes called Date and TimePeriod. Those classes implement
       SuperDate and when creating an object that requires a date (for example an Event) it is possible to create a date
@@ -182,10 +212,40 @@ implementation and consequences were whirling the use of the same.
         * This solution implements the [*template method*](https://refactoring.guru/design-patterns/template-method)
           pattern by breaking down the date-time period logic into a series of two steps, and turning these steps into a
           method and then call those methods inside a single template method.
-* **Problems:** TODO
-* **Implementation:** TODO
+* **Problems:**
+    * One of the problems that we can encounter is the violation of the Liskov Substitution Principle by suppressing a
+      default step implementation via a subclass and the maintainability of the code. If any changes to the method need
+      to be made, it can get harder to maintain the more differences there are.
+* **Implementation:** In the code snippet bellow you can observe the SuperDate interface that exposes
+  a ```returnDateString();``` method that forces the Date.java and TimePeriod.java classes to return or a date or of a
+  time period.
 
-![Dates UML](img/HighestTree-dates-class-diagram.svg)
+    ```java 
+    public interface SuperDate {
+        String returnDateString();
+    }
+    
+    public class TimePeriod implements SuperDate {
+        // standard methods.
+        
+        @Override
+        public String returnDateString() {
+            return toString();
+        }
+    }
+    
+    public class Date implements SuperDate {
+        // standard methods.
+        
+        @Override
+        public String returnDateString() {
+            return toString();
+        }
+    }
+    ```
+
+* **Diagram:**
+  ![Dates UML](img/HighestTree-dates-class-diagram.svg)
 
 ### Granularity of the fields
 
@@ -203,7 +263,7 @@ implementation and consequences were whirling the use of the same.
 * **Problems:** TODO
 * **Implementation:** TODO
 
-### Model-View-Controller Service MVCS
+### Model-View-Controller Service (MVCS)
 
 * **Problem:** TODO
 * **Solution:**
