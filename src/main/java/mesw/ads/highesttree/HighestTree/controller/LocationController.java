@@ -25,24 +25,23 @@ public class LocationController implements Initializable {
     private static final String ERROR_SCREEN = "/fxml/errorScreen1.fxml";
 
     @FXML
-    private TextField placeName_txt;
+    private TextField fldPlaceName;
     @FXML
-    private TextField country_txt;
+    private TextField fldCountry;
     @FXML
-    private TextField district_txt;
+    private TextField fldDistrict;
     @FXML
-    private TextArea descriptionTextArea;
+    private TextArea fldDescription;
     @FXML
-    private TextField city_txt;
+    private TextField fldCity;
     @FXML
-    private TextField street_txt;
+    private TextField fldStreet;
     @FXML
     private ChoiceBox<String> sensitiveInformation_optn;
 
-    private void changeScene(String SceneName, ActionEvent event) throws IOException {
+    public void changeScene(String SceneName, ActionEvent event) throws IOException {
         Parent MainSceneParent = FXMLLoader.load(getClass().getResource(SceneName));
         Scene MainScene = new Scene(MainSceneParent);
-
         Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
         window.setScene(MainScene);
         window.show();
@@ -50,8 +49,8 @@ public class LocationController implements Initializable {
 
     private void fillComboBox() {
         ArrayList<String> list = new ArrayList<>();
-        list.add("YES");
-        list.add("NOBODY CARES BRO");
+        list.add("Block info to users");
+        list.add("Show info to users");
         ObservableList<String> sensitiveLevels = FXCollections.observableArrayList(list);
         this.sensitiveInformation_optn.setItems(sensitiveLevels);
     }
@@ -73,29 +72,8 @@ public class LocationController implements Initializable {
         return "YES".equals(sensitivity);
     }
 
-    public void actionRegisterPlaceBtn(ActionEvent actionEvent) throws IOException {
-        try {
-            String name = placeName_txt.getText();
-            String country = country_txt.getText();
-            String district = district_txt.getText();
-            String city = city_txt.getText();
-            String street = street_txt.getText();
-            String description = descriptionTextArea.getText();
-            String isSensitive = sensitiveInformation_optn.getSelectionModel().getSelectedItem();
-            boolean sensitivity = this.setSensitivity(isSensitive);
 
-            // Service saves location
-            LocationService.save(name, country, district, city, street, description, sensitivity);
-
-            this.changeScene("/fxml/displayPlaces.fxml", actionEvent);
-
-        } catch (Exception e) {
-            e.printStackTrace();
-            this.changeScene(ERROR_SCREEN, actionEvent);
-        }
-
-    }
-
+    // REFACTOR - DELETE
     public void actionGoBackBtn(ActionEvent actionEvent) throws IOException {
         try {
             this.changeScene("/fxml/registerAPlace.fxml", actionEvent);
@@ -104,11 +82,47 @@ public class LocationController implements Initializable {
         }
     }
 
+    // REFACTOR
     public void actionViewPlaces(ActionEvent actionEvent) throws IOException {
         try {
             this.changeScene("/fxml/displayPlaces.fxml", actionEvent);
         } catch (IOException ex) {
             this.changeScene(ERROR_SCREEN, actionEvent);
         }
+    }
+
+    public void btnSceneHomePress(ActionEvent actionEvent) throws IOException {
+        System.out.println("Changing to Home scene");
+        changeScene("/mesw/ads/highesttree/HighestTree/HomeView.fxml", actionEvent);
+    }
+
+    public void btnAddLocationPress(ActionEvent actionEvent) throws IOException  {
+        try {
+            // Add a new location to records
+            System.out.println("Adding new Location to records");
+
+            String name = fldPlaceName.getText();
+            String country = fldCountry.getText();
+            String district = fldDistrict.getText();
+            String city = fldCity.getText();
+            String street = fldStreet.getText();
+            String description = fldDescription.getText();
+            String isSensitive = sensitiveInformation_optn.getSelectionModel().getSelectedItem();
+            boolean sensitivity = this.setSensitivity(isSensitive);
+
+            // Service saves location
+            LocationService.save(name, country, district, city, street, description, sensitivity);
+            // Change to another scene
+            changeScene("/fxml/LocationsView.fxml", actionEvent);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            this.changeScene(ERROR_SCREEN, actionEvent);
+        }
+    }
+
+    public void btnCancelPress(ActionEvent actionEvent) throws IOException {
+        System.out.println("Changing to Locations scene");
+        changeScene("/fxml/LocationsView.fxml", actionEvent);
     }
 }

@@ -28,7 +28,7 @@ public class HomeController {
         }
         else if (actionEvent.getSource()==btnPlacesMenu){
             System.out.println("Changing to Places scene");
-            changeScene("/fxml/PlacesView.fxml", actionEvent);
+            changeScene("/fxml/LocationsView.fxml", actionEvent);
         }
 
     }

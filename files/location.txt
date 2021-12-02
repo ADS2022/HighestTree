@@ -1,0 +1,3 @@
+The location [0] name => 'Place Name', the country => 'Country', the district='District', the city='City' and the street='Street'. Location description {'DescriptionField'} is the information sensitive ? false.
+The location [1] name => 'Place Name', the country => 'Country', the district='District', the city='City' and the street='Street'. Location description {'DescriptionField'} is the information sensitive ? false.
+The location [2] name => 'Place Name', the country => 'Country', the district='District', the city='City' and the street='Street'. Location description {'DescriptionField'} is the information sensitive ? false.
