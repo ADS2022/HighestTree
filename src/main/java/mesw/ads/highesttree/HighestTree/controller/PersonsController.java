@@ -1,4 +1,4 @@
-package mesw.ads.highesttreemaven.HighestTree.controller;
+package mesw.ads.highesttree.HighestTree.controller;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -7,8 +7,6 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -27,7 +25,7 @@ public class PersonsController {
 
     public void btnSceneHomePress(ActionEvent actionEvent) throws IOException {
         System.out.println("Changing to Home scene");
-        changeScene("/mesw/ads/highesttreemaven/HomeView.fxml", actionEvent);
+        changeScene("/mesw/ads/highesttree/HighestTree/HomeView.fxml", actionEvent);
     }
 
     public void btnPersonNewPress(ActionEvent actionEvent) throws IOException {

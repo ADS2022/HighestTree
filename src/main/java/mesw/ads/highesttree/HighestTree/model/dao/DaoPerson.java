@@ -1,5 +1,4 @@
-package mesw.ads.highesttree.HighestTree.model.dao.person;
-
+package mesw.ads.highesttree.HighestTree.model.dao;
 import mesw.ads.highesttree.HighestTree.model.Person;
 import mesw.ads.highesttree.HighestTree.model.dao.Dao;
 

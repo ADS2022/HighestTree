@@ -11,7 +11,7 @@ package HighestTree.model;/*
  *
  */
 
-import mesw.ads.highesttreemaven.HighestTree.model.Date;
+import mesw.ads.highesttree.HighestTree.model.Date;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;

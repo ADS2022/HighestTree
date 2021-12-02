@@ -1,4 +1,4 @@
-package mesw.ads.highesttreemaven.HighestTree.model;
+package mesw.ads.highesttree.HighestTree.model;
 
 import java.util.Arrays;
 import java.util.InputMismatchException;

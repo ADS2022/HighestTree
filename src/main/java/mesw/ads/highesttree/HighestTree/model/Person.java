@@ -1,4 +1,5 @@
 package mesw.ads.highesttree.HighestTree.model;
+
 import java.util.LinkedList;
 import java.util.Objects;
 

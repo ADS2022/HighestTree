@@ -4,7 +4,7 @@ package mesw.ads.highesttree.HighestTree.service;
 import mesw.ads.highesttree.HighestTree.model.Event;
 import mesw.ads.highesttree.HighestTree.model.Source;
 import mesw.ads.highesttree.HighestTree.model.dao.Dao;
-import mesw.ads.highesttree.HighestTree.model.dao.person.DaoPerson;
+import mesw.ads.highesttree.HighestTree.model.dao.DaoPerson;
 import mesw.ads.highesttree.HighestTree.model.database.Reader;
 import mesw.ads.highesttree.HighestTree.model.database.Writer;
 import mesw.ads.highesttree.HighestTree.model.Person;
