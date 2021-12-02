@@ -8,8 +8,6 @@
 
 - [Design](#design)
 
-<br>
-
 ## How to run the project
 
 To run the project, you can use the built-in tools in the IntelliJ IDEA. It should show up on the home screen with
@@ -150,7 +148,11 @@ this [link](https://docs.google.com/presentation/d/1SnStiRzLfbJ_3eKdzlC02kBM3T-g
 
 ### 3.1.3 Second approach
 
+TODO
+
 ![HighestTree-class-diagram_V1](img/HighestTree-class-diagram_V1.svg)
+
+TODO
 
 ![HighestTree-class-diagram_V2](img/HighestTree-class-diagram_V2.svg)
 
@@ -207,7 +209,7 @@ implementation and consequences were whirling the use of the same.
   ```
 * **Diagram:**
 
-  ![Person UML](img/Person_UML.png)
+![Person UML](img/Person_UML.png)
 
 ### Date, time periods and super dates
 
@@ -368,20 +370,172 @@ implementation and consequences were whirling the use of the same.
   </AnchorPane>
   ```
 
-### Model-View-Controller-Service (MVCS) and data access objects (DAO)
+### Model-View-Controller-Service (MVCS), data access objects (DAOs) and data transfer objects (DTOs)
 
-* **Problem:** TODO
+* **Problem:** In order to display users, places, events, ... we need to write and reed to something that can hold
+  data (a database, and Excel file or text files).
 * **Solution:**
-  TODO
-* **Problems:** TODO
-* **Implementation:** TODO
+    * We are adding another layer to the MVC model, a service. The service layer is an abstraction over domain logic. It
+      defines the application's boundary with a layer of services that establishes a set of available operations and
+      coordinates the application's response in each process. The service layer is an architectural pattern applied
+      within the service-orientation design paradigm, which aims to organize the services, within a service inventory,
+      into a set of logical layers. Services categorized into a particular layer share functionality; it helps reduce
+      the conceptual overhead related to managing the service inventory, as the services belonging to the same layer
+      address a smaller set of activities.
+    * We need to create DTOs and DAOs to implement this pattern correctly.
+        * DTO is an abbreviation for Data Transfer Object, so it is used to transfer the data between classes and
+          modules of your application.
+        * DAO is an abbreviation for Data Access Object, so it should encapsulate the logic for retrieving, saving, and
+          updating data in your data storage (a database, a file system, whatever).
+* **Problems:** They are the same as the MVC, they basically consist in added complexity, and they might lead to loss in
+  performance and close coupling between the different modules.
+* **Implementation and classes:** the LocationController.java, LocationService.java, the DaoLocation.java and the Dao
+  interface, as well as the Reader and Writer classes, and the ReaderController.java class.
+
+````java
+public class LocationService {
+    private static Dao<Location> locationDao = new DaoLocation();
+    private static Location location;
+
+    public static void save(String name,
+                            String country,
+                            String district,
+                            String city,
+                            String street,
+                            String description,
+                            boolean isSensitive) {
+        location = new Location(name, country, district, city, street, description);
+        location.setSensitive(isSensitive);
+        locationDao.save(location);
+        // Register user on the file database
+        Writer.writeToFile("files/location.txt", location.toString());
+    }
+
+    public static Collection<Location> getAllLocations() {
+        return locationDao.getAll();
+    }
+
+    public static int saveLocation(Location location) {
+        validate(location);
+        return locationDao.save(location);
+    }
+
+    private static void validate(Location location) {
+        // Not implemented
+        if (location == null)
+            throw new NullPointerException();
+    }
+
+    public static List<String> getAllLocationsFromFileDatabase() {
+        // Reads user from file database
+        return Reader.readFromFile("files/location.txt");
+    }
+
+    public Location getLocation() {
+        return location;
+    }
+}
+
+public class DaoLocation implements Dao<Location> {
+
+    private List<Location> locationList = new LinkedList<>();
+
+    @Override
+    public Optional<Location> get(int id) {
+        return Optional.ofNullable(locationList.get(id));
+    }
+
+    @Override
+    public Collection<Location> getAll() {
+        return locationList.stream()
+                .filter(Objects::nonNull)
+                .collect(Collectors.collectingAndThen(Collectors.toList(), Collections::unmodifiableList));
+    }
+
+    @Override
+    public int save(Location location) {
+        locationList.add(location);
+        int index = locationList.size() - 1;
+        location.setId(index);
+        return index;
+    }
+
+    @Override
+    public void update(Location location) {
+        locationList.set(location.getId(), location);
+    }
+
+    @Override
+    public void delete(Location location) {
+        locationList.set(location.getId(), null);
+    }
+}
+
+public interface Dao<T> {
+
+    Optional<T> get(int id);
+
+    Collection<T> getAll();
+
+    int save(T t);
+
+    void update(T t);
+
+    void delete(T t);
+}
+
+public class LocationController implements Initializable {
+
+    // attributes and methods
+
+    public void actionRegisterPlaceBtn(ActionEvent actionEvent) throws IOException {
+        try {
+            String name = placeName_txt.getText();
+            String country = country_txt.getText();
+            String district = district_txt.getText();
+            String city = city_txt.getText();
+            String street = street_txt.getText();
+            String description = descriptionTextArea.getText();
+            String isSensitive = sensitiveInformation_optn.getSelectionModel().getSelectedItem();
+            boolean sensitivity = this.setSensitivity(isSensitive);
+
+            // Service saves location
+            LocationService.save(name, country, district, city, street, description, sensitivity);
+
+            this.changeScene("/fxml/displayPlaces.fxml", actionEvent);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            this.changeScene(ERROR_SCREEN, actionEvent);
+        }
+
+    }
+
+    // the class continues
+}
+
+public class ReaderController implements Initializable {
+
+    // attributes and methods
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        List<String> data = LocationService.getAllLocationsFromFileDatabase();
+        for (String element : data) {
+            placesTextArea.appendText(element);
+            placesTextArea.appendText("\n");
+        }
+    }
+
+    // the class continues
+}
+````
 
 ### Granularity of the fields
 
 * **Problem:** We might not know from the start, what are the fields of some objects. For example, "I might not know
   what is the name of the street, the district or the city where my great-great-grandfather was born; however, I know
-  that he was born in England"
-  .
+  that he was born in England."
 * **Solution:**
   Both on the model and on the service allow for the creation and editing the created objects.
 * **Problems:** Close coupling of the different modules as well as, if the system it's not prepared some exceptions
