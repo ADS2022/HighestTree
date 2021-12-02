@@ -139,11 +139,15 @@ As a simple solution, a specific classes for storing and calling query strings.
 
 As a result one can see the main components of our system as described in the image below.
 
-![Classes_BL1_Freeze_Classes_4](img/HighestTree-class-diagram_V2.svg)
+![Classes_BL1_Freeze_Classes_4](img/Classes_BL1_Freeze_Classes_4.drawio.svg)
 
 ### 3.1.2 Refactor and code smells
 
 ### 3.1.3 Second approach
+
+![HighestTree-class-diagram_V1](img/HighestTree-class-diagram_V1.svg)
+
+![HighestTree-class-diagram_V2](img/HighestTree-class-diagram_V2.svg)
 
 ### 3.2. Patterns
 
@@ -257,21 +261,117 @@ implementation and consequences were whirling the use of the same.
 
 ### Model-View-Controller (MVC)
 
-* **Problem:** TODO
+* **Problem:** We need to have a constantly evolving graphical user interface so the user can preform the CRUD
+  operations, as well as interact with our system.
 * **Solution:**
-  TODO
-* **Problems:** TODO
-* **Implementation:** TODO
+    * The MVC divides an interactive application into three parts. The model contains the core functionality and data (
+      all of the classes in the model package). Views display information to the user (the FXML resources). The
+      controllers handle user input (the controller's package). Views and controllers together comprise the user
+      interface.
+        * Another concern is the fact that GUI is constantly being improved/changed. However, changes to a user
+          interface must not affect an application's core functionality, which is generally independent of its
+          presentation and changes less frequently. A change-propagation mechanism ensures consistency between the user
+          interface and the model.
+    * The solution divides the interactive application into three decoupled parts: processing, input, and output. Ensure
+      the consistency of the three parts with the help of a change propagation mechanism.
+* **Problems:** The most significant problems consist in the increased complexity (if you have 1 model class, you need
+  to create two more classes...in our system for six classes, we need to make 12 more classes minimum), and a
+  potentially excessive number of updates. If I change one model behavior, I might have to change more than one class,
+  which happens because of the intimate connection between views and controllers (close coupling of views and
+  controllers to the model and between them).
+* **Implementation and classes:** The Place in the model, the Place in the controller, and the FXML files that connect
+  to the controller.
 
-### Model-View-Controller Service (MVCS)
+    ````java
+    public class Location {
+        private int id;
+        private String name;
+        private String country;
+        private String district;
+        private String city;
+        private String street;
+        private String description;
+        private boolean isSensitive;
+    
+        // standard methods and getter and setters.
+    }
+    
+    public class LocationController implements Initializable {
+    
+        @FXML
+        private TextField placeName_txt;
+        @FXML
+        private TextField country_txt;
+        @FXML
+        private TextField district_txt;
+        @FXML
+        private TextArea descriptionTextArea;
+        @FXML
+        private TextField city_txt;
+        @FXML
+        private TextField street_txt;
+        @FXML
+        private ChoiceBox<String> sensitiveInformation_optn;
+    
+        private void changeScene(String SceneName, ActionEvent event) throws IOException {
+            // A method to change the scenes in the project.
+        }
+    
+        private void fillComboBox() {
+            // auxiliary method to fill the combo box.
+        }
+    
+        /**
+         * Called to initialize a controller after its root element has been
+         * completely processed.
+         *
+         * @param location  The location used to resolve relative paths for the root object, or
+         *                  <tt>null</tt> if the location is not known.
+         * @param resources The resources used to localize the root object, or <tt>null</tt> if
+         */
+        @Override
+        public void initialize(URL location, ResourceBundle resources) {
+            // Initialization method.
+        }
+    
+        private boolean setSensitivity(String sensitivity) {
+            // Auxiliary method.
+        }
+    
+        public void actionRegisterPlaceBtn(ActionEvent actionEvent) throws IOException {
+            // Button click handler.
+        }
+    
+        public void actionGoBackBtn(ActionEvent actionEvent) throws IOException {
+            // Button click handler.
+        }
+    
+        public void actionViewPlaces(ActionEvent actionEvent) throws IOException {
+            // Button click handler.
+        }
+    }
+    ````
 
-* **Problem:** TODO
-* **Solution:**
-  TODO
-* **Problems:** TODO
-* **Implementation:** TODO
+    ````XML
+    
+    <?xml version="1.0" encoding="UTF-8"?>
+    
+    <!--the view-->
+    
+    <?import javafx.scene.control.Button?>
+    <?import javafx.scene.control.TextArea?>
+    <?import javafx.scene.layout.AnchorPane?>
+    <?import javafx.scene.text.*?>
+    <!--the connection to the controller-->
+    <AnchorPane xmlns:fx="http://javafx.com/fxml/1" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
+                minWidth="-Infinity" prefHeight="390.0" prefWidth="490.0" style="-fx-background-color: #2A363F;"
+                xmlns="http://javafx.com/javafx/17"
+                fx:controller="mesw.ads.highesttree.HighestTree.controller.database.ReaderController">
+    
+        <!--the file continues-->
+    ````
 
-### DAO
+### Model-View-Controller-Service (MVCS) and data access objects (DAO)
 
 * **Problem:** TODO
 * **Solution:**
