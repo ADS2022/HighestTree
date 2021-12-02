@@ -251,14 +251,6 @@ implementation and consequences were whirling the use of the same.
 * **Diagram:**
   ![Dates UML](img/HighestTree-dates-class-diagram.svg)
 
-### Granularity of the fields
-
-* **Problem:** TODO
-* **Solution:**
-  TODO
-* **Problems:** TODO
-* **Implementation:** TODO
-
 ### Model-View-Controller (MVC)
 
 * **Problem:** We need to have a constantly evolving graphical user interface so the user can preform the CRUD
@@ -352,9 +344,8 @@ implementation and consequences were whirling the use of the same.
     }
     ````
 
-    ````XML
-    
-    <?xml version="1.0" encoding="UTF-8"?>
+  ```XML
+  <?xml version="1.0" encoding="UTF-8"?>
     
     <!--the view-->
     
@@ -369,7 +360,8 @@ implementation and consequences were whirling the use of the same.
                 fx:controller="mesw.ads.highesttree.HighestTree.controller.database.ReaderController">
     
         <!--the file continues-->
-    ````
+  </AnchorPane>
+  ```
 
 ### Model-View-Controller-Service (MVCS) and data access objects (DAO)
 
@@ -378,6 +370,120 @@ implementation and consequences were whirling the use of the same.
   TODO
 * **Problems:** TODO
 * **Implementation:** TODO
+
+### Granularity of the fields
+
+* **Problem:** We might not know from the start, what are the fields of some objects. For example, "I might not know
+  what is the name of the street, the district or the city where my great-great-grandfather was born; however, I know
+  that he was born in England"
+  .
+* **Solution:**
+  Both on the model and on the service allow for the creation and editing the created objects.
+* **Problems:** Close coupling of the different modules as well as, if the system it's not prepared some exceptions
+  might be thrown, as well as an increase in complexity.
+* **Implementation:**
+
+```java
+public class Location {
+    private int id;
+    private String name;
+    private String country;
+    private String district;
+    private String city;
+    private String street;
+    private String description;
+    private boolean isSensitive;
+
+    public Location(String name,
+                    String country,
+                    String district,
+                    String city,
+                    String street,
+                    String description) {
+        setName(name);
+        setCountry(country);
+        setDistrict(district);
+        setCity(city);
+        setStreet(street);
+        setDescription(description);
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    // It is mandatory for a place to have a name, a country and a description as well as a sensitive field. 
+    // The implementation of the other obligatory field is similar to this one.
+    public void setName(String name) {
+        if (name == null || name.length() == 0)
+            throw new IllegalArgumentException("The name attribute cannot be empty");
+        else
+            this.name = name;
+    }
+
+    public String getCountry() {
+        return country;
+    }
+
+    public void setCountry(String country) {
+        if (country == null || country.length() == 0)
+            throw new IllegalArgumentException("The country attribute cannot be empty");
+        else
+            this.country = country;
+    }
+
+    public String getDistrict() {
+        return district;
+    }
+
+    // the class continues
+}
+
+public class LocationService {
+    private static Dao<Location> locationDao = new DaoLocation();
+    private static Location location;
+
+    public static void save(String name,
+                            String country,
+                            String district,
+                            String city,
+                            String street,
+                            String description,
+                            boolean isSensitive) {
+        location = new Location(name, country, district, city, street, description);
+        location.setSensitive(isSensitive);
+        locationDao.save(location);
+        // heavy logic done here
+        // Register user on the file database
+        Writer.writeToFile("files/location.txt", location.toString());
+    }
+
+    public static Collection<Location> getAllLocations() {
+        return locationDao.getAll();
+    }
+
+    public static int saveLocation(Location location) {
+        validate(location);
+        return locationDao.save(location);
+    }
+
+    private static void validate(Location location) {
+        // Not implemented
+        if (location == null)
+            throw new NullPointerException();
+    }
+
+    public static List<String> getAllLocationsFromFileDatabase() {
+        // Reads user from file database
+        return Reader.readFromFile("files/location.txt");
+    }
+
+    public Location getLocation() {
+        return location;
+    }
+}
+
+````
 
 #### Composite
 
