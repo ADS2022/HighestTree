@@ -32,7 +32,7 @@
                                     <children>
                                        <AnchorPane>
                                           <children>
-                                                  <TextField prefHeight="25.0" prefWidth="369.0" promptText="Last Name" text="Name" AnchorPane.bottomAnchor="2.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="2.0">
+                                                  <TextField fx:id="fldName" prefHeight="25.0" prefWidth="369.0" promptText="Name" text="Name" AnchorPane.bottomAnchor="2.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="2.0">
                                                       <opaqueInsets>
                                                           <Insets />
                                                       </opaqueInsets>
@@ -44,7 +44,7 @@
                                              <VBox layoutY="-13.0" prefHeight="40.8" prefWidth="599.2" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                                 <children>
                                                         <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Place" />
-                                                   <TextArea text="PlaceField" />
+                                                   <TextArea fx:id="fldPlace" text="PlaceField" />
                                                 </children>
                                              </VBox>
                                           </children>
@@ -60,9 +60,9 @@
                               <children>
                                  <VBox alignment="CENTER_LEFT" layoutY="-12.94921875" prefHeight="158.4" prefWidth="296.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
                                     <children>
-                                            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Start" />
+                                            <Text fx:id="fldStartDate" strokeType="OUTSIDE" strokeWidth="0.0" text="Start" />
                                             <DatePicker />
-                                            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Finish" />
+                                            <Text fx:id="fldEndDate" strokeType="OUTSIDE" strokeWidth="0.0" text="Finish" />
                                             <DatePicker />
                                     </children>
                                  </VBox>
@@ -75,11 +75,11 @@
                            <VBox prefHeight="247.0" prefWidth="599.0" AnchorPane.bottomAnchor="6.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                               <children>
                                       <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Description" />
-                                 <TextArea text="DescriptionField" />
+                                 <TextArea fx:id="fldDescription" text="DescriptionField" />
                                       <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Persons Involved" />
-                                 <TextArea text="PersonsInvolvedField" />
+                                 <TextArea fx:id="fldPersons" text="PersonsInvolvedField" />
                                       <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Source" />
-                                 <TextArea text="SourceField" />
+                                 <TextArea fx:id="fldSource" text="SourceField" />
                               </children>
                            </VBox>
                         </children>
