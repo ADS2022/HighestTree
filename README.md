@@ -18,7 +18,7 @@ opening or running the project, don't hesitate to contact us. Don't forget to im
 
 ## Requirements
 
-[Link google docs](https://docs.google.com/spreadsheets/d/1xZ9EhlMW8qUNATcF684Nj9N8olOkkjLRqoa5ysPpLKs/edit?usp=sharing)
+[Link to requirements google docs](https://docs.google.com/spreadsheets/d/1xZ9EhlMW8qUNATcF684Nj9N8olOkkjLRqoa5ysPpLKs/edit?usp=sharing)
 
 ## 1. Introduction
 
@@ -54,7 +54,7 @@ be or might not be filled in the future.
 Summing up, the two main problems that we encountered and addressed were the redundancies in our system and the dates,
 and last but not least, the granularity when entering information.
 
-![FamilyTreeExample](https://github.com/ADS2022/HighestTree/blob/master/img/FamilyTreeExample.png)
+![FamilyTreeExample](img/FamilyTreeExample.png)
 
 ## 2. Goals
 
@@ -141,7 +141,7 @@ As a result one can see the main components of our system as described in the im
 
 ![Classes_BL1_Freeze_Classes_4](img/HighestTree-class-diagram_V2.svg)
 
-#### 3.1.2 Refactor and code smells
+### 3.1.2 Refactor and code smells
 
 ### 3.1.3 Second approach
 
@@ -168,7 +168,7 @@ implementation and consequences were whirling the use of the same.
       top-down (get the children of a person), because a person only knows about its parents but not its children.
 * **Implementation:** TODO
 
-![Person UML](https://github.com/ADS2022/HighestTree/blob/master/img/Person_UML.png)
+![Person UML](img/Person_UML.png)
 
 ### Date, time periods and super dates
 
@@ -185,7 +185,7 @@ implementation and consequences were whirling the use of the same.
 * **Problems:** TODO
 * **Implementation:** TODO
 
-![Dates UML](https://github.com/ADS2022/HighestTree/blob/master/img/TimePeriod.png)
+![Dates UML](img/HighestTree-dates-class-diagram.svg)
 
 ### Granularity of the fields
 
@@ -195,7 +195,7 @@ implementation and consequences were whirling the use of the same.
 * **Problems:** TODO
 * **Implementation:** TODO
 
-#### Model-View-Controller (MVC)
+### Model-View-Controller (MVC)
 
 * **Problem:** TODO
 * **Solution:**
@@ -203,7 +203,15 @@ implementation and consequences were whirling the use of the same.
 * **Problems:** TODO
 * **Implementation:** TODO
 
-#### Model-View-Controller Service MVCS
+### Model-View-Controller Service MVCS
+
+* **Problem:** TODO
+* **Solution:**
+  TODO
+* **Problems:** TODO
+* **Implementation:** TODO
+
+### DAO
 
 * **Problem:** TODO
 * **Solution:**
@@ -215,16 +223,12 @@ implementation and consequences were whirling the use of the same.
 
 * **Problem:** TODO
 * **Solution:**
-  TODO
+    * It is a structural design pattern. At first glace, the composite pattern got elected for structuring our tree of
+      records.
+        * "This pattern creates a class that contains group of its own objects. This class provides ways to modify its
+          group of same
+          objects." [Source: tutorialspoint.com](https://www.tutorialspoint.com/design_pattern/composite_pattern.htm)
+        * "A Composite Pattern says that just "allow clients to operate in generic manner on objects that may or may not
+          represent a hierarchy of objects." [Source: javapoint.com](https://www.javatpoint.com/composite-pattern)
 * **Problems:** TODO
 * **Implementation:** TODO
-
-It is a structural design pattern. At first glace, the composite pattern got elected for structuring our tree of
-records.
-
-"This pattern creates a class that contains group of its own objects. This class provides ways to modify its group of
-same objects". [Source: tutorialspoint.com](https://www.tutorialspoint.com/design_pattern/composite_pattern.htm)
-
-"A Composite Pattern says that just "allow clients to operate in generic manner on objects that may or may not represent
-a hierarchy of objects". [Source: javapoint.com](https://www.javatpoint.com/composite-pattern)
-
