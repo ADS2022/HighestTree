@@ -5,6 +5,7 @@ import java.util.LinkedList;
 import java.util.Objects;
 
 public class Event {
+    private int id;
     private String name;
     private Events standardEvents;
     private String description;
@@ -52,6 +53,14 @@ public class Event {
 
     public Event() {
         // Empty constructor
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public Events getStandardEvents() {
@@ -172,7 +181,8 @@ public class Event {
     @Override
     public String toString() {
         return "Event{" +
-                "name='" + name + '\'' +
+                "id=" + id +
+                ", name='" + name + '\'' +
                 ", standardEvents=" + standardEvents +
                 ", description='" + description + '\'' +
                 ", superDate=" + superDate +
