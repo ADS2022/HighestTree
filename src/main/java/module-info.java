@@ -9,4 +9,5 @@ module mesw.ads.highesttreemaven {
     exports mesw.ads.highesttree.HighestTree.controller;
     opens mesw.ads.highesttree.HighestTree.controller to javafx.fxml;
     exports mesw.ads.highesttree.HighestTree;
+    opens mesw.ads.highesttree.HighestTree.model;
 }
