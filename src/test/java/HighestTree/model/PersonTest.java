@@ -139,8 +139,8 @@ class PersonTest {
 
     @Test
     void getId() {
-        int expected = this.testPerson1.getId();
-        int actual = this.testPerson1.getId();
+        String expected = this.testPerson1.getId();
+        String actual = this.testPerson1.getId();
 
         Assertions.assertEquals(expected, actual);
     }

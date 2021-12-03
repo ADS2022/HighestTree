@@ -3,17 +3,42 @@ package mesw.ads.highesttree.HighestTree.controller;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
+import mesw.ads.highesttree.HighestTree.model.Person;
+import mesw.ads.highesttree.HighestTree.service.PersonService;
 
 import java.io.IOException;
+import java.net.URL;
+import java.util.Collection;
+import java.util.List;
+import java.util.ResourceBundle;
 
-public class PersonsController {
+public class PersonsController implements Initializable {
     @FXML
     private Button btnSceneHome, btnPersonNew, btnPersonEdit, btnPersonDelete;
+
+    @FXML private TableView<Person> tableView;
+    @FXML private TableColumn<Person, String> colFirstName;
+    @FXML private TableColumn<Person, String> colLastName;
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        colFirstName.setCellValueFactory(new PropertyValueFactory<Person, String>("firstName"));
+        colLastName.setCellValueFactory(new PropertyValueFactory<Person, String>("lastName"));
+        tableView.getItems().setAll(parsePersonList());
+    }
+
+    private Collection<Person> parsePersonList() {
+        return PersonService.getAllPersons();
+    }
 
     public void changeScene(String SceneName, ActionEvent event) throws IOException {
         Parent MainSceneParent = FXMLLoader.load(getClass().getResource(SceneName));

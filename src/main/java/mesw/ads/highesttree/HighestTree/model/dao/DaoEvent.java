@@ -20,11 +20,8 @@ public class DaoEvent implements Dao<Event>{
     }
 
     @Override
-    public int save(Event event) {
+    public void save(Event event) {
         eventList.add(event);
-        int index = eventList.size()-1;
-        event.setId(index);
-        return index;
     }
 
     @Override

@@ -27,29 +27,22 @@ public class PersonService {
         person.setFirstName(firstName);
         person.setLastName(lastName);
         person.setSensitive(sensitive);
-        personDao.save(person);
-        // Register user on the file database
-        Writer.writeToFile("files/person.txt", person.toString());
+        savePerson(person);
     }
 
     public static Collection<Person> getAllPersons() {
         return personDao.getAll();
     }
 
-    public static int savePerson(Person person) {
+    public static void savePerson(Person person) {
         validate(person);
-        return personDao.save(person);
+        personDao.save(person);
     }
 
     private static void validate(Person person) {
         // Not implemented
         if (person == null)
             throw new NullPointerException();
-    }
-
-    public static List<String> getAllPersonsFromFileDatabase() {
-        // Reads user from file database
-        return Reader.readFromFile("files/person.txt");
     }
 
     public Person getPerson() {

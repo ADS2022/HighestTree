@@ -1,7 +1,1 @@
-Person{id=0, firstName='bla', lastName='bla', nationality='null', events=null, source=null, description='null', parents=null, partner=null, sensitive=false}
-Person{id=0, firstName='António', lastName='Manuel', nationality='null', events=null, source=null, description='null', parents=null, partner=null, sensitive=false}
-Person{id=0, firstName='a', lastName='a', nationality='null', events=null, source=null, description='null', parents=null, partner=null, sensitive=false}
-Person{id=0, firstName='asdasd', lastName='LLAAL', nationality='null', events=null, source=null, description='null', parents=null, partner=null, sensitive=false}
-Person{id=0, firstName='asd', lastName='asd', nationality='null', events=null, source=null, description='null', parents=null, partner=null, sensitive=false}
-Person{id=0, firstName='Teste', lastName='Teste', nationality='null', events=null, source=null, description='null', parents=null, partner=null, sensitive=false}
-Person{id=1, firstName='teste2', lastName='teste2', nationality='null', events=null, source=null, description='null', parents=null, partner=null, sensitive=false}
+[{"firstName":"Sarah","lastName":"Schaab","id":"4e803d42-f5bd-4bb6-8487-fc7655438e63"},{"firstName":"Blümchen","lastName":"Benjamin","id":"6f54ab81-30c7-4449-9e32-760035b961da"},{"firstName":"dfd","lastName":"sdf","id":"cf8e47de-ec28-4c0e-9deb-6e56fe4c36b6"}]

@@ -1,9 +1,10 @@
 package mesw.ads.highesttree.HighestTree.model;
 
 import java.util.Objects;
+import java.util.UUID;
 
 public class Location {
-    private int id;
+    private String id;
     private String name;
     private String country;
     private String district;
@@ -18,6 +19,7 @@ public class Location {
                     String city,
                     String street,
                     String description) {
+        setId(UUID.randomUUID().toString());
         setName(name);
         setCountry(country);
         setDistrict(district);
@@ -92,11 +94,11 @@ public class Location {
         isSensitive = sensitive;
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 

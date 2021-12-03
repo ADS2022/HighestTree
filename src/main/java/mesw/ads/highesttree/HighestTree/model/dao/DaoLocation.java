@@ -23,20 +23,17 @@ public class DaoLocation implements Dao<Location> {
     }
 
     @Override
-    public int save(Location location) {
+    public void save(Location location) {
         locationList.add(location);
-        int index = locationList.size() - 1;
-        location.setId(index);
-        return index;
     }
 
     @Override
     public void update(Location location) {
-        locationList.set(location.getId(), location);
+        //locationList.set(location.getId(), location);
     }
 
     @Override
     public void delete(Location location) {
-        locationList.set(location.getId(), null);
+        locationList.set(1, null);
     }
 }
