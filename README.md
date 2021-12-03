@@ -20,9 +20,8 @@
 
 ## How to run the project
 
-To run the project, you can use the built-in tools in the IntelliJ IDEA. It should show up on the home screen with
-several of the system capabilities. Also, you can run the project using the command line. If there is any problem
-opening or running the project, don't hesitate to contact us. Don't forget to import all the maven dependencies.
+HighestTree project can be executed on IntelliJ IDEA built-in tools or called using the command line. At start-up, a home screen menu is displayed where the user can browse through the system capabilities. If there is any problem
+opening or running the project, don't hesitate to contact us. To run properly, it’s essential to import all the required maven dependencies.
 
 ## Requirements
 
@@ -30,39 +29,23 @@ opening or running the project, don't hesitate to contact us. Don't forget to im
 
 ## 1. Introduction<div id="introduction"></div>
 
-The project aims to develop a solution that helps historians study the "who," "what," and "when" genealogy tree. The
-product aims to help with research plans by providing a method to trace the birth, marriage, and death records of
-individuals and their relationships with other individuals, places, and events.
+The project intent is to develop a solution that helps historians study the "who," "what," and "when" genealogy tree. The product aims to help with genealogy research plans by providing a method to trace the birth, marriage, and death records of individuals and their relationships with other individuals, places, and events.
 
 ### 1.1 Problem description <div id="problem_description"></div>
 
-Genealogy is a long-term research goal with built-in short-term steps. Its main spotlights are the individuals and their
-background in time and geography. It's a research objective where the user can add more information while maintaining
-the links between individuals, places, and events.
+Genealogy is a long-term research goal with built-in short-term steps. Its main spotlights are the individuals and their background in time and geography. It's a research objective where the user can add more information while maintaining the links between individuals, places, and events.
 
-The team assumed that our model could represent the relationship between two (or more) persons in two ways.
-Horizontally, as in married, or had children with; and vertically ("child of," "parent to," "adopted by"). A brief
-example of the type of ramifications that can occur is presented in the following image.
-
-One problem that can always occur in the development of these projects (and in such a way in all software projects) is
-data redundancy, primarily when representing the relationships between two (or more persons), or when creating a place
-and even when creating events. So in our model, we tried to address this problem when implementing it (the solution is
-in the design section). The second design problem that we encountered was the dates. Dates in Java are always an issue (
-especially when testing them). The problem at hand is that an event can have a specific date or a period. For example, I
-know that FEUP was founded in 1926; however, I don't know precisely when Humanity invented the wheel. Historians only
-know that it was in the 4th century BC (and that qualifies as a period). So, the user might know that his
-great-grandmother was born in the 19th century (a period). However, he knows for sure that his mother was born in 1969 (
-a date). Our system should be able to have this flexibility. Also, another minor but essential problems that we faced
-were the fact that some information might be incomplete when entering a record. For example, the user knows that FEUP is
-located at R. Dr. Roberto Frias, 4200-465 Porto. However, the user doesn't know where his distant relative from Italy
-was when he studied at FEUP. The only thing that he knows is that he comes from Italy. When creating Places, Events,
-Persons, every object in our model, our system should also allow this option to insert granular information that might
-be or might not be filled in the future.
-
-Summing up, the two main problems that we encountered and addressed were the redundancies in our system and the dates,
-and last but not least, the granularity when entering information.
+The team views on the model could is a representation of the relationship between two (or more) persons in two ways: horizontally, as in married, or had children with; and vertically as in "child of," "parent to," "adopted by". A brief example of the type of ramifications that can occur is presented in the following image.
 
 ![FamilyTreeExample](img/FamilyTreeExample.png)
+
+A problem that can occur in the usage of the model is data redundancy, primarily when adding relationships between two (or more people), or when creating a place
+and even when creating events. In our project, we tried to address this in the implementation, as described in the design section. 
+
+A challenge that was identified beforehand is related to the “date” field. A record (person or event) can have a known specific date, or the user can only have a reference for a generic period. For example, we might know our exact birth date, however, I’ts unknown precisely when Humanity invented the wheel. Historians only know that it was in the 4th century BC and that qualifies as a period. A user might know that his great-grandmother was born in the 19th century, however, he knows for sure that his mother was born on the 3rd of December,1969. Our system should be able to record either specific dates or periods, as requested in the requirements listed below. 
+
+One other trial that will be faced is that the locations information might be incomplete. For example, the user doesn't know where a specific person relative from Italy natal city is, only that he or she is from Italy. When creating Locations, Events or Persons, every object in our model, should allow this option to insert information in a granular manner. 
+
 
 ## 2. Goals<a name="goals"></a>
 
