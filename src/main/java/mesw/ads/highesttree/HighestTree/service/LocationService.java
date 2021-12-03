@@ -31,9 +31,9 @@ public class LocationService {
         return locationDao.getAll();
     }
 
-    public static int saveLocation(Location location) {
+    public static void saveLocation(Location location) {
         validate(location);
-        return locationDao.save(location);
+        locationDao.save(location);
     }
 
     private static void validate(Location location) {

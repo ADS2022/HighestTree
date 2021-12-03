@@ -1,8 +1,10 @@
 package mesw.ads.highesttree.HighestTree.model;
 
+import org.json.simple.JSONObject;
+
 import java.util.LinkedList;
 import java.util.Objects;
-
+import java.util.UUID;
 
 
 /**SREQ-01
@@ -12,7 +14,7 @@ import java.util.Objects;
  * relationships: a person can be in a relationship with other persons
  */
 public class Person {
-    private int id;
+    private String id;
     private String firstName;
     private String lastName;
     private String nationality;
@@ -24,7 +26,7 @@ public class Person {
     private boolean sensitive;
 
     public Person() {
-        // Empty constructor
+        setId(UUID.randomUUID().toString());
     }
 
     public Person(String firstName,
@@ -37,7 +39,7 @@ public class Person {
                   LinkedList<Person> relationships,
                   boolean sensitive) {
         this.events = new LinkedList<>();
-        setId(id);
+        setId(UUID.randomUUID().toString());
         setFirstName(firstName);
         setLastName(lastName);
         setNationality(nationality);
@@ -59,11 +61,11 @@ public class Person {
         return ancestors;
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -209,5 +211,21 @@ public class Person {
                 ", partner=" + partner +
                 ", sensitive=" + sensitive +
                 '}';
+    }
+
+    public JSONObject toJson(){
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("id", id);
+        jsonObject.put("firstName", firstName);
+        jsonObject.put("lastName", lastName);
+        return jsonObject;
+    }
+
+    public Person fromJson(JSONObject jsonObject){
+        id = (String) jsonObject.get("id");
+        firstName = (String) jsonObject.get("firstName");
+        lastName = (String) jsonObject.get("lastName");
+
+        return this;
     }
 }
