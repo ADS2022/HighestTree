@@ -5,3 +5,5 @@ The location [0] name => 'sasa', the country => 'assaas', the district='', the c
 The location [0] name => 'sassa', the country => 'sasaassa', the district='sasasa', the city='' and the street=''. Location description {'sasasa'} is the information sensitive ? true.
 The location [0] name => 'asas', the country => 'ssasa', the district='', the city='' and the street=''. Location description {'assasa'} is the information sensitive ? false.
 The location [1] name => 'qwwqqw', the country => 'qwqwqw', the district='qwwqwq', the city='' and the street=''. Location description {'qwqwwq'} is the information sensitive ? false.
+The location [0] name => 'Place Name', the country => 'Country', the district='District', the city='City' and the street='Street'. Location description {'DescriptionFieldadsa'} is the information sensitive ? false.
+The location [0] name => 'Place Name', the country => 'Country ', the district='District', the city='City' and the street='Street'. Location description {'DescriptionField'} is the information sensitive ? false.

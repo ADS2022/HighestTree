@@ -35,8 +35,8 @@
                            <children>
                               <TableView prefHeight="286.0" prefWidth="240.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                 <columns>
-                                  <TableColumn prefWidth="75.0" text="First Name" />
-                                  <TableColumn prefWidth="75.0" text="Last Name" />
+                                  <TableColumn fx:id="colFirstName" prefWidth="75.0" text="First Name" />
+                                  <TableColumn fx:id="colLastName" prefWidth="75.0" text="Last Name" />
                                 </columns>
                                  <columnResizePolicy>
                                     <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />

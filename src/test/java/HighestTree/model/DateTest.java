@@ -79,7 +79,7 @@ class DateTest {
 
     @Test
     void testEquals() {
-        Assertions.assertFalse(this.testDate1.equals(this.testDate3));
+        Assertions.assertNotEquals(this.testDate1, this.testDate3);
     }
 
     @Test

@@ -94,7 +94,7 @@ class SourceTest {
 
     @Test
     void testEquals() {
-        Assertions.assertFalse(this.testSource1.equals(this.testSource2));
+        Assertions.assertNotEquals(this.testSource1, this.testSource2);
     }
 
     @Test

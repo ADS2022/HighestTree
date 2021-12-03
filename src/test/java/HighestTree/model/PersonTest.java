@@ -9,8 +9,7 @@ import org.junit.jupiter.api.Test;
 
 import java.util.LinkedList;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.*;
 
 class PersonTest {
     private Person parent11;
@@ -227,7 +226,7 @@ class PersonTest {
 
     @Test
     void testEquals() {
-        assertFalse(this.testPerson1.equals(this.testPerson2));
+        assertNotEquals(this.testPerson1, this.testPerson2);
     }
 
     @Test

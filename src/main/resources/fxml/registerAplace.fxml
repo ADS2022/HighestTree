@@ -8,7 +8,7 @@
             minWidth="-Infinity"
             prefHeight="482.0" prefWidth="622.0" style="-fx-background-color: #2A363F #2A363F;"
             xmlns="http://javafx.com/javafx/17"
-            fx:controller="mesw.ads.highesttree.HighestTree.controller.LocationController">
+            fx:controller="mesw.ads.highesttree.HighestTree.controller.location.LocationController">
     <children>
         <TextField fx:id="placeName_txt" layoutX="52.0" layoutY="126.0" prefHeight="34.0" prefWidth="217.0"
                    promptText="place name" style="-fx-background-color: #2A363F; -fx-border-color: A33F1F;"
