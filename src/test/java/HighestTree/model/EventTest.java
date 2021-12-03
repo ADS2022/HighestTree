@@ -12,6 +12,7 @@ package HighestTree.model;/*
  */
 
 import mesw.ads.highesttree.HighestTree.model.*;
+import mesw.ads.highesttree.HighestTree.model.place.Location;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -23,7 +24,7 @@ class EventTest {
     private Event testEvent2;
     private Source testSource;
     private SuperDate testSuperDate;
-    private Place testPlace;
+    private Location testLocation;
     private Person testPerson;
 
     private Event impossibleEvent;
@@ -34,15 +35,14 @@ class EventTest {
         this.testSuperDate = new Date("1999", "09", "30");
         this.testPerson = new Person();
 
-        this.testPlace = new Place("Portugal",
+        this.testLocation = new Location(
+                "My home",
+                "Portugal",
                 "Porto",
                 "V.N.Gaia",
-                "Pedroso",
                 "Av. Dr. Moreira de Sousa 1041 5ºesq.",
-                this.testSource,
-                "My place",
-                this.testSuperDate,
-                true);
+                "My place");
+        this.testLocation.setSensitive(false);
 
         Events testStandardEvent1 = Events.MARRIAGE;
         Events testStandardEvent2 = Events.DEATH;
@@ -52,7 +52,7 @@ class EventTest {
                 "The marriage of person Jhon and Mary",
                 testStandardEvent1,
                 testSuperDate,
-                this.testPlace,
+                this.testLocation,
                 testPerson,
                 this.testSource,
                 true);
@@ -62,7 +62,7 @@ class EventTest {
                 "The death Jhon",
                 testStandardEvent2,
                 testSuperDate,
-                this.testPlace,
+                this.testLocation,
                 testPerson,
                 this.testSource,
                 true);
@@ -124,8 +124,8 @@ class EventTest {
 
     @Test
     void getPlace() {
-        Place expected = this.testPlace;
-        Place actual = this.testEvent1.getPlace();
+        Location expected = this.testLocation;
+        Location actual = this.testEvent1.getPlace();
 
         Assertions.assertEquals(expected, actual);
     }
