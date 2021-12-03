@@ -148,11 +148,24 @@ this [link](https://docs.google.com/presentation/d/1SnStiRzLfbJ_3eKdzlC02kBM3T-g
 
 ### 3.1.3 Second approach
 
-TODO
+After refactoring the code to solve the code smells, we developed our model's second iteration (and third iteration). On
+the consequence iterations, we tried to solve the primitive obsession, long parameter list, and the redundancy that
+our (original model had) and that we constantly used across our model classes. We tried to divide the attributes (for
+example) in the package "Place" in the class "Location" we split the several attributes into several objects like "
+Country," "Street," and others. We were solving the primitive obsession and resolving a redundancy issue. However, some
+connections between classes (the multiplicity) did not justify the effort of creating an extra object to model the
+object. So we iterate to the third iteration of our model, where we tried even further to remove redundancies between
+classes (as it can be seen again in the Place package). Another thing that we modeled was the iteration between Person
+and Events. The second iteration implemented an intermediate object representing the connection between those two core
+classes. However, we could replace the additional effort (creating that object) with a relationship between them and a
+multiplicity of one to many. The third iteration removes the "extra effort" of creating objects to simplify our model (
+the KISS rule).
+
+* **Diagram second iteration:**
 
 ![HighestTree-class-diagram_V1](img/HighestTree-class-diagram_V1.svg)
 
-TODO
+* **Diagram third iteration:**
 
 ![HighestTree-class-diagram_V2](img/HighestTree-class-diagram_V2.svg)
 
@@ -207,9 +220,10 @@ implementation and consequences were whirling the use of the same.
   // other methods of the class.
   }
   ```
+
 * **Diagram:**
 
-![Person UML](img/Person_UML.png)
+  ![Person UML](img/Person_UML.png)
 
 ### Date, time periods and super dates
 
@@ -646,7 +660,7 @@ public class LocationService {
 
 #### Composite (Under study)
 
-* **Problem:** TODO
+* **Problem:** The main core class of the model are events and persons. How can I model the interaction between them?
 * **Solution:**
     * It is a structural design pattern. At first glace, the composite pattern got elected for structuring our tree of
       records.
@@ -655,5 +669,6 @@ public class LocationService {
           objects." [Source: tutorialspoint.com](https://www.tutorialspoint.com/design_pattern/composite_pattern.htm)
         * "A Composite Pattern says that just "allow clients to operate in generic manner on objects that may or may not
           represent a hierarchy of objects." [Source: javapoint.com](https://www.javatpoint.com/composite-pattern)
-* **Problems:** TODO
-* **Implementation:** TODO
+* **Problems:** It is challenging to provide a standard interface for the classes whose functionality differs (Persons
+  and Events).
+* **Implementation:** Work in progress!
