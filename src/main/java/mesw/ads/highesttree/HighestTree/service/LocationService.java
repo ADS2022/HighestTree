@@ -1,10 +1,10 @@
 package mesw.ads.highesttree.HighestTree.service;
 
 import mesw.ads.highesttree.HighestTree.model.dao.Dao;
-import mesw.ads.highesttree.HighestTree.model.dao.location.DaoLocation;
+import mesw.ads.highesttree.HighestTree.model.dao.DaoLocation;
 import mesw.ads.highesttree.HighestTree.model.database.Reader;
 import mesw.ads.highesttree.HighestTree.model.database.Writer;
-import mesw.ads.highesttree.HighestTree.model.place.Location;
+import mesw.ads.highesttree.HighestTree.model.Location;
 
 import java.util.Collection;
 import java.util.List;

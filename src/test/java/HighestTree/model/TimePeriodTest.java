@@ -67,7 +67,7 @@ class TimePeriodTest {
 
     @Test
     void testEquals() {
-        Assertions.assertFalse(this.testTimePeriod1.equals(this.testTimePeriod2));
+        Assertions.assertNotEquals(this.testTimePeriod1, this.testTimePeriod2);
     }
 
     @Test
