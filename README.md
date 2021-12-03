@@ -2,11 +2,21 @@
 
 ## Table of Contents
 
-- [Introduction](#introduction)
-
-- [Goals](#goals)
-
-- [Design](#design)
+- [1. Introduction](#introduction)
+    - [1.1 Problem description](#problem_description)
+- [2. Goals](#goals)
+- [3. Design](#design)
+    - [3. 1. Domain](#design)
+        - [3. 1. 1. First approach](#first_approach)
+        - [3. 1. 2. Refactor and code smells](#refactor_and_code_smells)
+        - [3. 1. 3. Second approach](#second_approach)
+    - [3. 2. Patterns](#patterns)
+        - [Persons and their Relationships to another](#persons)
+        - [Date, time periods and super dates](#dates)
+        - [Model-View-Controller (MVC)](#mvc)
+        - [Model-View-Controller-Service (MVCS), data access objects (DAOs) and data transfer objects (DTOs)](#mvcs)
+        - [Granularity of the fields](#granularity)
+        - [Granularity of the fields](#composite)
 
 ## How to run the project
 
@@ -18,13 +28,13 @@ opening or running the project, don't hesitate to contact us. Don't forget to im
 
 [Link to requirements google docs](https://docs.google.com/spreadsheets/d/1xZ9EhlMW8qUNATcF684Nj9N8olOkkjLRqoa5ysPpLKs/edit?usp=sharing)
 
-## 1. Introduction
+## 1. Introduction<div id="introduction"></div>
 
 The project aims to develop a solution that helps historians study the "who," "what," and "when" genealogy tree. The
 product aims to help with research plans by providing a method to trace the birth, marriage, and death records of
 individuals and their relationships with other individuals, places, and events.
 
-### 1.1 Problem description
+### 1.1 Problem description <div id="problem_description"></div>
 
 Genealogy is a long-term research goal with built-in short-term steps. Its main spotlights are the individuals and their
 background in time and geography. It's a research objective where the user can add more information while maintaining
@@ -54,7 +64,7 @@ and last but not least, the granularity when entering information.
 
 ![FamilyTreeExample](img/FamilyTreeExample.png)
 
-## 2. Goals
+## 2. Goals<a name="goals"></a>
 
 This exercise was presented as a series of bullet points of features or ideas for the system under development. These
 were broken down into the following requirements.
@@ -116,13 +126,13 @@ information should be part of the output or not.
 
 **SReq_25**    System can be used in edit-mode.
 
-## 3. Design
+## 3. Design<a name="design"></a>
 
 This section exposes the design decisions made during the ongoing phases of development of this project.
 
-### 3.1. Domain
+### 3.1. Domain<a name="domain"></a>
 
-#### 3.1.1 First approach
+#### 3.1.1 First approach<a name="first_approach"></a>
 
 As a first step into the solution, the group modeled the classes in a database manner, while discussing the
 implementation, kinds of relationships, and possible patterns that could be applied.
@@ -139,14 +149,14 @@ As a result one can see the main components of our system as described in the im
 
 ![Classes_BL1_Freeze_Classes_4](img/Classes_BL1_Freeze_Classes_4.drawio.svg)
 
-### 3.1.2 Refactor and code smells
+### 3.1.2 Refactor and code smells<a name="refactor_and_code_smells"></a>
 
 As the good practices say, we should write code and then refactor it. We found several codes smells. A PowerPoint
 presentation regarding them can be accessed throw
 this [link](https://docs.google.com/presentation/d/1SnStiRzLfbJ_3eKdzlC02kBM3T-gWlUZPRKwiSLjrH4/edit#slide=id.gfc000407e6_0_27)
 .
 
-### 3.1.3 Second approach
+### 3.1.3 Second approach<a name="second_approach"></a>
 
 After refactoring the code to solve the code smells, we developed our model's second iteration (and third iteration). On
 the consequence iterations, we tried to solve the primitive obsession, long parameter list, and the redundancy that
@@ -169,7 +179,7 @@ the KISS rule).
 
 ![HighestTree-class-diagram_V2](img/HighestTree-class-diagram_V2.svg)
 
-### 3.2. Patterns
+### 3.2. Patterns<a name="patterns"></a>
 
 This section presents the study of the design patterns considered for this project.
 
@@ -183,10 +193,10 @@ to be identified the correct approach.
 For the eventual patterns used in this project, the group shall include detailed descriptions of the problems,
 implementation and consequences were whirling the use of the same.
 
-### Persons and their Relationships to another
+### Persons and their Relationships to another<a name="persons"></a>
 
 * **Problem:** Design the Person-Relationships without redundancies
-* **classes:** Person.java
+* **classes:** [Person.java](src/main/java/mesw/ads/highesttree/HighestTree/model/Person.java)
 * **Solution:** Each Person Object is associated to its parents and its spouses.
 * **Consequences:**
     * The Family Tree is easy to traverse bottom-up (get the ancestors of a person) but more difficult to traverse
@@ -225,11 +235,13 @@ implementation and consequences were whirling the use of the same.
 
   ![Person UML](img/Person_UML.png)
 
-### Date, time periods and super dates
+### Date, time periods and super dates<a name="dates"></a>
 
 * **Problem:** A person can be born on a specific date or in on a time period. For example, an individual could be born
   in 1578 or in the XVI century (between 1501 and 1600).
-* **Classes:** Date.java, SuperDate.java and TimePeriod.java
+* **Classes:** [Date.java](src/main/java/mesw/ads/highesttree/HighestTree/model/Date.java)
+  , [SuperDate.java](src/main/java/mesw/ads/highesttree/HighestTree/model/SuperDate.java)
+  and [TimePeriod.java](src/main/java/mesw/ads/highesttree/HighestTree/model/TimePeriod.java)
 * **Solution:**
     * There is an interface called SuperDate and two classes called Date and TimePeriod. Those classes implement
       SuperDate and when creating an object that requires a date (for example an Event) it is possible to create a date
@@ -269,10 +281,12 @@ implementation and consequences were whirling the use of the same.
     }
     ```
 
+
 * **Diagram:**
+
   ![Dates UML](img/HighestTree-dates-class-diagram.svg)
 
-### Model-View-Controller (MVC)
+### Model-View-Controller (MVC)<a name="mvc"></a>
 
 * **Problem:** We need to have a constantly evolving graphical user interface so the user can preform the CRUD
   operations, as well as interact with our system.
@@ -292,8 +306,9 @@ implementation and consequences were whirling the use of the same.
   potentially excessive number of updates. If I change one model behavior, I might have to change more than one class,
   which happens because of the intimate connection between views and controllers (close coupling of views and
   controllers to the model and between them).
-* **Implementation and classes:** The Place in the model, the Place in the controller, and the FXML files that connect
-  to the controller.
+* **Implementation and classes:** The [Place](src/main/java/mesw/ads/highesttree/HighestTree/model/place/Location.java)
+  in the model, the [Place](src/main/java/mesw/ads/highesttree/HighestTree/controller/location/LocationController.java)
+  in the controller, and the [FXML](src/main/resources/fxml/displayPlaces.fxml) files that connect to the controller.
 
     ````java
     public class Location {
@@ -384,7 +399,7 @@ implementation and consequences were whirling the use of the same.
   </AnchorPane>
   ```
 
-### Model-View-Controller-Service (MVCS), data access objects (DAOs) and data transfer objects (DTOs)
+### Model-View-Controller-Service (MVCS), data access objects (DAOs) and data transfer objects (DTOs)<a name="mvcs"></a>
 
 * **Problem:** In order to display users, places, events, ... we need to write and reed to something that can hold
   data (a database, and Excel file or text files).
@@ -403,8 +418,14 @@ implementation and consequences were whirling the use of the same.
           updating data in your data storage (a database, a file system, whatever).
 * **Problems:** They are the same as the MVC, they basically consist in added complexity, and they might lead to loss in
   performance and close coupling between the different modules.
-* **Implementation and classes:** the LocationController.java, LocationService.java, the DaoLocation.java and the Dao
-  interface, as well as the Reader and Writer classes, and the ReaderController.java class.
+* **Implementation and classes:**
+  the [LocationController.java](src/main/java/mesw/ads/highesttree/HighestTree/controller/location/LocationController.java)
+  , [LocationService.java](src/main/java/mesw/ads/highesttree/HighestTree/service/LocationService.java), the
+  [DaoLocation.java](src/main/java/mesw/ads/highesttree/HighestTree/model/dao/location/DaoLocation.java) and the Dao
+  interface, as well as the [Reader](src/main/java/mesw/ads/highesttree/HighestTree/model/database/Reader.java)
+  and [Writer](src/main/java/mesw/ads/highesttree/HighestTree/model/database/Writer.java) classes, and the
+  [ReaderController.java](src/main/java/mesw/ads/highesttree/HighestTree/controller/database/ReaderController.java)
+  class.
 
 ````java
 public class LocationService {
@@ -545,7 +566,7 @@ public class ReaderController implements Initializable {
 }
 ````
 
-### Granularity of the fields
+### Granularity of the fields<a name="granularity"></a>
 
 * **Problem:** We might not know from the start, what are the fields of some objects. For example, "I might not know
   what is the name of the street, the district or the city where my great-great-grandfather was born; however, I know
@@ -657,18 +678,3 @@ public class LocationService {
 }
 
 ````
-
-#### Composite (Under study)
-
-* **Problem:** The main core class of the model are events and persons. How can I model the interaction between them?
-* **Solution:**
-    * It is a structural design pattern. At first glace, the composite pattern got elected for structuring our tree of
-      records.
-        * "This pattern creates a class that contains group of its own objects. This class provides ways to modify its
-          group of same
-          objects." [Source: tutorialspoint.com](https://www.tutorialspoint.com/design_pattern/composite_pattern.htm)
-        * "A Composite Pattern says that just "allow clients to operate in generic manner on objects that may or may not
-          represent a hierarchy of objects." [Source: javapoint.com](https://www.javatpoint.com/composite-pattern)
-* **Problems:** It is challenging to provide a standard interface for the classes whose functionality differs (Persons
-  and Events).
-* **Implementation:** Work in progress!
