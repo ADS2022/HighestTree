@@ -8,33 +8,37 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 import mesw.ads.highesttree.HighestTree.model.Person;
 import mesw.ads.highesttree.HighestTree.service.PersonService;
-
 import java.io.IOException;
 import java.net.URL;
 import java.util.Collection;
-import java.util.List;
 import java.util.ResourceBundle;
 
 public class PersonsController implements Initializable {
+
+    @FXML
+    private GridPane personsTable;
+
+    @FXML
+    private Label firstNameCol, firstNameLabel, lastNameCol, lastNameLabel,
+            nationalityCol, nationalityLabel,descriptionCol,descriptionLabel,
+            sourceCol, sourceLabel, eventsCol, eventsLabel;
+
+    @FXML
+    private TableView<Person> tableView;
+
+    @FXML
+    private TableColumn<Person, String> colFirstName, colLastName;
+
     @FXML
     private Button btnSceneHome, btnPersonNew, btnPersonEdit, btnPersonDelete;
-
-    @FXML private TableView<Person> tableView;
-    @FXML private TableColumn<Person, String> colFirstName;
-    @FXML private TableColumn<Person, String> colLastName;
-
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
-        colFirstName.setCellValueFactory(new PropertyValueFactory<Person, String>("firstName"));
-        colLastName.setCellValueFactory(new PropertyValueFactory<Person, String>("lastName"));
-        tableView.getItems().setAll(parsePersonList());
-    }
 
     private Collection<Person> parsePersonList() {
         return PersonService.getAllPersons();
@@ -67,5 +71,35 @@ public class PersonsController implements Initializable {
         System.out.println("Deleting person record");
         //changeScene("/mesw/ads/highesttreemaven/HomeView.fxml", actionEvent);
 
+    }
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        colFirstName.setCellValueFactory(new PropertyValueFactory<Person, String>("firstName"));
+        colLastName.setCellValueFactory(new PropertyValueFactory<Person, String>("lastName"));
+        tableView.getItems().setAll(parsePersonList());
+        showPersonDetails(null);
+
+        // Detects selection changes and shows the person's details when there is a change.
+        tableView.getSelectionModel().selectedItemProperty().addListener(
+                (observable, oldValue, newValue) -> showPersonDetails(newValue));
+    }
+
+    private void showPersonDetails(Person person) {
+        if (person != null) {
+            firstNameLabel.setText(person.getFirstName());
+            lastNameLabel.setText(person.getLastName());
+            nationalityLabel.setText(person.getNationality());
+            descriptionLabel.setText(person.getDescription());
+            sourceLabel.setText(person.getSource().toString());
+            eventsLabel.setText(person.getEvents().toString());
+        } else {
+            firstNameLabel.setText("");
+            lastNameLabel.setText("");
+            nationalityLabel.setText("");
+            descriptionLabel.setText("");
+            sourceLabel.setText("");
+            eventsLabel.setText("");
+        }
     }
 }

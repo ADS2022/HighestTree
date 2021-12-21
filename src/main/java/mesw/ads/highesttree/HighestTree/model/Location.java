@@ -131,4 +131,9 @@ public class Location {
                 ". Location description {'" + description + '\'' +
                 "} is the information sensitive ? " + isSensitive + '.';
     }
+
+    public String getParish() {
+        //TODO: get and set Parish do not exist
+    return null;
+    }
 }

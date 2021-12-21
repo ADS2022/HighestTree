@@ -1,11 +1,13 @@
 package mesw.ads.highesttree.HighestTree.service;
 
 import mesw.ads.highesttree.HighestTree.model.Event;
+import mesw.ads.highesttree.HighestTree.model.Location;
 import mesw.ads.highesttree.HighestTree.model.dao.Dao;
 import mesw.ads.highesttree.HighestTree.model.dao.DaoEvent;
 import mesw.ads.highesttree.HighestTree.model.database.Reader;
 import mesw.ads.highesttree.HighestTree.model.database.Writer;
 
+import java.util.Collection;
 import java.util.List;
 
 public class EventService {
@@ -30,5 +32,9 @@ public class EventService {
 
     public static List<String> getAllEventsFromFileDatabase(){
         return Reader.readFromFile(FILE_NAME);
+    }
+
+    public static Collection<Event> getAllEvents() {
+        return eventDao.getAll();
     }
 }

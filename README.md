@@ -659,5 +659,8 @@ public class LocationService {
         return location;
     }
 }
-
 ````
+
+### Composite Pattern
+
+- Composite let's client treat individual objects and compositions of objects uniformly.
