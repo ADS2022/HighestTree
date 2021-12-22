@@ -1,0 +1,1 @@
+Event{id=0, name='Name', standardEvents=null, description='null', superDate=null, place=null, personsInvolved=null, source=null, isSensitive=false}

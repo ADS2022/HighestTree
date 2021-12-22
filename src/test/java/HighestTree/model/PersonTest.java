@@ -88,8 +88,8 @@ class PersonTest {
                 this.testEvent1,
                 this.testSource,
                 "A software developer",
-                parentTestPerson1,
-                partnerTestPerson1,
+                null,
+                null,
                 true);
     }
 
@@ -103,17 +103,17 @@ class PersonTest {
         LinkedList<Person> parentsOfParent1 = new LinkedList<>();
         parentsOfParent1.add(this.parent11);
         parentsOfParent1.add(this.parent12);
-        parent1.setParents(parentsOfParent1);
+        parent1.setParents(parent11); // edited for compilation purpose, must be broken
 
         LinkedList<Person> parentsOfParent2 = new LinkedList<>();
         parentsOfParent2.add(this.parent21);
         parentsOfParent2.add(this.parent22);
-        parent2.setParents(parentsOfParent2);
+        parent2.setParents(parent22); // edited for compilation purpose, must be broken
 
         LinkedList<Person> parentsOfTargetPerson = new LinkedList<>();
         parentsOfTargetPerson.add(this.parent1);
         parentsOfTargetPerson.add(this.parent2);
-        targetPerson.setParents(parentsOfTargetPerson);
+        targetPerson.setParents(parent1); // edited for compilation purpose, must be broken
 
         LinkedList<Person> ancestors = new LinkedList<>();
         ancestors = Person.getAncestors(targetPerson, ancestors);
@@ -179,9 +179,7 @@ class PersonTest {
 
     @Test
     void getEvents() {
-        LinkedList<Person> testRelationShip1 = new LinkedList<>();
-        testRelationShip1.add(this.testPerson1);
-        testRelationShip1.add(this.testPerson2);
+
 
         this.testPerson1.associateEvents(
                 new Event(
@@ -200,7 +198,7 @@ class PersonTest {
                         true
                 )
         );
-        this.testPerson1.setPartner(testRelationShip1);
+        this.testPerson1.setPartner(testPerson2);
         System.out.println("Number of relationships => " + this.testPerson1.getPartners().size());
 
         int expected = 2;

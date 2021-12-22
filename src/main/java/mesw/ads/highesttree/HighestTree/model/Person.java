@@ -18,26 +18,22 @@ public class Person {
     private String firstName;
     private String lastName;
     private String nationality;
-    private LinkedList<Event> events;
     private Source source;
     private String description;
-    private LinkedList<Person> parents;
-    private LinkedList<Person> partner;
+    private LinkedList<Event> events = null;
+    private LinkedList<Person> partner = null;
+    private LinkedList<Person> parents = null;
+    private LinkedList<Person> children = null;
     private boolean sensitive;
 
     public Person() {
         setId(UUID.randomUUID().toString());
     }
 
-    public Person(String firstName,
-                  String lastName,
-                  String nationality,
-                  Event anEvent,
-                  Source source,
-                  String description,
-                  LinkedList<Person> parents,
-                  LinkedList<Person> relationships,
-                  boolean sensitive) {
+    public Person(String firstName, String lastName, String nationality,
+                  Event anEvent, Source source, String description, Person parents,
+                  Person relationships, boolean sensitive)
+    {
         this.events = new LinkedList<>();
         setId(UUID.randomUUID().toString());
         setFirstName(firstName);
@@ -51,16 +47,7 @@ public class Person {
         setSensitive(sensitive);
     }
 
-    public static LinkedList<Person> getAncestors(Person targetPerson, LinkedList<Person> ancestors) {
-        if (targetPerson.getParents() != null) {
-            for (Person parent : targetPerson.getParents()) {
-                ancestors.add(parent);
-                ancestors = getAncestors(parent, ancestors);
-            }
-        }
-        return ancestors;
-    }
-
+    // #### SETTERS AND GETTERS
     public String getId() {
         return id;
     }
@@ -68,8 +55,6 @@ public class Person {
     public void setId(String id) {
         this.id = id;
     }
-
-
 
     public String getFirstName() {
         return firstName;
@@ -140,22 +125,27 @@ public class Person {
         return parents;
     }
 
-    public void setParents(LinkedList<Person> parents) {
-        if (parents == null)
-            throw new NullPointerException();
-        else
-            this.parents = parents;
+    public void setParents(Person e) {
+        e.children.add(this);
+        parents.add(e);
     }
 
-    public void setPartner(LinkedList<Person> partner) {
-        if (partner == null)
-            throw new NullPointerException();
-        else
-            this.partner = partner;
+    public void setPartner(Person e) {
+        e.partner.add(this);
+        partner.add(e);
     }
 
     public LinkedList<Person> getPartners() {
         return partner;
+    }
+
+    public void setChildren(Person e) {
+        e.parents.add(this);
+        children.add(e);
+    }
+
+    public LinkedList<Person> getChildren() {
+        return children;
     }
 
     public boolean isSensitive() {
@@ -166,12 +156,45 @@ public class Person {
         this.sensitive = sensitive;
     }
 
+    //Composite - Ancestry and Successors
+    public LinkedList<Person> getSuccessors() {
+        LinkedList<Person> successors = this.getChildren();
+        int size = successors.size();
+
+        for (int i = 0; i < size; i++) {
+            if (successors.get(i).getChildren().isEmpty()){
+                System.out.print("Has no children. \n");
+            } else {
+                System.out.print("Has " + successors.get(i).getChildren().size() + " children. \n");
+                successors.addAll(successors.get(i).getChildren());
+                size = size + successors.get(i).getChildren().size();
+            }
+        }
+        return successors;
+    }
+
+    public LinkedList<Person> getAncestry() {
+        LinkedList<Person> ancestors = this.getParents();
+        int size = ancestors.size();
+
+        for (int i = 0; i < size; i++) {
+            if (ancestors.get(i).getParents().isEmpty()){
+                System.out.print("Parents unknown. \n");
+            } else {
+                System.out.print("Number of known parents: " + ancestors.get(i).getParents().size() + ".\n");
+                ancestors.addAll(ancestors.get(i).getParents());
+                size = size + ancestors.get(i).getParents().size();
+            }
+        }
+        return ancestors;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof Person)) return false;
         Person person = (Person) o;
-        return getId() == person.getId() &&
+        return Objects.equals(getId(), person.getId()) &&
                 isSensitive() == person.isSensitive() &&
                 Objects.equals(getFirstName(), person.getFirstName()) &&
                 Objects.equals(getLastName(), person.getLastName()) &&
@@ -211,6 +234,16 @@ public class Person {
                 ", partner=" + partner +
                 ", sensitive=" + sensitive +
                 '}';
+    }
+
+    public static LinkedList<Person> getAncestors(Person targetPerson, LinkedList<Person> ancestors) {
+        if (targetPerson.getParents() != null) {
+            for (Person parent : targetPerson.getParents()) {
+                ancestors.add(parent);
+                ancestors = getAncestors(parent, ancestors);
+            }
+        }
+        return ancestors;
     }
 
     public JSONObject toJson(){
