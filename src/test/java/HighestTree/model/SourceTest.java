@@ -99,13 +99,12 @@ class SourceTest {
 
     @Test
     void testToString() {
-        String expected = "Source{id=" + this.testSource1.getId() +
-                ", researchersName='Charles Darwin', " +
-                "superDate=Date{year='1999', month='09', " +
-                "day='30'}, " +
-                "description='The evolution of the species', " +
-                "sourceOfInformation='Wikepedia', " +
-                "sensitivity=false}";
+        String expected = this.testSource1.getId() +
+                ",Charles Darwin," +
+                "1999,09,30," +
+                "The evolution of the species," +
+                "Wikepedia," +
+                "false";
         String actual = this.testSource1.toString();
 
         Assertions.assertEquals(expected, actual);

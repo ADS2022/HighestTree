@@ -1,4 +1,5 @@
 package mesw.ads.highesttree.HighestTree.model;
+
 import java.util.Objects;
 
 public class TimePeriod implements SuperDate {
@@ -9,8 +10,7 @@ public class TimePeriod implements SuperDate {
         // Empty constructor
     }
 
-    public TimePeriod(Date startDate,
-                      Date endDate) {
+    public TimePeriod(Date startDate, Date endDate) {
         setStartDate(startDate);
         setEndDate(endDate);
     }
@@ -20,10 +20,8 @@ public class TimePeriod implements SuperDate {
     }
 
     public void setStartDate(Date startDate) {
-        if (startDate == null)
-            throw new NullPointerException();
-        else
-            this.startDate = startDate;
+        if (startDate == null) throw new NullPointerException();
+        else this.startDate = startDate;
     }
 
     public Date getEndDate() {
@@ -31,10 +29,8 @@ public class TimePeriod implements SuperDate {
     }
 
     public void setEndDate(Date endDate) {
-        if (endDate == null)
-            throw new NullPointerException();
-        else
-            this.endDate = endDate;
+        if (endDate == null) throw new NullPointerException();
+        else this.endDate = endDate;
     }
 
     @Override
@@ -42,8 +38,7 @@ public class TimePeriod implements SuperDate {
         if (this == o) return true;
         if (!(o instanceof TimePeriod)) return false;
         TimePeriod that = (TimePeriod) o;
-        return Objects.equals(getStartDate(), that.getStartDate()) &&
-                Objects.equals(endDate, that.endDate);
+        return Objects.equals(getStartDate(), that.getStartDate()) && Objects.equals(endDate, that.endDate);
     }
 
     @Override
@@ -53,10 +48,7 @@ public class TimePeriod implements SuperDate {
 
     @Override
     public String toString() {
-        return "TimePeriod{" +
-                "startDate=" + startDate +
-                ", endDate=" + endDate +
-                '}';
+        return startDate + "," + endDate;
     }
 
     @Override

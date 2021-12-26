@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<Place>
+    <id>90fe66df-278b-4a53-8ece-ae1ba0196109</id>
+    <name>Place Name</name>
+    <country>Country</country>
+    <district>District</district>
+    <city>City</city>
+    <street>Street</street>
+    <description>DescriptionField</description>
+    <is_sensitive>false</is_sensitive>
+    <id>ae6409ed-e29d-4e7e-929b-ea21772efcd5</id>
+    <name>Place Name</name>
+    <country>Country</country>
+    <district>District</district>
+    <city>City</city>
+    <street>Street</street>
+    <description>DescriptionField</description>
+    <is_sensitive>false</is_sensitive>
+    <id>a2499015-003b-4ab3-9908-978617b4db50</id>
+    <name>Place Name</name>
+    <country>Country</country>
+    <district>District</district>
+    <city>City</city>
+    <street>Street</street>
+    <description>DescriptionField</description>
+    <is_sensitive>false</is_sensitive>
+    <id>fd4ea294-4a41-477c-8d27-00cea40a2acb</id>
+    <name>Place Name</name>
+    <country>Country</country>
+    <district>District</district>
+    <city>City</city>
+    <street>Street</street>
+    <description>DescriptionField</description>
+    <is_sensitive>false</is_sensitive>
+    <id>cc6442ea-7acf-4e7d-9e3a-b0bf37a9515f</id>
+    <name>Place Name</name>
+    <country>Country</country>
+    <district>District</district>
+    <city>City</city>
+    <street>Street</street>
+    <description>DescriptionField</description>
+    <is_sensitive>false</is_sensitive>
+    <id>0cf79bd1-4dc8-49fb-8afc-7c078a3cfd5b</id>
+    <name>Place Name</name>
+    <country>Country</country>
+    <district>District</district>
+    <city>City</city>
+    <street>Street</street>
+    <description>DescriptionField</description>
+    <is_sensitive>false</is_sensitive>
+</Place>

@@ -11,9 +11,7 @@ public class Date implements SuperDate {
         // Empty constructor
     }
 
-    public Date(String year,
-                String month,
-                String day) {
+    public Date(String year, String month, String day) {
         setYear(year);
         setMonth(month);
         setDay(day);
@@ -24,10 +22,8 @@ public class Date implements SuperDate {
     }
 
     public void setYear(String year) {
-        if (year == null || year.length() <= 0)
-            throw new IllegalArgumentException();
-        else
-            this.year = year;
+        if (year == null || year.length() <= 0) throw new IllegalArgumentException();
+        else this.year = year;
     }
 
     public String getMonth() {
@@ -35,10 +31,8 @@ public class Date implements SuperDate {
     }
 
     public void setMonth(String month) {
-        if (month == null || month.length() <= 0)
-            throw new IllegalArgumentException();
-        else
-            this.month = month;
+        if (month == null || month.length() <= 0) throw new IllegalArgumentException();
+        else this.month = month;
     }
 
     public String getDay() {
@@ -46,10 +40,8 @@ public class Date implements SuperDate {
     }
 
     public void setDay(String day) {
-        if (day == null || day.length() <= 0)
-            throw new IllegalArgumentException();
-        else
-            this.day = day;
+        if (day == null || day.length() <= 0) throw new IllegalArgumentException();
+        else this.day = day;
     }
 
     @Override
@@ -57,9 +49,7 @@ public class Date implements SuperDate {
         if (this == o) return true;
         if (!(o instanceof Date)) return false;
         Date date = (Date) o;
-        return Objects.equals(getYear(), date.getYear()) &&
-                Objects.equals(getMonth(), date.getMonth()) &&
-                Objects.equals(getDay(), date.getDay());
+        return Objects.equals(getYear(), date.getYear()) && Objects.equals(getMonth(), date.getMonth()) && Objects.equals(getDay(), date.getDay());
     }
 
     @Override
@@ -69,11 +59,7 @@ public class Date implements SuperDate {
 
     @Override
     public String toString() {
-        return "Date{" +
-                "year='" + year + '\'' +
-                ", month='" + month + '\'' +
-                ", day='" + day + '\'' +
-                '}';
+        return year + "," + month + "," + day;
     }
 
     @Override

@@ -1,5 +1,6 @@
 package mesw.ads.highesttree.HighestTree.model;
-import mesw.ads.highesttree.HighestTree.model.place.Location;
+
+import mesw.ads.highesttree.HighestTree.model.Location;
 
 import java.util.LinkedList;
 import java.util.Objects;
@@ -180,16 +181,14 @@ public class Event {
 
     @Override
     public String toString() {
-        return "Event{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", standardEvents=" + standardEvents +
-                ", description='" + description + '\'' +
-                ", superDate=" + superDate +
-                ", place=" + location +
-                ", personsInvolved=" + personsInvolved +
-                ", source=" + source +
-                ", isSensitive=" + isSensitive +
-                '}';
+        return id +
+                "," + name +
+                "," + standardEvents +
+                "," + description +
+                "," + superDate +
+                "," + location +
+                "," + personsInvolved +
+                "," + source +
+                "," + isSensitive;
     }
 }

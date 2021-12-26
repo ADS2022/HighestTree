@@ -1,9 +1,6 @@
-The location [0] name => 'saas', the country => 'sasa', the district='', the city='' and the street=''. Location description {'saas'} is the information sensitive ? true.
-The location [1] name => 'saasas', the country => 'asassa', the district='', the city='' and the street=''. Location description {'sassa'} is the information sensitive ? false.
-The location [2] name => 'sasasa', the country => 'sasasa', the district='', the city='' and the street=''. Location description {'sasasasa'} is the information sensitive ? false.
-The location [0] name => 'sasa', the country => 'assaas', the district='', the city='' and the street=''. Location description {'sasasa'} is the information sensitive ? false.
-The location [0] name => 'sassa', the country => 'sasaassa', the district='sasasa', the city='' and the street=''. Location description {'sasasa'} is the information sensitive ? true.
-The location [0] name => 'asas', the country => 'ssasa', the district='', the city='' and the street=''. Location description {'assasa'} is the information sensitive ? false.
-The location [1] name => 'qwwqqw', the country => 'qwqwqw', the district='qwwqwq', the city='' and the street=''. Location description {'qwqwwq'} is the information sensitive ? false.
-The location [0] name => 'Place Name', the country => 'Country', the district='District', the city='City' and the street='Street'. Location description {'DescriptionFieldadsa'} is the information sensitive ? false.
-The location [0] name => 'Place Name', the country => 'Country ', the district='District', the city='City' and the street='Street'. Location description {'DescriptionField'} is the information sensitive ? false.
+90fe66df-278b-4a53-8ece-ae1ba0196109,Place Name,Country,District,City,Street,DescriptionField,false
+ae6409ed-e29d-4e7e-929b-ea21772efcd5,Place Name,Country,District,City,Street,DescriptionField,false
+a2499015-003b-4ab3-9908-978617b4db50,Place Name,Country,District,City,Street,DescriptionField,false
+fd4ea294-4a41-477c-8d27-00cea40a2acb,Place Name,Country,District,City,Street,DescriptionField,false
+cc6442ea-7acf-4e7d-9e3a-b0bf37a9515f,Place Name,Country,District,City,Street,DescriptionField,false
+0cf79bd1-4dc8-49fb-8afc-7c078a3cfd5b,Place Name,Country,District,City,Street,DescriptionField,false

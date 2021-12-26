@@ -77,16 +77,14 @@ class TimePeriodTest {
 
     @Test
     void testToString() {
-        String expectedTimePeriod1 = "TimePeriod{startDate=Date{year='1969'," +
-                " month='07', day='16'}, endDate=Date{year='1972', month='12', day='7'}}";
+        String expectedTimePeriod1 = "1969,07,16,1972,12,7";
         String actualTimePeriod1 = this.testTimePeriod1.toString();
         Assertions.assertEquals(expectedTimePeriod1, actualTimePeriod1);
     }
 
     @Test
     void returnDateString() {
-        String expectedTimePeriod1 = "TimePeriod{startDate=Date{year='1969'," +
-                " month='07', day='16'}, endDate=Date{year='1972', month='12', day='7'}}";
+        String expectedTimePeriod1 = "1969,07,16,1972,12,7";
         String actualTimePeriod1 = this.testTimePeriod1.returnDateString();
         Assertions.assertEquals(expectedTimePeriod1, actualTimePeriod1);
     }

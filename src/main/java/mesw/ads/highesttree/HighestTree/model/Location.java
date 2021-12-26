@@ -125,10 +125,13 @@ public class Location {
 
     @Override
     public String toString() {
-        return "The location [" + id + "] name => '" + name + '\'' +
-                ", the country => '" + country + '\'' + ", the district='" + district + '\'' +
-                ", the city='" + city + '\'' + " and the street='" + street + '\'' +
-                ". Location description {'" + description + '\'' +
-                "} is the information sensitive ? " + isSensitive + '.';
+        return id +
+                "," + name +
+                "," + country +
+                "," + district +
+                "," + city +
+                "," + street +
+                "," + description +
+                "," + isSensitive;
     }
 }

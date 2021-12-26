@@ -7,9 +7,10 @@ import java.util.Objects;
 import java.util.UUID;
 
 
-/**SREQ-01
- *
- *
+/**
+ * SREQ-01
+ * <p>
+ * <p>
  * parents: a person can have 0 to 2 known parents
  * relationships: a person can be in a relationship with other persons
  */
@@ -68,7 +69,6 @@ public class Person {
     public void setId(String id) {
         this.id = id;
     }
-
 
 
     public String getFirstName() {
@@ -199,21 +199,19 @@ public class Person {
 
     @Override
     public String toString() {
-        return "Person{" +
-                "id=" + id +
-                ", firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
-                ", nationality='" + nationality + '\'' +
-                ", events=" + events +
-                ", source=" + source +
-                ", description='" + description + '\'' +
-                ", parents=" + parents +
-                ", partner=" + partner +
-                ", sensitive=" + sensitive +
-                '}';
+        return id +
+                "," + firstName +
+                "," + lastName +
+                "," + nationality +
+                "," + events +
+                "," + source +
+                "," + description +
+                "," + parents +
+                "," + partner +
+                "," + sensitive;
     }
 
-    public JSONObject toJson(){
+    public JSONObject toJson() {
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("id", id);
         jsonObject.put("firstName", firstName);
@@ -221,7 +219,7 @@ public class Person {
         return jsonObject;
     }
 
-    public Person fromJson(JSONObject jsonObject){
+    public Person fromJson(JSONObject jsonObject) {
         id = (String) jsonObject.get("id");
         firstName = (String) jsonObject.get("firstName");
         lastName = (String) jsonObject.get("lastName");

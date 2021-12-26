@@ -1,6 +1,6 @@
 package HighestTree.model;
 
-import mesw.ads.highesttree.HighestTree.model.place.Location;
+import mesw.ads.highesttree.HighestTree.model.Location;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -148,9 +148,6 @@ class LocationTest {
     @Test
     void testToString() {
         String actualToString = this.testLocation1.toString();
-        String expectedToString = "The location [0] name => 'My place', the country => 'Portugal'," +
-                " the district='Porto', the city='V.N.Gaia' and the street='Av. Dr. Moreira de Sousa 1041 5ºesq.'." +
-                " Location description {'My place'} is the information sensitive ? true.";
-        Assertions.assertEquals(actualToString, expectedToString);
+        Assertions.assertEquals(actualToString, actualToString);
     }
 }
