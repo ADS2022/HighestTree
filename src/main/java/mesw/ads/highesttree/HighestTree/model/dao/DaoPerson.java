@@ -1,23 +1,24 @@
 package mesw.ads.highesttree.HighestTree.model.dao;
+
 import mesw.ads.highesttree.HighestTree.model.Person;
-
-
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.util.*;
-
 import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
+import org.json.simple.JSONObject;
 
+import java.io.*;
+import java.util.*;
 
+/**
+ * 23/12/2021 LNeto
+ * - changed PERSON_FILE from .txt to .json
+ *
+ *
+ */
 public class DaoPerson implements Dao<Person> {
-    private static final String PERSON_FILE = "files/person.txt";
+    private static final String PERSON_FILE = "files/person.json";
 
-    private Map<String, Person> personMap = new HashMap<>();
+    private final Map<String, Person> personMap = new HashMap<>();
 
     public DaoPerson(){
         readJsonFile();
@@ -61,6 +62,10 @@ public class DaoPerson implements Dao<Person> {
         try (FileWriter file = new FileWriter(PERSON_FILE)) {
             file.write(jsonArray.toJSONString());
             file.flush();
+            // TODO: Fix New line
+            //PrintWriter writer = new PrintWriter(file);
+            //writer.write(jsonArray.toString().replace("},{", "},\n{"));
+            //writer.close();
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -86,11 +91,7 @@ public class DaoPerson implements Dao<Person> {
                 personMap.put(person.getId(),person);
             });
 
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (ParseException e) {
+        } catch (ParseException | IOException e) {
             e.printStackTrace();
         }
     }

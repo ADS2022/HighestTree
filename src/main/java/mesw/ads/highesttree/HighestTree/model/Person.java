@@ -6,13 +6,19 @@ import java.util.LinkedList;
 import java.util.Objects;
 import java.util.UUID;
 
-
-/**SREQ-01
+/**
+ * 20/12/2021 LNeto
+ * - Added missing parameters to complete JSONObject Methods (toJson and fromJson)
+ * - Added methods to return LinkedList<> and objects as string to 'view':
+ *             getSourceAsText()
+ *             getEventsAsText()
+ *             getPartnersAsText()
+ *             getParentsAsText()
+ *             getChildrenAsText()
  *
  *
- * parents: a person can have 0 to 2 known parents
- * relationships: a person can be in a relationship with other persons
  */
+
 public class Person {
     private String id;
     private String firstName;
@@ -26,13 +32,22 @@ public class Person {
     private LinkedList<Person> children = null;
     private boolean sensitive;
 
+    private static  String EMPTY = "<field is empty>";
+
+    //Constructor for empty parameters
     public Person() {
         setId(UUID.randomUUID().toString());
     }
 
-    public Person(String firstName, String lastName, String nationality,
-                  Event anEvent, Source source, String description, Person parents,
-                  Person relationships, boolean sensitive)
+    public Person(String firstName,
+                  String lastName,
+                  String nationality,
+                  Event anEvent,
+                  Source source,
+                  String description,
+                  Person parents,
+                  Person relationships,
+                  boolean sensitive)
     {
         this.events = new LinkedList<>();
         setId(UUID.randomUUID().toString());
@@ -47,15 +62,18 @@ public class Person {
         setSensitive(sensitive);
     }
 
-    // #### SETTERS AND GETTERS
+    // SETTERS AND GETTERS
+    //    private String id;
     public String getId() {
         return id;
     }
 
+    // LNeto: If ID is set when object is created, do we want to overwrite it ?
     public void setId(String id) {
         this.id = id;
     }
 
+    //    private String firstName;
     public String getFirstName() {
         return firstName;
     }
@@ -67,6 +85,7 @@ public class Person {
             this.firstName = firstName;
     }
 
+    //    private String lastName;
     public String getLastName() {
         return lastName;
     }
@@ -77,7 +96,11 @@ public class Person {
         this.lastName = lastName;
     }
 
+    //    private String nationality;
     public String getNationality() {
+        if (nationality == null){
+            return EMPTY;
+        }
         return nationality;
     }
 
@@ -87,19 +110,7 @@ public class Person {
         this.nationality = nationality;
     }
 
-    public LinkedList<Event> getEvents() {
-        return events;
-    }
-
-    public void associateEvents(Event event) {
-        if (event == null)
-            throw new NullPointerException();
-        else if (!(this.events.contains(event)))
-            this.events.add(event);
-        else
-            throw new IllegalArgumentException();
-    }
-
+    //    private Source source;
     public Source getSource() {
         return source;
     }
@@ -111,7 +122,18 @@ public class Person {
             this.source = source;
     }
 
+    public String getSourceAsText() {
+        if (source == null){
+            return EMPTY;
+        }
+        return source.getDescription();
+    }
+
+    //    private String description;
     public String getDescription() {
+        if (description == null){
+            return EMPTY;
+        }
         return description;
     }
 
@@ -121,15 +143,49 @@ public class Person {
         this.description = description;
     }
 
-    public LinkedList<Person> getParents() {
-        return parents;
+    //    private LinkedList<Event> events = null;
+    public LinkedList<Event> getEvents() {
+        return events;
     }
 
+    public String getEventsAsText() {
+        if (events == null){
+            return EMPTY;
+        }
+        //TODO: Create method to return First Name + Last Name
+        // of Parents list as text
+        return events.toString();
+    }
+
+    public void associateEvents(Event event) {
+        if (event == null)
+            throw new NullPointerException();
+        else if (!(this.events.contains(event)))
+            this.events.add(event);
+        else
+            throw new IllegalArgumentException();
+    }
+
+    //    private LinkedList<Person> parents = null;
     public void setParents(Person e) {
         e.children.add(this);
         parents.add(e);
     }
+    public LinkedList<Person> getParents() {
+        return parents;
+    }
 
+    public String getParentsAsText() {
+        if (parents == null){
+            return EMPTY;
+        }
+        //TODO: Create method to return First Name + Last Name
+        // of Parents list as text
+        return parents.toString();
+    }
+
+
+    //    private LinkedList<Person> partner = null;
     public void setPartner(Person e) {
         e.partner.add(this);
         partner.add(e);
@@ -139,6 +195,16 @@ public class Person {
         return partner;
     }
 
+    public String getPartnersAsText() {
+        if (partner == null){
+            return EMPTY;
+        }
+        //TODO: Create method to return First Name + Last Name
+        // of partner list as text
+        return partner.toString();
+    }
+
+    //    private LinkedList<Person> children = null;
     public void setChildren(Person e) {
         e.parents.add(this);
         children.add(e);
@@ -148,6 +214,15 @@ public class Person {
         return children;
     }
 
+    public String getChildrenAsText() {
+        if (children == null){
+            return EMPTY;
+        }
+        //TODO: Create method to return First Name + Last Name
+        // of children list as text
+        return children.toString();
+    }
+    //    private boolean sensitive;
     public boolean isSensitive() {
         return sensitive;
     }
@@ -156,38 +231,7 @@ public class Person {
         this.sensitive = sensitive;
     }
 
-    //Composite - Ancestry and Successors
-    public LinkedList<Person> getSuccessors() {
-        LinkedList<Person> successors = this.getChildren();
-        int size = successors.size();
-
-        for (int i = 0; i < size; i++) {
-            if (successors.get(i).getChildren().isEmpty()){
-                System.out.print("Has no children. \n");
-            } else {
-                System.out.print("Has " + successors.get(i).getChildren().size() + " children. \n");
-                successors.addAll(successors.get(i).getChildren());
-                size = size + successors.get(i).getChildren().size();
-            }
-        }
-        return successors;
-    }
-
-    public LinkedList<Person> getAncestry() {
-        LinkedList<Person> ancestors = this.getParents();
-        int size = ancestors.size();
-
-        for (int i = 0; i < size; i++) {
-            if (ancestors.get(i).getParents().isEmpty()){
-                System.out.print("Parents unknown. \n");
-            } else {
-                System.out.print("Number of known parents: " + ancestors.get(i).getParents().size() + ".\n");
-                ancestors.addAll(ancestors.get(i).getParents());
-                size = size + ancestors.get(i).getParents().size();
-            }
-        }
-        return ancestors;
-    }
+    // METHODS
 
     @Override
     public boolean equals(Object o) {
@@ -236,8 +280,42 @@ public class Person {
                 '}';
     }
 
+    //Composite - Ancestry and Successors
+    public LinkedList<Person> getSuccessors() {
+        LinkedList<Person> successors = this.getChildren();
+        int size = successors.size();
+
+        for (int i = 0; i < size; i++) {
+            if (successors.get(i).getChildren().isEmpty()){
+                System.out.print("Has no children. \n");
+            } else {
+                System.out.print("Has " + successors.get(i).getChildren().size() + " children. \n");
+                successors.addAll(successors.get(i).getChildren());
+                size = size + successors.get(i).getChildren().size();
+            }
+        }
+        return successors;
+    }
+
+    public LinkedList<Person> getAncestry() {
+        LinkedList<Person> ancestors = this.getParents();
+        int size = ancestors.size();
+
+        for (int i = 0; i < size; i++) {
+            if (ancestors.get(i).getParents().isEmpty()){
+                System.out.print("Parents unknown. \n");
+            } else {
+                System.out.print("Number of known parents: " + ancestors.get(i).getParents().size() + ".\n");
+                ancestors.addAll(ancestors.get(i).getParents());
+                size = size + ancestors.get(i).getParents().size();
+            }
+        }
+        return ancestors;
+    }
+
+    // LNeto: Not sure if this is duplicate after 'Composite - Ancestry and Successors'
     public static LinkedList<Person> getAncestors(Person targetPerson, LinkedList<Person> ancestors) {
-        if (targetPerson.getParents() != null) {
+        if (targetPerson.getParents() == null) {
             for (Person parent : targetPerson.getParents()) {
                 ancestors.add(parent);
                 ancestors = getAncestors(parent, ancestors);
@@ -246,11 +324,20 @@ public class Person {
         return ancestors;
     }
 
+
     public JSONObject toJson(){
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("id", id);
         jsonObject.put("firstName", firstName);
         jsonObject.put("lastName", lastName);
+        jsonObject.put("nationality", nationality);
+        jsonObject.put("source", source);
+        jsonObject.put("description", description);
+        jsonObject.put("events", events);
+        jsonObject.put("partner", partner);
+        jsonObject.put("parents", parents);
+        jsonObject.put("children", children);
+        jsonObject.put("sensitive", sensitive);
         return jsonObject;
     }
 
@@ -258,7 +345,14 @@ public class Person {
         id = (String) jsonObject.get("id");
         firstName = (String) jsonObject.get("firstName");
         lastName = (String) jsonObject.get("lastName");
-
+        nationality = (String) jsonObject.get("nationality");
+        source = (Source) jsonObject.get("source");
+        description = (String) jsonObject.get("description");
+        events = (LinkedList<Event>) jsonObject.get("events");
+        partner = (LinkedList<Person>) jsonObject.get("partner");
+        parents = (LinkedList<Person>) jsonObject.get("parents");
+        children = (LinkedList<Person>) jsonObject.get("children");
+        sensitive = (boolean) jsonObject.get("sensitive");
         return this;
     }
 }

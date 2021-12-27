@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mesw.ads.highesttree.HighestTree.controller.LocationController">
+<AnchorPane prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mesw.ads.highesttree.HighestTree.controller.recordControllers.LocationController">
    <children>
       <SplitPane dividerPositions="0.10573476702508962" orientation="VERTICAL" prefHeight="448.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <items>
@@ -71,6 +71,16 @@
                                              </TextField>
                                           </children>
                                        </AnchorPane>
+                                       <AnchorPane>
+                                          <children>
+                                             <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Is sensitive info?" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="10.0" />
+                                          </children>
+                                       </AnchorPane>
+                                       <AnchorPane>
+                                          <children>
+                                             <ChoiceBox fx:id="isSensitive" maxWidth="120.0" minWidth="120.0" prefWidth="120.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                                          </children>
+                                       </AnchorPane>
                                     </children>
                                     <opaqueInsets>
                                        <Insets />
@@ -83,8 +93,7 @@
                                  <VBox alignment="CENTER_LEFT" layoutY="-12.94921875" prefHeight="158.4" prefWidth="296.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
                                     <children>
                                             <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Description" />
-                                       <TextArea fx:id="fldDescription" prefHeight="26.0" prefWidth="599.0" text="DescriptionField" VBox.vgrow="ALWAYS" />
-                                       <ChoiceBox fx:id="sensitiveInformation_optn" prefWidth="150.0" />
+                                       <TextArea fx:id="flsDescription" prefHeight="26.0" prefWidth="599.0" text="DescriptionField" VBox.vgrow="ALWAYS" />
                                     </children>
                                  </VBox>
                               </children>

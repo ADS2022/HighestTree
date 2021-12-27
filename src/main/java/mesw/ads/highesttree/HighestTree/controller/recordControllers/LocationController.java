@@ -1,4 +1,4 @@
-package mesw.ads.highesttree.HighestTree.controller;
+package mesw.ads.highesttree.HighestTree.controller.recordControllers;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -21,39 +21,17 @@ import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class LocationController implements Initializable {
-
     private static final String ERROR_SCREEN = "/fxml/errorScreen1.fxml";
 
     @FXML
-    private TextField fldPlaceName;
-    @FXML
-    private TextField fldCountry;
-    @FXML
-    private TextField fldDistrict;
-    @FXML
-    private TextArea fldDescription;
-    @FXML
-    private TextField fldCity;
-    @FXML
-    private TextField fldStreet;
-    @FXML
-    private ChoiceBox<String> sensitiveInformation_optn;
+    private TextArea flsDescription;
 
-    public void changeScene(String SceneName, ActionEvent event) throws IOException {
-        Parent MainSceneParent = FXMLLoader.load(getClass().getResource(SceneName));
-        Scene MainScene = new Scene(MainSceneParent);
-        Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        window.setScene(MainScene);
-        window.show();
-    }
+    @FXML
+    private TextField fldPlaceName, fldCountry, fldDistrict, fldCity, fldStreet;
 
-    private void fillComboBox() {
-        ArrayList<String> list = new ArrayList<>();
-        list.add("Block info to users");
-        list.add("Show info to users");
-        ObservableList<String> sensitiveLevels = FXCollections.observableArrayList(list);
-        this.sensitiveInformation_optn.setItems(sensitiveLevels);
-    }
+    @FXML
+    public ChoiceBox isSensitive;
+
 
     /**
      * Called to initialize a controller after its root element has been
@@ -67,6 +45,24 @@ public class LocationController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         this.fillComboBox();
     }
+
+    public void changeScene(String SceneName, ActionEvent event) throws IOException {
+        Parent MainSceneParent = FXMLLoader.load(getClass().getResource(SceneName));
+        Scene MainScene = new Scene(MainSceneParent);
+        Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        window.setScene(MainScene);
+        window.show();
+    }
+
+    //'Is sensitive info' Choisebox
+    private void fillComboBox() {
+        ArrayList<String> list = new ArrayList<>();
+        list.add("Block info to users"); //TRUE
+        list.add("Show info to users");  //FALSE
+        ObservableList<String> sensitiveLevels = FXCollections.observableArrayList(list);
+        this.isSensitive.setItems(sensitiveLevels);
+    }
+
 
     private boolean setSensitivity(String sensitivity) {
         return "YES".equals(sensitivity);
@@ -106,12 +102,11 @@ public class LocationController implements Initializable {
             String district = fldDistrict.getText();
             String city = fldCity.getText();
             String street = fldStreet.getText();
-            String description = fldDescription.getText();
-            String isSensitive = sensitiveInformation_optn.getSelectionModel().getSelectedItem();
-            boolean sensitivity = this.setSensitivity(isSensitive);
+            String description = flsDescription.getText();
+            Boolean sensitive = isSensitive.equals("Block info to users");
 
             // Service saves location
-            LocationService.save(name, country, district, city, street, description, sensitivity);
+            LocationService.save(name, country, district, city, street, description, sensitive);
             // Change to another scene
             changeScene("/fxml/LocationsView.fxml", actionEvent);
 

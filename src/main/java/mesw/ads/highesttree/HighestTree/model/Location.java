@@ -1,8 +1,15 @@
 package mesw.ads.highesttree.HighestTree.model;
 
+import org.json.simple.JSONObject;
+
 import java.util.Objects;
 import java.util.UUID;
 
+/**
+ * 20/12/2021 LNeto
+ * - Added constructor with setId(), as done in Person.java
+ * - Added JSONObject (toJson and fromJson methods)
+ */
 public class Location {
     private String id;
     private String name;
@@ -12,6 +19,12 @@ public class Location {
     private String street;
     private String description;
     private boolean isSensitive;
+
+    private static  String EMPTY = "<field is empty>";
+
+    public Location(){
+        setId(UUID.randomUUID().toString());
+    }
 
     public Location(String name,
                     String country,
@@ -27,6 +40,7 @@ public class Location {
         setStreet(street);
         setDescription(description);
     }
+
 
     public String getName() {
         return name;
@@ -135,5 +149,30 @@ public class Location {
     public String getParish() {
         //TODO: get and set Parish do not exist
     return null;
+    }
+
+    public JSONObject toJson(){
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("id", id);
+        jsonObject.put("name", name);
+        jsonObject.put("country", country);
+        jsonObject.put("district", district);
+        jsonObject.put("city", city);
+        jsonObject.put("street", street);
+        jsonObject.put("description", description);
+        jsonObject.put("isSensitive", isSensitive);
+        return jsonObject;
+    }
+
+    public Location fromJson(JSONObject jsonObject){
+        id = (String) jsonObject.get("id");
+        name = (String) jsonObject.get("name");
+        country = (String) jsonObject.get("country");
+        district = (String) jsonObject.get("district");
+        city = (String) jsonObject.get("city");
+        street = (String) jsonObject.get("street");
+        description = (String) jsonObject.get("description");
+        isSensitive = (boolean) jsonObject.get("isSensitive");
+        return this;
     }
 }

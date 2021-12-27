@@ -1,5 +1,7 @@
-package mesw.ads.highesttree.HighestTree.controller;
+package mesw.ads.highesttree.HighestTree.controller.recordControllers;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -7,6 +9,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
@@ -14,9 +17,12 @@ import mesw.ads.highesttree.HighestTree.service.PersonService;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class PersonController implements Initializable {
+    private static final String ERROR_SCREEN = "/fxml/errorScreen1.fxml";
+
     @FXML
     private TextField fldLastName;
 
@@ -41,6 +47,21 @@ public class PersonController implements Initializable {
     @FXML
     private TextArea fldSource;
 
+    @FXML
+    public ChoiceBox isSensitive;
+
+    /**
+     * Called to initialize a controller after its root element has been
+     * completely processed.
+     *
+     * @param location  The location used to resolve relative paths for the root object, or
+     *                  <tt>null</tt> if the location is not known.
+     * @param resources The resources used to localize the root object, or <tt>null</tt> if
+     */
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        this.fillComboBox();
+    }
 
     public void changeScene(String SceneName, ActionEvent event) throws IOException {
         Parent MainSceneParent = FXMLLoader.load(getClass().getResource(SceneName));
@@ -55,6 +76,15 @@ public class PersonController implements Initializable {
         changeScene("/mesw/ads/highesttree/HighestTree/HomeView.fxml", actionEvent);
     }
 
+    //'Is sensitive info' Choisebox
+    private void fillComboBox() {
+        ArrayList<String> list = new ArrayList<>();
+        list.add("Block info to users"); //TRUE
+        list.add("Show info to users");  //FALSE
+        ObservableList<String> sensitiveLevels = FXCollections.observableArrayList(list);
+        this.isSensitive.setItems(sensitiveLevels);
+    }
+
     public void btnAddPersonPress(ActionEvent actionEvent) throws IOException {
         System.out.println("Adding a new Person record");
         try {
@@ -67,6 +97,7 @@ public class PersonController implements Initializable {
             String parents = fldParents.getText();
             String spouses = fldSpouses.getText();
             String source = fldSource.getText();
+            Boolean sensitive = isSensitive.equals("Block info to users");
 
             // Service saves location
             PersonService.save(lastName, firstName, nationality, events, source, description, parents, spouses, false);
@@ -84,9 +115,4 @@ public class PersonController implements Initializable {
         changeScene("/fxml/PersonsView.fxml", actionEvent);
     }
 
-
-    @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
-
-    }
 }

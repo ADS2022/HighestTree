@@ -49,7 +49,7 @@ class PersonTest {
 
         this.testSuperDate = new Date("1999", "09", "30");
 
-        this.testSource = new Source();
+        Source source = new Source();
 
         this.testLocation = new Location(
                 "Ordem da Lapa",
@@ -69,6 +69,7 @@ class PersonTest {
                 testStandardEvent1,
                 testSuperDate,
                 this.testLocation,
+                this.testPerson1,
                 this.testSource,
                 true);
 
@@ -194,6 +195,7 @@ class PersonTest {
                                 "City",
                                 "street",
                                 "description"),
+                        testPerson1,
                         this.testSource,
                         true
                 )

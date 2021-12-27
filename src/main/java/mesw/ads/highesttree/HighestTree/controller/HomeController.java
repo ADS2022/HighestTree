@@ -1,6 +1,5 @@
 package mesw.ads.highesttree.HighestTree.controller;
 
-
 import java.io.IOException;
 
 import javafx.event.ActionEvent;
@@ -14,21 +13,28 @@ import javafx.scene.control.Button;
 
 
 public class HomeController {
+    private static final String ERROR_SCREEN = "/fxml/errorScreen1.fxml";
+
     @FXML
     private Button btnPersonsMenu, btnEventsMenu, btnPlacesMenu;
 
     public void goToPersonsMenu(ActionEvent actionEvent) throws IOException {
-        if(actionEvent.getSource()==btnPersonsMenu){
-            System.out.println("Changing to Persons scene");
-            changeScene("/fxml/PersonsView.fxml", actionEvent);
-        }
-        else if (actionEvent.getSource()==btnEventsMenu){
-            System.out.println("Changing to Events scene");
-            changeScene("/fxml/EventsView.fxml", actionEvent);
-        }
-        else if (actionEvent.getSource()==btnPlacesMenu){
-            System.out.println("Changing to Places scene");
-            changeScene("/fxml/LocationsView.fxml", actionEvent);
+        try {
+            if(actionEvent.getSource()==btnPersonsMenu){
+                System.out.println("Changing to Persons scene");
+                changeScene("/fxml/PersonsView.fxml", actionEvent);
+            }
+            else if (actionEvent.getSource()==btnEventsMenu){
+                System.out.println("Changing to Events scene");
+                changeScene("/fxml/EventsView.fxml", actionEvent);
+            }
+            else if (actionEvent.getSource()==btnPlacesMenu){
+                System.out.println("Changing to Places scene");
+                changeScene("/fxml/LocationsView.fxml", actionEvent);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            this.changeScene(ERROR_SCREEN, actionEvent);
         }
 
     }

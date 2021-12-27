@@ -1,1 +1,14 @@
-Event{id=0, name='Name', standardEvents=null, description='null', superDate=null, place=null, personsInvolved=null, source=null, isSensitive=false}
+Event{id=482ff3c6-1325-443c-9351-8d79f70602c1, name='Event Test numer1', standardEvents=null, description='null', superDate=null, place=null, personsInvolved=null, source=null, isSensitive=false}
+Event{id=44dd09b8-c41e-4e9a-bc01-6cb5e907d44b, name='Name', standardEvents=null, description='null', superDate=null, place=null, personsInvolved=null, source=null, isSensitive=false}
+Event{id=51cb5d36-ad0c-4fe3-842d-a8225fd26bb3, name='Name', standardEvents=null, description='null', superDate=null, place=null, personsInvolved=null, source=null, isSensitive=false}
+Event{id=6622c9a7-300e-4d39-a204-4ce7170935fd, name='Test Event', standardEvents=null, description='null', superDate=null, place=null, personsInvolved=null, source=null, isSensitive=false}
+Event{id=5fd4ed79-03d8-4cb6-bb9a-a21180bce746, name='Test Event 2 ', standardEvents=null, description='null', superDate=null, place=null, personsInvolved=null, source=null, isSensitive=false}
+Event{id=39499d4d-f132-4c88-a960-495e0d885ff4, name='Event 3 ', standardEvents=null, description='null', superDate=null, place=null, personsInvolved=null, source=null, isSensitive=false}
+Event{id=b7e794f6-dd3e-4005-a92c-c021276796f6, name='Name', standardEvents=null, description='null', superDate=null, place=null, personsInvolved=null, source=null, isSensitive=false}
+Event{id=52bd03b2-90cc-4a5b-92b0-8eb30728fd7c, name='Name2 ', standardEvents=null, description='null', superDate=null, place=null, personsInvolved=null, source=null, isSensitive=false}
+Event{id=5883983f-052f-4947-8e3b-a0b2f4c0c84f, name='TestEvent', standardEvents=null, description='null', superDate=null, place=null, personsInvolved=null, source=null, isSensitive=false}
+Event{id=9f5fc553-8ac2-4bfe-a50d-b156465efbf8, name='place 2', standardEvents=null, description='null', superDate=null, place=null, personsInvolved=null, source=null, isSensitive=false}
+Event{id=7963fedc-9699-4ba3-b101-85d73a784f84, name='Event Test 1', standardEvents=UNKNOWN, description='null', superDate=null, place=null, personsInvolved=null, source=null, isSensitive=false}
+Event{id=edf095f0-13f8-4629-b668-83035142b58a, name='Event Test 2', standardEvents=UNKNOWN, description='null', superDate=null, place=null, personsInvolved=null, source=null, isSensitive=false}
+Event{id=a53fd30a-701a-4d8d-ad69-413cc789717e, name='Event Name sensitive', standardEvents=UNKNOWN, description='null', superDate=null, place=null, personsInvolved=null, source=null, isSensitive=false}
+Event{id=155ab192-46f9-4b79-885d-ccd523d76db7, name='Event Name isSensitive 2', standardEvents=UNKNOWN, description='null', superDate=null, place=null, personsInvolved=null, source=null, isSensitive=false}

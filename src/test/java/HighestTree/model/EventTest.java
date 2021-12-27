@@ -125,7 +125,7 @@ class EventTest {
     @Test
     void getPlace() {
         Location expected = this.testLocation;
-        Location actual = this.testEvent1.getPlace();
+        Location actual = this.testEvent1.getLocation();
 
         Assertions.assertEquals(expected, actual);
     }
@@ -157,7 +157,7 @@ class EventTest {
     @Test
     void getSource() {
         Source expected = this.testSource;
-        Source actualSource = this.testEvent1.getSource();
+        Source actualSource = this.testEvent1.getSource().get(1);
 
         Assertions.assertEquals(expected, actualSource);
     }

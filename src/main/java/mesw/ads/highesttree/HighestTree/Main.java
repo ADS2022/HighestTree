@@ -6,7 +6,9 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import java.io.IOException;
 
+//TODO: change database files from .txt to JSON
 public class Main extends Application {
+
 
     @Override
     public void start(Stage stage) throws IOException {
