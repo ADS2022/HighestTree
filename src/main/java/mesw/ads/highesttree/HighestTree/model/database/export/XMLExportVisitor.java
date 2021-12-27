@@ -12,6 +12,15 @@ import javax.xml.transform.sax.TransformerHandler;
 import javax.xml.transform.stream.StreamResult;
 import java.io.BufferedReader;
 import java.io.FileReader;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
+import java.util.Scanner;
 
 public class XMLExportVisitor implements Visitor {
 
@@ -31,6 +40,8 @@ public class XMLExportVisitor implements Visitor {
     private static final String FILES_PERSON_XML = "files/person.xml";
     private static final String FILES_LOCATION_XML = "files/location.xml";
 
+    private static final String PATH_TO_FILE = "files/";
+
     public XMLExportVisitor(int kind) {
         try {
             String str;
@@ -41,7 +52,7 @@ public class XMLExportVisitor implements Visitor {
 
                     this.personXLMInitializer();
                     while ((str = bufferedReader.readLine()) != null) {
-                        visitPerson(str);
+                        visitPersonTXTToXML(str);
                     }
 
                     bufferedReader.close();
@@ -53,7 +64,7 @@ public class XMLExportVisitor implements Visitor {
 
                     this.placeXLMInitializer();
                     while ((str = bufferedReader.readLine()) != null) {
-                        visitLocation(str);
+                        visitLocationTXTToXML(str);
                     }
 
                     bufferedReader.close();
@@ -65,11 +76,23 @@ public class XMLExportVisitor implements Visitor {
 
                     this.eventXLMInitializer();
                     while ((str = bufferedReader.readLine()) != null) {
-                        visitEvent(str);
+                        visitEventTXTToXML(str);
                     }
 
                     bufferedReader.close();
                     this.eventXMLCloser();
+                    break;
+
+                case 4:
+                    visitPersonTXTToCSV();
+                    break;
+
+                case 5:
+                    visitLocationTXTToCSV();
+                    break;
+
+                case 6:
+                    visitEventTXTToCSV();
                     break;
 
                 default:
@@ -81,13 +104,24 @@ public class XMLExportVisitor implements Visitor {
         }
     }
 
+    private void writeToCSV(Path txt, Path csv) throws IOException {
+        Charset utf8 = StandardCharsets.UTF_8;
+        try (
+                final Scanner scanner = new Scanner(Files.newBufferedReader(txt, utf8));
+                final PrintWriter pw = new PrintWriter(Files.newBufferedWriter(csv, utf8, StandardOpenOption.CREATE_NEW))) {
+            while (scanner.hasNextLine()) {
+                pw.println(scanner.nextLine().replace(',', ','));
+            }
+        }
+    }
+
     private void placeXLMInitializer() throws ParserConfigurationException,
             TransformerConfigurationException, SAXException {
-        trasformerFactory();
+        transformerFactory();
         transformerHandler.startElement("", "", "Place", attributes);
     }
 
-    private void trasformerFactory() throws TransformerConfigurationException, SAXException {
+    private void transformerFactory() throws TransformerConfigurationException, SAXException {
         SAXTransformerFactory transformerFactory = (SAXTransformerFactory) SAXTransformerFactory
                 .newInstance();
 
@@ -109,7 +143,7 @@ public class XMLExportVisitor implements Visitor {
 
     private void eventXLMInitializer() throws ParserConfigurationException,
             TransformerConfigurationException, SAXException {
-        trasformerFactory();
+        transformerFactory();
         transformerHandler.startElement("", "", "Event", attributes);
     }
 
@@ -120,7 +154,7 @@ public class XMLExportVisitor implements Visitor {
 
     private void personXLMInitializer() throws ParserConfigurationException,
             TransformerConfigurationException, SAXException {
-        trasformerFactory();
+        transformerFactory();
         transformerHandler.startElement("", "", "Person", attributes);
     }
 
@@ -130,7 +164,7 @@ public class XMLExportVisitor implements Visitor {
     }
 
     @Override
-    public void visitPerson(String person) throws SAXException {
+    public void visitPersonTXTToXML(String person) throws SAXException {
         // TODO to implement when Persons are correctly implemented.
         String[] elements = person.split(",");
         attributes.clear();
@@ -149,7 +183,7 @@ public class XMLExportVisitor implements Visitor {
     }
 
     @Override
-    public void visitLocation(String location) throws SAXException {
+    public void visitLocationTXTToXML(String location) throws SAXException {
         // TODO to implement when Locations are correctly implemented.
         String[] elements = location.split(",");
         attributes.clear();
@@ -188,7 +222,7 @@ public class XMLExportVisitor implements Visitor {
     }
 
     @Override
-    public void visitEvent(String event) throws SAXException {
+    public void visitEventTXTToXML(String event) throws SAXException {
         // TODO to implement when Events are correctly implemented.
         String[] elements = event.split(",");
         attributes.clear();
@@ -228,5 +262,31 @@ public class XMLExportVisitor implements Visitor {
         transformerHandler.startElement("", "", "isSensitive", attributes);
         transformerHandler.characters(elements[8].toCharArray(), 0, elements[8].length());
         transformerHandler.endElement("", "", "isSensitive");
+    }
+
+    @Override
+    public void visitPersonTXTToCSV() throws IOException {
+        Path path = Paths.get(PATH_TO_FILE);
+        Path txt = path.resolve("person.txt");
+        Path csv = path.resolve("person.csv");
+        writeToCSV(txt, csv);
+
+    }
+
+    @Override
+    public void visitLocationTXTToCSV() throws IOException {
+        Path path = Paths.get(PATH_TO_FILE);
+        Path txt = path.resolve("location.txt");
+        Path csv = path.resolve("location.csv");
+        writeToCSV(txt, csv);
+    }
+
+    @Override
+    public void visitEventTXTToCSV() throws IOException {
+        Path path = Paths.get(PATH_TO_FILE);
+        Path txt = path.resolve("event.txt");
+        Path csv = path.resolve("event.csv");
+        writeToCSV(txt, csv);
+
     }
 }
