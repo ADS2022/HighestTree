@@ -100,5 +100,8 @@ fabric.properties
 
 target/
 
+.idea/compiler.xml
+
+.idea/codeStyles/Project.xml
 
 # End of https://www.gitignore.io/api/intellij
