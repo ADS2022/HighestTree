@@ -3,7 +3,6 @@ package mesw.ads.highesttree.HighestTree.model.database.export;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.AttributesImpl;
 
-import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.OutputKeys;
 import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerConfigurationException;
@@ -22,14 +21,14 @@ import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
 import java.util.Scanner;
 
-public class XMLExportVisitor implements Visitor {
+public class ExportVisitor implements Visitor {
 
     private BufferedReader bufferedReader;
     private StreamResult streamResult;
     private TransformerHandler transformerHandler;
     private AttributesImpl attributes;
 
-    private static final String ENCODING = "ISO-8859-1";
+    private static final String ENCODING = "UTF-8";
     private static final String URL = "{http://xml.apache.org/xslt}indent-amount";
 
     private static final String FILES_EVENT_TXT = "files/event.txt";
@@ -42,7 +41,7 @@ public class XMLExportVisitor implements Visitor {
 
     private static final String PATH_TO_FILE = "files/";
 
-    public XMLExportVisitor(int kind) {
+    public ExportVisitor(int kind) {
         try {
             String str;
             switch (kind) {
@@ -115,8 +114,7 @@ public class XMLExportVisitor implements Visitor {
         }
     }
 
-    private void placeXLMInitializer() throws ParserConfigurationException,
-            TransformerConfigurationException, SAXException {
+    private void placeXLMInitializer() throws TransformerConfigurationException, SAXException {
         transformerFactory();
         transformerHandler.startElement("", "", "Place", attributes);
     }
@@ -141,8 +139,7 @@ public class XMLExportVisitor implements Visitor {
         transformerHandler.endDocument();
     }
 
-    private void eventXLMInitializer() throws ParserConfigurationException,
-            TransformerConfigurationException, SAXException {
+    private void eventXLMInitializer() throws TransformerConfigurationException, SAXException {
         transformerFactory();
         transformerHandler.startElement("", "", "Event", attributes);
     }
@@ -152,8 +149,7 @@ public class XMLExportVisitor implements Visitor {
         transformerHandler.endDocument();
     }
 
-    private void personXLMInitializer() throws ParserConfigurationException,
-            TransformerConfigurationException, SAXException {
+    private void personXLMInitializer() throws TransformerConfigurationException, SAXException {
         transformerFactory();
         transformerHandler.startElement("", "", "Person", attributes);
     }
@@ -164,7 +160,7 @@ public class XMLExportVisitor implements Visitor {
     }
 
     @Override
-    public void visitPersonTXTToXML(String person) throws SAXException {
+    public void visitPersonTXTToXML(String person) throws SAXException, IOException {
         // TODO to implement when Persons are correctly implemented.
         String[] elements = person.split(",");
         attributes.clear();

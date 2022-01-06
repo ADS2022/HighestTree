@@ -5,7 +5,7 @@ import org.xml.sax.SAXException;
 import java.io.IOException;
 
 public interface Visitor {
-    void visitPersonTXTToXML(String person) throws SAXException;
+    void visitPersonTXTToXML(String person) throws SAXException, IOException;
 
     void visitLocationTXTToXML(String location) throws SAXException;
 

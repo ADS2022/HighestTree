@@ -1,7 +1,7 @@
 package mesw.ads.highesttree.HighestTree.model.database.export;
 
-public class Main {
+public class VisitorMain {
     public static void main(String[] args) {
-        new XMLExportVisitor(6);
+        new ExportVisitor(5);
     }
 }

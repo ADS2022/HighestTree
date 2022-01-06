@@ -1,18 +1,17 @@
 
 package mesw.ads.highesttree.HighestTree.service;
 
+import mesw.ads.highesttree.HighestTree.model.Person;
 import mesw.ads.highesttree.HighestTree.model.dao.Dao;
 import mesw.ads.highesttree.HighestTree.model.dao.DaoPerson;
-import mesw.ads.highesttree.HighestTree.model.database.Reader;
 import mesw.ads.highesttree.HighestTree.model.database.Writer;
-import mesw.ads.highesttree.HighestTree.model.Person;
 
 import java.util.Collection;
-import java.util.List;
 
 public class PersonService {
     private static Dao<Person> personDao = new DaoPerson();
     private static Person person;
+    private static final String FILE_NAME = "files/person.txt";
 
     public static void save(String lastName,
                             String firstName,
@@ -37,6 +36,7 @@ public class PersonService {
     public static void savePerson(Person person) {
         validate(person);
         personDao.save(person);
+        Writer.writeToFile(FILE_NAME, person.toString());
     }
 
     private static void validate(Person person) {

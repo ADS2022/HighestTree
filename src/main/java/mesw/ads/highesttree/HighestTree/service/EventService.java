@@ -1,7 +1,6 @@
 package mesw.ads.highesttree.HighestTree.service;
 
 import mesw.ads.highesttree.HighestTree.model.Event;
-import mesw.ads.highesttree.HighestTree.model.Location;
 import mesw.ads.highesttree.HighestTree.model.dao.Dao;
 import mesw.ads.highesttree.HighestTree.model.dao.DaoEvent;
 import mesw.ads.highesttree.HighestTree.model.database.Reader;
@@ -23,14 +22,14 @@ public class EventService {
             String description,
             String persons,
             String source
-    ){
+    ) {
         event = new Event();
         event.setName(name);
         eventDao.save(event);
         Writer.writeToFile(FILE_NAME, event.toString());
     }
 
-    public static List<String> getAllEventsFromFileDatabase(){
+    public static List<String> getAllEventsFromFileDatabase() {
         return Reader.readFromFile(FILE_NAME);
     }
 
