@@ -3,6 +3,7 @@ module mesw.ads.highesttreemaven {
     requires javafx.fxml;
     requires com.google.gson;
     requires json.simple;
+    requires java.xml;
 
 
     opens mesw.ads.highesttree.HighestTree to javafx.fxml;

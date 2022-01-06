@@ -12,7 +12,7 @@ package HighestTree.model;/*
  */
 
 import mesw.ads.highesttree.HighestTree.model.*;
-import mesw.ads.highesttree.HighestTree.model.place.Location;
+import mesw.ads.highesttree.HighestTree.model.Location;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;

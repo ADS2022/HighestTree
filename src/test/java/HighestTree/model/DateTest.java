@@ -90,7 +90,7 @@ class DateTest {
     @Test
     void testToString() {
         String actualDateString = this.testDate1.toString();
-        String expectedDateString = "Date{year='1999', month='09', day='30'}";
+        String expectedDateString = "1999,09,30";
 
         Assertions.assertEquals(expectedDateString, actualDateString);
     }
@@ -108,7 +108,7 @@ class DateTest {
     @Test
     void returnDateString() {
         String actualDateString = this.testDate1.returnDateString();
-        String expectedDateString = "Date{year='1999', month='09', day='30'}";
+        String expectedDateString = "1999,09,30";
 
         Assertions.assertEquals(expectedDateString, actualDateString);
     }

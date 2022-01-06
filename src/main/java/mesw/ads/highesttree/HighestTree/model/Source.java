@@ -112,13 +112,11 @@ public class Source {
 
     @Override
     public String toString() {
-        return "Source{" +
-                "id=" + id +
-                ", researchersName='" + researchersName + '\'' +
-                ", superDate=" + superDate +
-                ", description='" + description + '\'' +
-                ", sourceOfInformation='" + sourceOfInformation + '\'' +
-                ", sensitivity=" + sensitivity +
-                '}';
+        return id +
+                "," + researchersName +
+                "," + superDate +
+                "," + description +
+                "," + sourceOfInformation +
+                "," + sensitivity;
     }
 }
