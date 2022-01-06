@@ -1,1 +1,57 @@
-[{"standardEvents":"UNKNOWN","isSensitive":false,"name":"Event Test 1","superDate":null,"description":null,"location":null,"id":"7963fedc-9699-4ba3-b101-85d73a784f84","source":null,"personsInvolved":null},{"standardEvents":"UNKNOWN","isSensitive":false,"name":"Event Name sensitive","superDate":null,"description":null,"location":null,"id":"a53fd30a-701a-4d8d-ad69-413cc789717e","source":null,"personsInvolved":null},{"standardEvents":"UNKNOWN","isSensitive":false,"name":"Event Test 2","superDate":null,"description":null,"location":null,"id":"edf095f0-13f8-4629-b668-83035142b58a","source":null,"personsInvolved":null},{"standardEvents":"UNKNOWN","isSensitive":false,"name":"Event Name isSensitive 2","superDate":null,"description":null,"location":null,"id":"155ab192-46f9-4b79-885d-ccd523d76db7","source":null,"personsInvolved":null}]
+[
+  {
+    "standardEvents": "UNKNOWN",
+    "isSensitive": false,
+    "name": "Event Test 1",
+    "superDate": null,
+    "description": null,
+    "location": null,
+    "id": "7963fedc-9699-4ba3-b101-85d73a784f84",
+    "source": null,
+    "personsInvolved": null
+  },
+  {
+    "standardEvents": "UNKNOWN",
+    "isSensitive": false,
+    "name": "Event Name",
+    "superDate": null,
+    "description": null,
+    "location": null,
+    "id": "1915f865-23e1-4d31-89e6-6210c5c9da5b",
+    "source": null,
+    "personsInvolved": null
+  },
+  {
+    "standardEvents": "UNKNOWN",
+    "isSensitive": false,
+    "name": "Event Name sensitive",
+    "superDate": null,
+    "description": null,
+    "location": null,
+    "id": "a53fd30a-701a-4d8d-ad69-413cc789717e",
+    "source": null,
+    "personsInvolved": null
+  },
+  {
+    "standardEvents": "UNKNOWN",
+    "isSensitive": false,
+    "name": "Event Test 2",
+    "superDate": null,
+    "description": null,
+    "location": null,
+    "id": "edf095f0-13f8-4629-b668-83035142b58a",
+    "source": null,
+    "personsInvolved": null
+  },
+  {
+    "standardEvents": "UNKNOWN",
+    "isSensitive": false,
+    "name": "Event Name isSensitive 2",
+    "superDate": null,
+    "description": null,
+    "location": null,
+    "id": "155ab192-46f9-4b79-885d-ccd523d76db7",
+    "source": null,
+    "personsInvolved": null
+  }
+]

@@ -1,6 +1,5 @@
 package mesw.ads.highesttree.HighestTree.model;
 
-import mesw.ads.highesttree.HighestTree.model.place.Location;
 import org.json.simple.JSONObject;
 
 import java.util.LinkedList;

@@ -1,1 +1,6 @@
+The location [c6703d08-ead8-4826-af45-3dbdbc354174] name => 'Place Name 1', the country => 'Country 1 ', the district='District 1', the city='City 1' and the street='Street 1'. Location description {'DescriptionField - BLBLB'} is the information sensitive ? false.
+The location [3b819458-4afb-441f-80f9-c95230d1e294] name => 'Place Name 1', the country => 'Country 1', the district='District 1', the city='City 1' and the street='Street 1'. Location description {'DescriptionField'} is the information sensitive ? false.
+The location [3a232322-e09c-437c-95ca-0b5828e28d59] name => 'Place Name 3', the country => 'Country 3', the district='District 3', the city='City 3' and the street='Street 3'. Location description {'DescriptionField'} is the information sensitive ? false.
+The location [4e7b776b-baf8-4efb-bb04-14041b95f32b] name => 'Place Name isSensitive', the country => 'Country  isSensitive', the district='District isSensitive', the city='City isSensitive' and the street='Street isSensitive'. Location description {'DescriptionField isSensitive'} is the information sensitive ? false.
 0,Name,null,null,null,null,null,null,false
+1915f865-23e1-4d31-89e6-6210c5c9da5b,Event Name,UNKNOWN,null,null,null,null,null,false
