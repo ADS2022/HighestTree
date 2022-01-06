@@ -663,4 +663,16 @@ public class LocationService {
 
 ### Composite Pattern
 
-- Composite let's client treat individual objects and compositions of objects uniformly.
+Thinking on the problem of how to compile a genealogy tree, either to show/export, edit or perform any other kind of operation that might come up as a future feature, the composite is a structural pattern that enables and enhances those possibilities. 
+In our project, this pattern was tough as a solution for the relationship between person class. Looking at what we intended to do versus the ‘ad hoc’ implementation of a composite pattern, it was not clear on how to fit the pattern. The first question is, in our model, what would make a container and what would be a leaf? Leaves are a terminal element, and in our case it was not obvious how a relationship node ends, meaning, when entering a record it is not clear if a person will be an ‘end node’ on a tree or if will span new relationships. So ‘person’ class has to be a container (aka composite) in the ‘composite’ paradigm, because it is an element that has sub-elements, in this case, of the same type. 
+Composite ables us to treat individual objects and compositions of objects uniformly, meaning we can ‘spread out’ methods through all person objects that could be called for in a structural way, as an example, to show or edit a field on all known descendants of a given person.
+We would be applying the pattern to only one class, so it is not difficult to define an interface since methods are all alike.
+In the end we can not securely say that the composite pattern is implemented in our model. The classes were laid out but we did not see an end to the full structural implementation of the ‘ad hoc’ pattern. Still, we believe that laying out the foundation for this type of structure can help to refactor in the future, either towards this or another kind of structure.
+
+### Template Method
+The template method was applied in the controller section of our MVC. The intent is to have the controller for the page to call in the same methods in sequenced order, but, those methods have to be adapted for the specific views. In our MVC, the controllers are specific for ‘Person’ ‘Location’ and ‘Event’ and contain almost identical steps with some minor differences. 
+
+### Filter Pattern
+
+Filter pattern or Criteria pattern was chosen as a way to query a set of objects using different criteria and being able to chain those criteria through logical operations. This type of design pattern comes under structural pattern as this pattern combines multiple criteria to obtain single criteria.
+
