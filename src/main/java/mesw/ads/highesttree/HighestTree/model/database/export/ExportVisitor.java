@@ -56,18 +56,20 @@ public class ExportVisitor implements Visitor {
 
                     bufferedReader.close();
                     this.personXMLCloser();
+                    System.out.println("File exported to XML");
                     break;
                 case 2:
                     bufferedReader = new BufferedReader(new FileReader(FILES_LOCATION_TXT));
                     streamResult = new StreamResult(FILES_LOCATION_XML);
 
-                    this.placeXLMInitializer();
+                    this.locationXLMInitializer();
                     while ((str = bufferedReader.readLine()) != null) {
                         visitLocationTXTToXML(str);
                     }
 
                     bufferedReader.close();
-                    this.placeXMLCloser();
+                    this.locationXMLCloser();
+                    System.out.println("File exported to XML");
                     break;
                 case 3:
                     bufferedReader = new BufferedReader(new FileReader(FILES_EVENT_TXT));
@@ -80,22 +82,26 @@ public class ExportVisitor implements Visitor {
 
                     bufferedReader.close();
                     this.eventXMLCloser();
+                    System.out.println("File exported to XML");
                     break;
 
                 case 4:
                     visitPersonTXTToCSV();
+                    System.out.println("File exported to CSV");
                     break;
 
                 case 5:
                     visitLocationTXTToCSV();
+                    System.out.println("File exported to CSV");
                     break;
 
                 case 6:
                     visitEventTXTToCSV();
+                    System.out.println("File exported to CSV");
                     break;
 
                 default:
-                    System.out.println("The options are:\n1 - Person\n2 - Place\n3 - Event\n");
+                    System.out.println("Wrong action");
                     break;
             }
         } catch (Exception e) {
@@ -114,7 +120,7 @@ public class ExportVisitor implements Visitor {
         }
     }
 
-    private void placeXLMInitializer() throws TransformerConfigurationException, SAXException {
+    private void locationXLMInitializer() throws TransformerConfigurationException, SAXException {
         transformerFactory();
         transformerHandler.startElement("", "", "Place", attributes);
     }
@@ -134,7 +140,7 @@ public class ExportVisitor implements Visitor {
         attributes = new AttributesImpl();
     }
 
-    private void placeXMLCloser() throws SAXException {
+    private void locationXMLCloser() throws SAXException {
         transformerHandler.endElement("", "", "Place");
         transformerHandler.endDocument();
     }
@@ -161,7 +167,6 @@ public class ExportVisitor implements Visitor {
 
     @Override
     public void visitPersonTXTToXML(String person) throws SAXException, IOException {
-        // TODO to implement when Persons are correctly implemented.
         String[] elements = person.split(",");
         attributes.clear();
 
@@ -180,7 +185,6 @@ public class ExportVisitor implements Visitor {
 
     @Override
     public void visitLocationTXTToXML(String location) throws SAXException {
-        // TODO to implement when Locations are correctly implemented.
         String[] elements = location.split(",");
         attributes.clear();
 
@@ -219,7 +223,6 @@ public class ExportVisitor implements Visitor {
 
     @Override
     public void visitEventTXTToXML(String event) throws SAXException {
-        // TODO to implement when Events are correctly implemented.
         String[] elements = event.split(",");
         attributes.clear();
 

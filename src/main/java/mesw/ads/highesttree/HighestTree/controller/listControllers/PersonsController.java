@@ -7,7 +7,9 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import mesw.ads.highesttree.HighestTree.controller.ListController;
 import mesw.ads.highesttree.HighestTree.model.Person;
+import mesw.ads.highesttree.HighestTree.model.database.export.ExportVisitor;
 import mesw.ads.highesttree.HighestTree.service.PersonService;
+
 import java.io.IOException;
 import java.net.URL;
 import java.util.Collection;
@@ -85,5 +87,13 @@ public class PersonsController extends ListController {
             gridLine8Label.setText("");
             gridLine9Label.setText("");
         }
+    }
+
+    public void btnExportToXML(ActionEvent actionEvent) {
+        new ExportVisitor(1);
+    }
+
+    public void btnExportToCSV(ActionEvent actionEvent) {
+        new ExportVisitor(4);
     }
 }
