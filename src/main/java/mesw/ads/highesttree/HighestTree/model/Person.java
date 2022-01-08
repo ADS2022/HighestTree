@@ -2,6 +2,7 @@ package mesw.ads.highesttree.HighestTree.model;
 
 import org.json.simple.JSONObject;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Objects;
 import java.util.UUID;
@@ -33,10 +34,10 @@ public class Person {
     private String nationality;
     private Source source;
     private String description;
-    private LinkedList<Event> events = null;
-    private LinkedList<Person> partner = null;
-    private LinkedList<Person> parents = null;
-    private LinkedList<Person> children = null;
+    private LinkedList<Event> events = new LinkedList<>();
+    private LinkedList<Person> partner = new LinkedList<>();
+    private LinkedList<Person> parents = new LinkedList<>();
+    private LinkedList<Person> children = new LinkedList<>();
     private boolean sensitive;
 
     private static  String EMPTY = "<field is empty>";

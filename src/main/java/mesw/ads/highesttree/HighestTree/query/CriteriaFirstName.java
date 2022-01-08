@@ -24,14 +24,13 @@ public class CriteriaFirstName implements Criteria {
      */
 
     private String firstName;
-    private List<Person> personsWithFirstName = new ArrayList<>();
-
     public CriteriaFirstName(String firstName) {
         this.firstName = firstName.toLowerCase(Locale.ROOT);
     }
 
     @Override
     public List<Person> meetCriteria(List<Person> persons) {
+        List<Person> personsWithFirstName = new ArrayList<>();
         for (Person person : persons) {
             String name = person.getFirstName().toLowerCase(Locale.ROOT);
             if(name.contains(firstName)){

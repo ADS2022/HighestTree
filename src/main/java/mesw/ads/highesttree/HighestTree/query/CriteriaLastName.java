@@ -23,7 +23,6 @@ public class CriteriaLastName implements Criteria {
      *         }
      */
     private String lastname;
-    private List<Person> personsWithLastName = new ArrayList<>();
 
     public CriteriaLastName(String lastName) {
         this.lastname = lastName.toLowerCase(Locale.ROOT);
@@ -31,6 +30,8 @@ public class CriteriaLastName implements Criteria {
 
     @Override
     public List<Person> meetCriteria(List<Person> persons) {
+        List<Person> personsWithLastName = new ArrayList<>();
+
         for (Person person : persons) {
             String name = person.getLastName().toLowerCase(Locale.ROOT);
             if(name.contains(lastname)){
