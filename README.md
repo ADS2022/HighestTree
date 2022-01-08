@@ -243,8 +243,9 @@ implementation and consequences were whirling the use of the same.
   potentially excessive number of updates. If I change one model behavior, I might have to change more than one class,
   which happens because of the intimate connection between views and controllers (close coupling of views and
   controllers to the model and between them).
-* **Implementation and classes:** The [Place](src/main/java/mesw/ads/highesttree/HighestTree/model/place/Location.java)
-  in the model, the [Place](src/main/java/mesw/ads/highesttree/HighestTree/controller/location/LocationController.java)
+* **Implementation and classes:** The [Place](src/main/java/mesw/ads/highesttree/HighestTree/model/Location.java)
+  in the model,
+  the [Place](src/main/java/mesw/ads/highesttree/HighestTree/controller/recordControllers/LocationController.java)
   in the controller, and the [FXML](src/main/resources/fxml/displayPlaces.fxml) files that connect to the controller.
 
 ### Data access objects (DAOs) and data transfer objects (DTOs)<a name="dao_dto"></a>
@@ -267,10 +268,10 @@ implementation and consequences were whirling the use of the same.
 * **Problems:** They are the same as the MVC, they basically consist in added complexity, and they might lead to loss in
   performance and close coupling between the different modules.
 * **Implementation and classes:**
-  the [LocationController.java](src/main/java/mesw/ads/highesttree/HighestTree/controller/location/LocationController.java)
+  the [LocationController.java](src/main/java/mesw/ads/highesttree/HighestTree/controller/listControllers/LocationsController.java)
   , [LocationService.java](src/main/java/mesw/ads/highesttree/HighestTree/service/LocationService.java), the
-  [DaoLocation.java](src/main/java/mesw/ads/highesttree/HighestTree/model/dao/location/DaoLocation.java) and the Dao
-  interface, as well as the [Reader](src/main/java/mesw/ads/highesttree/HighestTree/model/database/Reader.java)
+  [DaoLocation.java](src/main/java/mesw/ads/highesttree/HighestTree/model/dao/DaoLocation.java) and the Dao interface,
+  as well as the [Reader](src/main/java/mesw/ads/highesttree/HighestTree/model/database/Reader.java)
   and [Writer](src/main/java/mesw/ads/highesttree/HighestTree/model/database/Writer.java) classes, and the
   [ReaderController.java](src/main/java/mesw/ads/highesttree/HighestTree/controller/database/ReaderController.java)
   class.
@@ -306,7 +307,33 @@ Filter pattern or Criteria pattern was chosen as a way to query a set of objects
 to chain those criteria through logical operations. This type of design pattern comes under structural pattern as this
 pattern combines multiple criteria to obtain single criteria.
 
+### Visitor and strategy patterns to export files<a name="visitor_and_strategy"></a>
+
+* **Problem:** It is necessary a way to export to different files formats different parts of the system. For example,
+  the system should be able to export the several persons in the database both to XML and CSV formats.
+* **classes:**
+  The [ExportVisitor.java](src/main/java/mesw/ads/highesttree/HighestTree/model/database/export/ExportVisitor.java)
+  class and the [Visitor.java](src/main/java/mesw/ads/highesttree/HighestTree/model/database/export/Visitor.java)
+  interface.
+* **Solution:** The solution consists in applying the visitor pattern plus with the strategy. The visitor pattern
+  consists of placing the new behavior into a separate class called visitor instead of integrating it into existing
+  classes. The original object that has to perform the behavior is now passed to one of the visitor's methods as an
+  argument, providing access to all necessary data as well as the strategy pattern which consists in taking a class that
+  does something specific in a lot of different ways and extracting all of these algorithms into separate classes called
+  strategies.
+* **Consequences:**
+    * It is necessary to update all the visitors each time a class gets added to or removed from the element hierarchy.
+      Also, a level of complexity added to the system that the strategy pattern might not entirely need.
+* **Diagram:**
+
+  ![Visitor UML](img/Visitor.svg)
+
 ### 3.2. Design Problems<a name="design_problemes"></a>
+
+During the development of this project, the group encountered some difficulties worth mentioning. This chapter depicts
+the main challenges faced and how the team overcame them. This chapter regarding its organization it's pretty similar to
+the branch above, with a section explaining the problem, another explaining the solution, and other subtopics describing
+the classes involved.
 
 ### Persons and their Relationships to another<a name="persons"></a>
 
@@ -316,9 +343,6 @@ pattern combines multiple criteria to obtain single criteria.
 * **Consequences:**
     * The Family Tree is easy to traverse bottom-up (get the ancestors of a person) but more difficult to traverse
       top-down (get the children of a person), because a person only knows about its parents but not its children.
-* **Implementation:** In the code snippet bellow you can observe a method that allows to get all the accessors of a
-  person, the same logic can be applied to the partners (spouses, boyfriend, etc...) of the person.
-
 * **Diagram:**
 
   ![Person UML](img/Person_UML.png)
@@ -333,104 +357,5 @@ pattern combines multiple criteria to obtain single criteria.
 * **Problems:** Close coupling of the different modules as well as, if the system it's not prepared some exceptions
   might be thrown, as well as an increase in complexity.
 * **Implementation:**
-
-```java
-public class Location {
-    private int id;
-    private String name;
-    private String country;
-    private String district;
-    private String city;
-    private String street;
-    private String description;
-    private boolean isSensitive;
-
-    public Location(String name,
-                    String country,
-                    String district,
-                    String city,
-                    String street,
-                    String description) {
-        setName(name);
-        setCountry(country);
-        setDistrict(district);
-        setCity(city);
-        setStreet(street);
-        setDescription(description);
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    // It is mandatory for a place to have a name, a country and a description as well as a sensitive field. 
-    // The implementation of the other obligatory field is similar to this one.
-    public void setName(String name) {
-        if (name == null || name.length() == 0)
-            throw new IllegalArgumentException("The name attribute cannot be empty");
-        else
-            this.name = name;
-    }
-
-    public String getCountry() {
-        return country;
-    }
-
-    public void setCountry(String country) {
-        if (country == null || country.length() == 0)
-            throw new IllegalArgumentException("The country attribute cannot be empty");
-        else
-            this.country = country;
-    }
-
-    public String getDistrict() {
-        return district;
-    }
-
-    // the class continues
-}
-
-public class LocationService {
-    private static Dao<Location> locationDao = new DaoLocation();
-    private static Location location;
-
-    public static void save(String name,
-                            String country,
-                            String district,
-                            String city,
-                            String street,
-                            String description,
-                            boolean isSensitive) {
-        location = new Location(name, country, district, city, street, description);
-        location.setSensitive(isSensitive);
-        locationDao.save(location);
-        // heavy logic done here
-        // Register user on the file database
-        Writer.writeToFile("files/location.txt", location.toString());
-    }
-
-    public static Collection<Location> getAllLocations() {
-        return locationDao.getAll();
-    }
-
-    public static int saveLocation(Location location) {
-        validate(location);
-        return locationDao.save(location);
-    }
-
-    private static void validate(Location location) {
-        // Not implemented
-        if (location == null)
-            throw new NullPointerException();
-    }
-
-    public static List<String> getAllLocationsFromFileDatabase() {
-        // Reads user from file database
-        return Reader.readFromFile("files/location.txt");
-    }
-
-    public Location getLocation() {
-        return location;
-    }
-}
-````
+  It is possible to check the implementation of this
+  on [this](src/main/java/mesw/ads/highesttree/HighestTree/model/Person.java) class.

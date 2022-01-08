@@ -51,7 +51,7 @@ public class ExportVisitor implements Visitor {
 
                     this.personXLMInitializer();
                     while ((str = bufferedReader.readLine()) != null) {
-                        visitPersonTXTToXML(str);
+                        visitPersonTXTXML(str);
                     }
 
                     bufferedReader.close();
@@ -64,7 +64,7 @@ public class ExportVisitor implements Visitor {
 
                     this.locationXLMInitializer();
                     while ((str = bufferedReader.readLine()) != null) {
-                        visitLocationTXTToXML(str);
+                        visitLocationTXTXML(str);
                     }
 
                     bufferedReader.close();
@@ -77,7 +77,7 @@ public class ExportVisitor implements Visitor {
 
                     this.eventXLMInitializer();
                     while ((str = bufferedReader.readLine()) != null) {
-                        visitEventTXTToXML(str);
+                        visitEventTXTXML(str);
                     }
 
                     bufferedReader.close();
@@ -86,17 +86,17 @@ public class ExportVisitor implements Visitor {
                     break;
 
                 case 4:
-                    visitPersonTXTToCSV();
+                    visitPersonTXTCSV();
                     System.out.println("File exported to CSV");
                     break;
 
                 case 5:
-                    visitLocationTXTToCSV();
+                    visitLocationTXTCSV();
                     System.out.println("File exported to CSV");
                     break;
 
                 case 6:
-                    visitEventTXTToCSV();
+                    visitEventTXTCSV();
                     System.out.println("File exported to CSV");
                     break;
 
@@ -166,7 +166,7 @@ public class ExportVisitor implements Visitor {
     }
 
     @Override
-    public void visitPersonTXTToXML(String person) throws SAXException, IOException {
+    public void visitPersonTXTXML(String person) throws SAXException, IOException {
         String[] elements = person.split(",");
         attributes.clear();
 
@@ -184,7 +184,7 @@ public class ExportVisitor implements Visitor {
     }
 
     @Override
-    public void visitLocationTXTToXML(String location) throws SAXException {
+    public void visitLocationTXTXML(String location) throws SAXException {
         String[] elements = location.split(",");
         attributes.clear();
 
@@ -222,7 +222,7 @@ public class ExportVisitor implements Visitor {
     }
 
     @Override
-    public void visitEventTXTToXML(String event) throws SAXException {
+    public void visitEventTXTXML(String event) throws SAXException {
         String[] elements = event.split(",");
         attributes.clear();
 
@@ -264,7 +264,7 @@ public class ExportVisitor implements Visitor {
     }
 
     @Override
-    public void visitPersonTXTToCSV() throws IOException {
+    public void visitPersonTXTCSV() throws IOException {
         Path path = Paths.get(PATH_TO_FILE);
         Path txt = path.resolve("person.txt");
         Path csv = path.resolve("person.csv");
@@ -273,7 +273,7 @@ public class ExportVisitor implements Visitor {
     }
 
     @Override
-    public void visitLocationTXTToCSV() throws IOException {
+    public void visitLocationTXTCSV() throws IOException {
         Path path = Paths.get(PATH_TO_FILE);
         Path txt = path.resolve("location.txt");
         Path csv = path.resolve("location.csv");
@@ -281,7 +281,7 @@ public class ExportVisitor implements Visitor {
     }
 
     @Override
-    public void visitEventTXTToCSV() throws IOException {
+    public void visitEventTXTCSV() throws IOException {
         Path path = Paths.get(PATH_TO_FILE);
         Path txt = path.resolve("event.txt");
         Path csv = path.resolve("event.csv");
