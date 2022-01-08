@@ -11,17 +11,24 @@
         - [3. 1. 2. Refactor and code smells](#refactor_and_code_smells)
         - [3. 1. 3. Second approach](#second_approach)
     - [3. 2. Patterns](#patterns)
-        - [Persons and their Relationships to another](#persons)
         - [Date, time periods and super dates](#dates)
         - [Model-View-Controller (MVC)](#mvc)
-        - [Model-View-Controller-Service (MVCS), data access objects (DAOs) and data transfer objects (DTOs)](#mvcs)
+        - [Data access objects (DAOs) and data transfer objects (DTOs)](#dao_dto)
+        - [Composite Pattern](#composite_pattern)
+        - [Template Method](#template_method)
+        - [Filter Pattern](#fileter_pattern)
+        - [Visitor and strategy patterns to export files](#visitor_and_strategy)
+    - [3. 3. Design Problems](#design_problemes)
+        - [Persons and their Relationships to another](#persons)
         - [Granularity of the fields](#granularity)
         - [Granularity of the fields](#composite)
 
 ## How to run the project
 
-HighestTree project can be executed on IntelliJ IDEA built-in tools or called using the command line. At start-up, a home screen menu is displayed where the user can browse through the system capabilities. If there is any problem
-opening or running the project, don't hesitate to contact us. To run properly, it’s essential to import all the required maven dependencies.
+HighestTree project can be executed on IntelliJ IDEA built-in tools or called using the command line. At start-up, a
+home screen menu is displayed where the user can browse through the system capabilities. If there is any problem opening
+or running the project, don't hesitate to contact us. To run properly, it’s essential to import all the required maven
+dependencies.
 
 ## Requirements
 
@@ -29,23 +36,37 @@ opening or running the project, don't hesitate to contact us. To run properly, i
 
 ## 1. Introduction<div id="introduction"></div>
 
-The project intent is to develop a solution that helps historians study the "who," "what," and "when" genealogy tree. The product aims to help with genealogy research plans by providing a method to trace the birth, marriage, and death records of individuals and their relationships with other individuals, places, and events.
+The project intent is to develop a solution that helps historians study the "who," "what," and "when" genealogy tree.
+The product aims to help with genealogy research plans by providing a method to trace the birth, marriage, and death
+records of individuals and their relationships with other individuals, places, and events.
 
 ### 1.1 Problem description <div id="problem_description"></div>
 
-Genealogy is a long-term research goal with built-in short-term steps. Its main spotlights are the individuals and their background in time and geography. It's a research objective where the user can add more information while maintaining the links between individuals, places, and events.
+Genealogy is a long-term research goal with built-in short-term steps. Its main spotlights are the individuals and their
+background in time and geography. It's a research objective where the user can add more information while maintaining
+the links between individuals, places, and events.
 
-The team views on the model could is a representation of the relationship between two (or more) persons in two ways: horizontally, as in married, or had children with; and vertically as in "child of," "parent to," "adopted by". A brief example of the type of ramifications that can occur is presented in the following image.
+The team views on the model could is a representation of the relationship between two (or more) persons in two ways:
+horizontally, as in married, or had children with; and vertically as in "child of," "parent to," "adopted by". A brief
+example of the type of ramifications that can occur is presented in the following image.
 
 ![FamilyTreeExample](img/FamilyTreeExample.png)
 
-A problem that can occur in the usage of the model is data redundancy, primarily when adding relationships between two (or more people), or when creating a place
-and even when creating events. In our project, we tried to address this in the implementation, as described in the design section. 
+A problem that can occur in the usage of the model is data redundancy, primarily when adding relationships between two (
+or more people), or when creating a place and even when creating events. In our project, we tried to address this in the
+implementation, as described in the design section.
 
-A challenge that was identified beforehand is related to the “date” field. A record (person or event) can have a known specific date, or the user can only have a reference for a generic period. For example, we might know our exact birth date, however, I’ts unknown precisely when Humanity invented the wheel. Historians only know that it was in the 4th century BC and that qualifies as a period. A user might know that his great-grandmother was born in the 19th century, however, he knows for sure that his mother was born on the 3rd of December,1969. Our system should be able to record either specific dates or periods, as requested in the requirements listed below. 
+A challenge that was identified beforehand is related to the “date” field. A record (person or event) can have a known
+specific date, or the user can only have a reference for a generic period. For example, we might know our exact birth
+date, however, I’ts unknown precisely when Humanity invented the wheel. Historians only know that it was in the 4th
+century BC and that qualifies as a period. A user might know that his great-grandmother was born in the 19th century,
+however, he knows for sure that his mother was born on the 3rd of December,1969. Our system should be able to record
+either specific dates or periods, as requested in the requirements listed below.
 
-One other trial that will be faced is that the locations information might be incomplete. For example, the user doesn't know where a specific person relative from Italy natal city is, only that he or she is from Italy. When creating Locations, Events or Persons, every object in our model, should allow this option to insert information in a granular manner. 
-
+One other trial that will be faced is that the locations information might be incomplete. For example, the user doesn't
+know where a specific person relative from Italy natal city is, only that he or she is from Italy. When creating
+Locations, Events or Persons, every object in our model, should allow this option to insert information in a granular
+manner.
 
 ## 2. Goals<a name="goals"></a>
 
@@ -176,48 +197,6 @@ to be identified the correct approach.
 For the eventual patterns used in this project, the group shall include detailed descriptions of the problems,
 implementation and consequences were whirling the use of the same.
 
-### Persons and their Relationships to another<a name="persons"></a>
-
-* **Problem:** Design the Person-Relationships without redundancies
-* **classes:** [Person.java](src/main/java/mesw/ads/highesttree/HighestTree/model/Person.java)
-* **Solution:** Each Person Object is associated to its parents and its spouses.
-* **Consequences:**
-    * The Family Tree is easy to traverse bottom-up (get the ancestors of a person) but more difficult to traverse
-      top-down (get the children of a person), because a person only knows about its parents but not its children.
-* **Implementation:** In the code snippet bellow you can observe a method that allows to get all the accessors of a
-  person, the same logic can be applied to the partners (spouses, boyfriend, etc...) of the person.
-  ```java
-  public class Person {
-  private int id;
-  private String firstName;
-  private String lastName;
-  private String nationality;
-  private LinkedList<Event> events;
-  private Source source;
-  private String description;
-  private LinkedList<Person> parents;
-  private LinkedList<Person> partner;
-  private boolean sensitive;
-
-  // standard constructors and getters and setters.
-
-    public static LinkedList<Person> getAncestors(Person targetPerson, LinkedList<Person> ancestors) {
-        if (targetPerson.getParents() != null) { 
-            for (Person parent : targetPerson.getParents()) { 
-                ancestors.add(parent);
-                ancestors = getAncestors(parent, ancestors); 
-            } 
-        } 
-      return ancestors; 
-    }
-  // other methods of the class.
-  }
-  ```
-
-* **Diagram:**
-
-  ![Person UML](img/Person_UML.png)
-
 ### Date, time periods and super dates<a name="dates"></a>
 
 * **Problem:** A person can be born on a specific date or in on a time period. For example, an individual could be born
@@ -239,31 +218,6 @@ implementation and consequences were whirling the use of the same.
 * **Implementation:** In the code snippet bellow you can observe the SuperDate interface that exposes
   a ```returnDateString();``` method that forces the Date.java and TimePeriod.java classes to return or a date or of a
   time period.
-
-    ```java 
-    public interface SuperDate {
-        String returnDateString();
-    }
-    
-    public class TimePeriod implements SuperDate {
-        // standard methods.
-        
-        @Override
-        public String returnDateString() {
-            return toString();
-        }
-    }
-    
-    public class Date implements SuperDate {
-        // standard methods.
-        
-        @Override
-        public String returnDateString() {
-            return toString();
-        }
-    }
-    ```
-
 
 * **Diagram:**
 
@@ -289,100 +243,12 @@ implementation and consequences were whirling the use of the same.
   potentially excessive number of updates. If I change one model behavior, I might have to change more than one class,
   which happens because of the intimate connection between views and controllers (close coupling of views and
   controllers to the model and between them).
-* **Implementation and classes:** The [Place](src/main/java/mesw/ads/highesttree/HighestTree/model/place/Location.java)
-  in the model, the [Place](src/main/java/mesw/ads/highesttree/HighestTree/controller/location/LocationController.java)
+* **Implementation and classes:** The [Place](src/main/java/mesw/ads/highesttree/HighestTree/model/Location.java)
+  in the model,
+  the [Place](src/main/java/mesw/ads/highesttree/HighestTree/controller/recordControllers/LocationController.java)
   in the controller, and the [FXML](src/main/resources/fxml/displayPlaces.fxml) files that connect to the controller.
 
-    ````java
-    public class Location {
-        private int id;
-        private String name;
-        private String country;
-        private String district;
-        private String city;
-        private String street;
-        private String description;
-        private boolean isSensitive;
-    
-        // standard methods and getter and setters.
-    }
-    
-    public class LocationController implements Initializable {
-    
-        @FXML
-        private TextField placeName_txt;
-        @FXML
-        private TextField country_txt;
-        @FXML
-        private TextField district_txt;
-        @FXML
-        private TextArea descriptionTextArea;
-        @FXML
-        private TextField city_txt;
-        @FXML
-        private TextField street_txt;
-        @FXML
-        private ChoiceBox<String> sensitiveInformation_optn;
-    
-        private void changeScene(String SceneName, ActionEvent event) throws IOException {
-            // A method to change the scenes in the project.
-        }
-    
-        private void fillComboBox() {
-            // auxiliary method to fill the combo box.
-        }
-    
-        /**
-         * Called to initialize a controller after its root element has been
-         * completely processed.
-         *
-         * @param location  The location used to resolve relative paths for the root object, or
-         *                  <tt>null</tt> if the location is not known.
-         * @param resources The resources used to localize the root object, or <tt>null</tt> if
-         */
-        @Override
-        public void initialize(URL location, ResourceBundle resources) {
-            // Initialization method.
-        }
-    
-        private boolean setSensitivity(String sensitivity) {
-            // Auxiliary method.
-        }
-    
-        public void actionRegisterPlaceBtn(ActionEvent actionEvent) throws IOException {
-            // Button click handler.
-        }
-    
-        public void actionGoBackBtn(ActionEvent actionEvent) throws IOException {
-            // Button click handler.
-        }
-    
-        public void actionViewPlaces(ActionEvent actionEvent) throws IOException {
-            // Button click handler.
-        }
-    }
-    ````
-
-  ```XML
-  <?xml version="1.0" encoding="UTF-8"?>
-    
-    <!--the view-->
-    
-    <?import javafx.scene.control.Button?>
-    <?import javafx.scene.control.TextArea?>
-    <?import javafx.scene.layout.AnchorPane?>
-    <?import javafx.scene.text.*?>
-    <!--the connection to the controller-->
-    <AnchorPane xmlns:fx="http://javafx.com/fxml/1" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
-                minWidth="-Infinity" prefHeight="390.0" prefWidth="490.0" style="-fx-background-color: #2A363F;"
-                xmlns="http://javafx.com/javafx/17"
-                fx:controller="mesw.ads.highesttree.HighestTree.controller.database.ReaderController">
-    
-        <!--the file continues-->
-  </AnchorPane>
-  ```
-
-### Model-View-Controller-Service (MVCS), data access objects (DAOs) and data transfer objects (DTOs)<a name="mvcs"></a>
+### Data access objects (DAOs) and data transfer objects (DTOs)<a name="dao_dto"></a>
 
 * **Problem:** In order to display users, places, events, ... we need to write and reed to something that can hold
   data (a database, and Excel file or text files).
@@ -402,152 +268,84 @@ implementation and consequences were whirling the use of the same.
 * **Problems:** They are the same as the MVC, they basically consist in added complexity, and they might lead to loss in
   performance and close coupling between the different modules.
 * **Implementation and classes:**
-  the [LocationController.java](src/main/java/mesw/ads/highesttree/HighestTree/controller/location/LocationController.java)
+  the [LocationController.java](src/main/java/mesw/ads/highesttree/HighestTree/controller/listControllers/LocationsController.java)
   , [LocationService.java](src/main/java/mesw/ads/highesttree/HighestTree/service/LocationService.java), the
-  [DaoLocation.java](src/main/java/mesw/ads/highesttree/HighestTree/model/dao/location/DaoLocation.java) and the Dao
-  interface, as well as the [Reader](src/main/java/mesw/ads/highesttree/HighestTree/model/database/Reader.java)
+  [DaoLocation.java](src/main/java/mesw/ads/highesttree/HighestTree/model/dao/DaoLocation.java) and the Dao interface,
+  as well as the [Reader](src/main/java/mesw/ads/highesttree/HighestTree/model/database/Reader.java)
   and [Writer](src/main/java/mesw/ads/highesttree/HighestTree/model/database/Writer.java) classes, and the
   [ReaderController.java](src/main/java/mesw/ads/highesttree/HighestTree/controller/database/ReaderController.java)
   class.
 
-````java
-public class LocationService {
-    private static Dao<Location> locationDao = new DaoLocation();
-    private static Location location;
+### Composite Pattern<a name="composite_pattern"></a>
 
-    public static void save(String name,
-                            String country,
-                            String district,
-                            String city,
-                            String street,
-                            String description,
-                            boolean isSensitive) {
-        location = new Location(name, country, district, city, street, description);
-        location.setSensitive(isSensitive);
-        locationDao.save(location);
-        // Register user on the file database
-        Writer.writeToFile("files/location.txt", location.toString());
-    }
+Thinking on the problem of how to compile a genealogy tree, either to show/export, edit or perform any other kind of
+operation that might come up as a future feature, the composite is a structural pattern that enables and enhances those
+possibilities. In our project, this pattern was tough as a solution for the relationship between person class. Looking
+at what we intended to do versus the ‘ad hoc’ implementation of a composite pattern, it was not clear on how to fit the
+pattern. The first question is, in our model, what would make a container and what would be a leaf? Leaves are a
+terminal element, and in our case it was not obvious how a relationship node ends, meaning, when entering a record it is
+not clear if a person will be an ‘end node’ on a tree or if will span new relationships. So ‘person’ class has to be a
+container (aka composite) in the ‘composite’ paradigm, because it is an element that has sub-elements, in this case, of
+the same type. Composite ables us to treat individual objects and compositions of objects uniformly, meaning we can
+‘spread out’ methods through all person objects that could be called for in a structural way, as an example, to show or
+edit a field on all known descendants of a given person. We would be applying the pattern to only one class, so it is
+not difficult to define an interface since methods are all alike. In the end we can not securely say that the composite
+pattern is implemented in our model. The classes were laid out but we did not see an end to the full structural
+implementation of the ‘ad hoc’ pattern. Still, we believe that laying out the foundation for this type of structure can
+help to refactor in the future, either towards this or another kind of structure.
 
-    public static Collection<Location> getAllLocations() {
-        return locationDao.getAll();
-    }
+### Template Method<a name="template_method"></a>
 
-    public static int saveLocation(Location location) {
-        validate(location);
-        return locationDao.save(location);
-    }
+The template method was applied in the controller section of our MVC. The intent is to have the controller for the page
+to call in the same methods in sequenced order, but, those methods have to be adapted for the specific views. In our
+MVC, the controllers are specific for ‘Person’ ‘Location’ and ‘Event’ and contain almost identical steps with some minor
+differences.
 
-    private static void validate(Location location) {
-        // Not implemented
-        if (location == null)
-            throw new NullPointerException();
-    }
+### Filter Pattern<a name="fileter_pattern"></a>
 
-    public static List<String> getAllLocationsFromFileDatabase() {
-        // Reads user from file database
-        return Reader.readFromFile("files/location.txt");
-    }
+Filter pattern or Criteria pattern was chosen as a way to query a set of objects using different criteria and being able
+to chain those criteria through logical operations. This type of design pattern comes under structural pattern as this
+pattern combines multiple criteria to obtain single criteria.
 
-    public Location getLocation() {
-        return location;
-    }
-}
+### Visitor and strategy patterns to export files<a name="visitor_and_strategy"></a>
 
-public class DaoLocation implements Dao<Location> {
+* **Problem:** It is necessary a way to export to different files formats different parts of the system. For example,
+  the system should be able to export the several persons in the database both to XML and CSV formats.
+* **classes:**
+  The [ExportVisitor.java](src/main/java/mesw/ads/highesttree/HighestTree/model/database/export/ExportVisitor.java)
+  class and the [Visitor.java](src/main/java/mesw/ads/highesttree/HighestTree/model/database/export/Visitor.java)
+  interface.
+* **Solution:** The solution consists in applying the visitor pattern plus with the strategy. The visitor pattern
+  consists of placing the new behavior into a separate class called visitor instead of integrating it into existing
+  classes. The original object that has to perform the behavior is now passed to one of the visitor's methods as an
+  argument, providing access to all necessary data as well as the strategy pattern which consists in taking a class that
+  does something specific in a lot of different ways and extracting all of these algorithms into separate classes called
+  strategies.
+* **Consequences:**
+    * It is necessary to update all the visitors each time a class gets added to or removed from the element hierarchy.
+      Also, a level of complexity added to the system that the strategy pattern might not entirely need.
+* **Diagram:**
 
-    private List<Location> locationList = new LinkedList<>();
+  ![Visitor UML](img/Visitor.svg)
 
-    @Override
-    public Optional<Location> get(int id) {
-        return Optional.ofNullable(locationList.get(id));
-    }
+### 3.2. Design Problems<a name="design_problemes"></a>
 
-    @Override
-    public Collection<Location> getAll() {
-        return locationList.stream()
-                .filter(Objects::nonNull)
-                .collect(Collectors.collectingAndThen(Collectors.toList(), Collections::unmodifiableList));
-    }
+During the development of this project, the group encountered some difficulties worth mentioning. This chapter depicts
+the main challenges faced and how the team overcame them. This chapter regarding its organization it's pretty similar to
+the branch above, with a section explaining the problem, another explaining the solution, and other subtopics describing
+the classes involved.
 
-    @Override
-    public int save(Location location) {
-        locationList.add(location);
-        int index = locationList.size() - 1;
-        location.setId(index);
-        return index;
-    }
+### Persons and their Relationships to another<a name="persons"></a>
 
-    @Override
-    public void update(Location location) {
-        locationList.set(location.getId(), location);
-    }
+* **Problem:** Design the Person-Relationships without redundancies
+* **classes:** [Person.java](src/main/java/mesw/ads/highesttree/HighestTree/model/Person.java)
+* **Solution:** Each Person Object is associated to its parents and its spouses.
+* **Consequences:**
+    * The Family Tree is easy to traverse bottom-up (get the ancestors of a person) but more difficult to traverse
+      top-down (get the children of a person), because a person only knows about its parents but not its children.
+* **Diagram:**
 
-    @Override
-    public void delete(Location location) {
-        locationList.set(location.getId(), null);
-    }
-}
-
-public interface Dao<T> {
-
-    Optional<T> get(int id);
-
-    Collection<T> getAll();
-
-    int save(T t);
-
-    void update(T t);
-
-    void delete(T t);
-}
-
-public class LocationController implements Initializable {
-
-    // attributes and methods
-
-    public void actionRegisterPlaceBtn(ActionEvent actionEvent) throws IOException {
-        try {
-            String name = placeName_txt.getText();
-            String country = country_txt.getText();
-            String district = district_txt.getText();
-            String city = city_txt.getText();
-            String street = street_txt.getText();
-            String description = descriptionTextArea.getText();
-            String isSensitive = sensitiveInformation_optn.getSelectionModel().getSelectedItem();
-            boolean sensitivity = this.setSensitivity(isSensitive);
-
-            // Service saves location
-            LocationService.save(name, country, district, city, street, description, sensitivity);
-
-            this.changeScene("/fxml/displayPlaces.fxml", actionEvent);
-
-        } catch (Exception e) {
-            e.printStackTrace();
-            this.changeScene(ERROR_SCREEN, actionEvent);
-        }
-
-    }
-
-    // the class continues
-}
-
-public class ReaderController implements Initializable {
-
-    // attributes and methods
-
-    @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
-        List<String> data = LocationService.getAllLocationsFromFileDatabase();
-        for (String element : data) {
-            placesTextArea.appendText(element);
-            placesTextArea.appendText("\n");
-        }
-    }
-
-    // the class continues
-}
-````
+  ![Person UML](img/Person_UML.png)
 
 ### Granularity of the fields<a name="granularity"></a>
 
@@ -559,120 +357,5 @@ public class ReaderController implements Initializable {
 * **Problems:** Close coupling of the different modules as well as, if the system it's not prepared some exceptions
   might be thrown, as well as an increase in complexity.
 * **Implementation:**
-
-```java
-public class Location {
-    private int id;
-    private String name;
-    private String country;
-    private String district;
-    private String city;
-    private String street;
-    private String description;
-    private boolean isSensitive;
-
-    public Location(String name,
-                    String country,
-                    String district,
-                    String city,
-                    String street,
-                    String description) {
-        setName(name);
-        setCountry(country);
-        setDistrict(district);
-        setCity(city);
-        setStreet(street);
-        setDescription(description);
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    // It is mandatory for a place to have a name, a country and a description as well as a sensitive field. 
-    // The implementation of the other obligatory field is similar to this one.
-    public void setName(String name) {
-        if (name == null || name.length() == 0)
-            throw new IllegalArgumentException("The name attribute cannot be empty");
-        else
-            this.name = name;
-    }
-
-    public String getCountry() {
-        return country;
-    }
-
-    public void setCountry(String country) {
-        if (country == null || country.length() == 0)
-            throw new IllegalArgumentException("The country attribute cannot be empty");
-        else
-            this.country = country;
-    }
-
-    public String getDistrict() {
-        return district;
-    }
-
-    // the class continues
-}
-
-public class LocationService {
-    private static Dao<Location> locationDao = new DaoLocation();
-    private static Location location;
-
-    public static void save(String name,
-                            String country,
-                            String district,
-                            String city,
-                            String street,
-                            String description,
-                            boolean isSensitive) {
-        location = new Location(name, country, district, city, street, description);
-        location.setSensitive(isSensitive);
-        locationDao.save(location);
-        // heavy logic done here
-        // Register user on the file database
-        Writer.writeToFile("files/location.txt", location.toString());
-    }
-
-    public static Collection<Location> getAllLocations() {
-        return locationDao.getAll();
-    }
-
-    public static int saveLocation(Location location) {
-        validate(location);
-        return locationDao.save(location);
-    }
-
-    private static void validate(Location location) {
-        // Not implemented
-        if (location == null)
-            throw new NullPointerException();
-    }
-
-    public static List<String> getAllLocationsFromFileDatabase() {
-        // Reads user from file database
-        return Reader.readFromFile("files/location.txt");
-    }
-
-    public Location getLocation() {
-        return location;
-    }
-}
-````
-
-### Composite Pattern
-
-Thinking on the problem of how to compile a genealogy tree, either to show/export, edit or perform any other kind of operation that might come up as a future feature, the composite is a structural pattern that enables and enhances those possibilities. 
-In our project, this pattern was tough as a solution for the relationship between person class. Looking at what we intended to do versus the ‘ad hoc’ implementation of a composite pattern, it was not clear on how to fit the pattern. The first question is, in our model, what would make a container and what would be a leaf? Leaves are a terminal element, and in our case it was not obvious how a relationship node ends, meaning, when entering a record it is not clear if a person will be an ‘end node’ on a tree or if will span new relationships. So ‘person’ class has to be a container (aka composite) in the ‘composite’ paradigm, because it is an element that has sub-elements, in this case, of the same type. 
-Composite ables us to treat individual objects and compositions of objects uniformly, meaning we can ‘spread out’ methods through all person objects that could be called for in a structural way, as an example, to show or edit a field on all known descendants of a given person.
-We would be applying the pattern to only one class, so it is not difficult to define an interface since methods are all alike.
-In the end we can not securely say that the composite pattern is implemented in our model. The classes were laid out but we did not see an end to the full structural implementation of the ‘ad hoc’ pattern. Still, we believe that laying out the foundation for this type of structure can help to refactor in the future, either towards this or another kind of structure.
-
-### Template Method
-The template method was applied in the controller section of our MVC. The intent is to have the controller for the page to call in the same methods in sequenced order, but, those methods have to be adapted for the specific views. In our MVC, the controllers are specific for ‘Person’ ‘Location’ and ‘Event’ and contain almost identical steps with some minor differences. 
-
-### Filter Pattern
-
-Filter pattern or Criteria pattern was chosen as a way to query a set of objects using different criteria and being able to chain those criteria through logical operations. This type of design pattern comes under structural pattern as this pattern combines multiple criteria to obtain single criteria.
-
+  It is possible to check the implementation of this
+  on [this](src/main/java/mesw/ads/highesttree/HighestTree/model/Person.java) class.

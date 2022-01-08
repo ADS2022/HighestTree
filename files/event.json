@@ -46,6 +46,17 @@
   {
     "standardEvents": "UNKNOWN",
     "isSensitive": false,
+    "name": "Event Name",
+    "superDate": null,
+    "description": null,
+    "location": null,
+    "id": "ce16e6ea-c5a2-453f-a29b-edb1cfa013d0",
+    "source": null,
+    "personsInvolved": null
+  },
+  {
+    "standardEvents": "UNKNOWN",
+    "isSensitive": false,
     "name": "Event Name isSensitive 2",
     "superDate": null,
     "description": null,

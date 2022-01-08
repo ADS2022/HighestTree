@@ -3,19 +3,25 @@
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
-
-<AnchorPane prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mesw.ads.highesttree.HighestTree.controller.listControllers.EventsController">
+<?import javafx.scene.text.Text?>
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1" prefHeight="600.0" prefWidth="1000.0"
+            xmlns="http://javafx.com/javafx/17"
+            fx:controller="mesw.ads.highesttree.HighestTree.controller.listControllers.EventsController">
     <opaqueInsets>
-        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
     </opaqueInsets>
-   <children>
-      <SplitPane dividerPositions="0.1520979020979021" orientation="VERTICAL" prefHeight="448.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-        <items>
-          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="40.0" prefWidth="578.0">
-               <children>
-                  <Text layoutX="14.0" layoutY="27.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Events View" wrappingWidth="78.93670272827148" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="14.0" />
-                  <Button fx:id="btnSceneHome" mnemonicParsing="false" onAction="#btnSceneHomePress" text="Home" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0" />
+    <children>
+        <SplitPane dividerPositions="0.1520979020979021" orientation="VERTICAL" prefHeight="448.0" prefWidth="600.0"
+                   AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
+                   AnchorPane.topAnchor="0.0">
+            <items>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="40.0" prefWidth="578.0">
+                    <children>
+                        <Text layoutX="14.0" layoutY="27.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Events View"
+                              wrappingWidth="78.93670272827148" AnchorPane.leftAnchor="14.0"
+                              AnchorPane.topAnchor="14.0"/>
+                        <Button fx:id="btnSceneHome" mnemonicParsing="false" onAction="#btnSceneHomePress" text="Home"
+                                AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0"/>
                </children>
             </AnchorPane>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="269.0" prefWidth="578.0">
@@ -80,17 +86,23 @@
                                          </children>
                                      </GridPane>
                                     <HBox alignment="CENTER_RIGHT" VBox.vgrow="NEVER">
-                                       <children>
-                                          <Button fx:id="btnEventNew" mnemonicParsing="false" onAction="#btnEventNewPress" text="New">
-                                             <HBox.margin>
-                                                <Insets left="5.0" right="5.0" />
-                                             </HBox.margin>
-                                          </Button>
-                                          <Button fx:id="btnEventEdit" mnemonicParsing="false" onAction="#btnEventEditPress" text="Edit">
-                                             <HBox.margin>
-                                                <Insets left="5.0" right="5.0" />
-                                             </HBox.margin>
-                                          </Button>
+                                        <children>
+                                            <Button fx:id="btnExportXML" mnemonicParsing="false"
+                                                    onAction="#btnExportToXML" text="Export to XML"/>
+                                            <Button fx:id="btnExportCSV" mnemonicParsing="false"
+                                                    onAction="#btnExportToCSV" text="Export to CSV"/>
+                                            <Button fx:id="btnEventNew" mnemonicParsing="false"
+                                                    onAction="#btnEventNewPress" text="New">
+                                                <HBox.margin>
+                                                    <Insets left="5.0" right="5.0"/>
+                                                </HBox.margin>
+                                            </Button>
+                                            <Button fx:id="btnEventEdit" mnemonicParsing="false"
+                                                    onAction="#btnEventEditPress" text="Edit">
+                                                <HBox.margin>
+                                                    <Insets left="5.0" right="5.0"/>
+                                                </HBox.margin>
+                                            </Button>
                                           <Button fx:id="btnEventDelete" mnemonicParsing="false" onAction="#btnEventDeletePress" text="Delete">
                                              <HBox.margin>
                                                 <Insets left="5.0" right="5.0" />

@@ -2,17 +2,14 @@ package mesw.ads.highesttree.HighestTree.controller.listControllers;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.stage.Stage;
 import mesw.ads.highesttree.HighestTree.controller.ListController;
 import mesw.ads.highesttree.HighestTree.model.Location;
+import mesw.ads.highesttree.HighestTree.model.database.export.ExportVisitor;
 import mesw.ads.highesttree.HighestTree.service.LocationService;
+
 import java.io.IOException;
 import java.net.URL;
 import java.util.Collection;
@@ -82,5 +79,13 @@ public class LocationsController extends ListController {
             gridLine5Label.setText("");
             gridLine6Label.setText("");
         }
+    }
+
+    public void btnExportToXML(ActionEvent actionEvent) {
+        new ExportVisitor(2);
+    }
+
+    public void btnExportToCSV(ActionEvent actionEvent) {
+        new ExportVisitor(5);
     }
 }
