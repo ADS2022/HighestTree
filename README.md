@@ -14,6 +14,10 @@
         - [Date, time periods and super dates](#dates)
         - [Model-View-Controller (MVC)](#mvc)
         - [Data access objects (DAOs) and data transfer objects (DTOs)](#dao_dto)
+        - [Composite Pattern](#composite_pattern)
+        - [Template Method](#template_method)
+        - [Filter Pattern](#fileter_pattern)
+        - [Visitor and strategy patterns to export files](#visitor_and_strategy)
     - [3. 3. Design Problems](#design_problemes)
         - [Persons and their Relationships to another](#persons)
         - [Granularity of the fields](#granularity)
@@ -21,8 +25,10 @@
 
 ## How to run the project
 
-HighestTree project can be executed on IntelliJ IDEA built-in tools or called using the command line. At start-up, a home screen menu is displayed where the user can browse through the system capabilities. If there is any problem
-opening or running the project, don't hesitate to contact us. To run properly, it’s essential to import all the required maven dependencies.
+HighestTree project can be executed on IntelliJ IDEA built-in tools or called using the command line. At start-up, a
+home screen menu is displayed where the user can browse through the system capabilities. If there is any problem opening
+or running the project, don't hesitate to contact us. To run properly, it’s essential to import all the required maven
+dependencies.
 
 ## Requirements
 
@@ -30,23 +36,37 @@ opening or running the project, don't hesitate to contact us. To run properly, i
 
 ## 1. Introduction<div id="introduction"></div>
 
-The project intent is to develop a solution that helps historians study the "who," "what," and "when" genealogy tree. The product aims to help with genealogy research plans by providing a method to trace the birth, marriage, and death records of individuals and their relationships with other individuals, places, and events.
+The project intent is to develop a solution that helps historians study the "who," "what," and "when" genealogy tree.
+The product aims to help with genealogy research plans by providing a method to trace the birth, marriage, and death
+records of individuals and their relationships with other individuals, places, and events.
 
 ### 1.1 Problem description <div id="problem_description"></div>
 
-Genealogy is a long-term research goal with built-in short-term steps. Its main spotlights are the individuals and their background in time and geography. It's a research objective where the user can add more information while maintaining the links between individuals, places, and events.
+Genealogy is a long-term research goal with built-in short-term steps. Its main spotlights are the individuals and their
+background in time and geography. It's a research objective where the user can add more information while maintaining
+the links between individuals, places, and events.
 
-The team views on the model could is a representation of the relationship between two (or more) persons in two ways: horizontally, as in married, or had children with; and vertically as in "child of," "parent to," "adopted by". A brief example of the type of ramifications that can occur is presented in the following image.
+The team views on the model could is a representation of the relationship between two (or more) persons in two ways:
+horizontally, as in married, or had children with; and vertically as in "child of," "parent to," "adopted by". A brief
+example of the type of ramifications that can occur is presented in the following image.
 
 ![FamilyTreeExample](img/FamilyTreeExample.png)
 
-A problem that can occur in the usage of the model is data redundancy, primarily when adding relationships between two (or more people), or when creating a place
-and even when creating events. In our project, we tried to address this in the implementation, as described in the design section. 
+A problem that can occur in the usage of the model is data redundancy, primarily when adding relationships between two (
+or more people), or when creating a place and even when creating events. In our project, we tried to address this in the
+implementation, as described in the design section.
 
-A challenge that was identified beforehand is related to the “date” field. A record (person or event) can have a known specific date, or the user can only have a reference for a generic period. For example, we might know our exact birth date, however, I’ts unknown precisely when Humanity invented the wheel. Historians only know that it was in the 4th century BC and that qualifies as a period. A user might know that his great-grandmother was born in the 19th century, however, he knows for sure that his mother was born on the 3rd of December,1969. Our system should be able to record either specific dates or periods, as requested in the requirements listed below. 
+A challenge that was identified beforehand is related to the “date” field. A record (person or event) can have a known
+specific date, or the user can only have a reference for a generic period. For example, we might know our exact birth
+date, however, I’ts unknown precisely when Humanity invented the wheel. Historians only know that it was in the 4th
+century BC and that qualifies as a period. A user might know that his great-grandmother was born in the 19th century,
+however, he knows for sure that his mother was born on the 3rd of December,1969. Our system should be able to record
+either specific dates or periods, as requested in the requirements listed below.
 
-One other trial that will be faced is that the locations information might be incomplete. For example, the user doesn't know where a specific person relative from Italy natal city is, only that he or she is from Italy. When creating Locations, Events or Persons, every object in our model, should allow this option to insert information in a granular manner. 
-
+One other trial that will be faced is that the locations information might be incomplete. For example, the user doesn't
+know where a specific person relative from Italy natal city is, only that he or she is from Italy. When creating
+Locations, Events or Persons, every object in our model, should allow this option to insert information in a granular
+manner.
 
 ## 2. Goals<a name="goals"></a>
 
@@ -199,31 +219,6 @@ implementation and consequences were whirling the use of the same.
   a ```returnDateString();``` method that forces the Date.java and TimePeriod.java classes to return or a date or of a
   time period.
 
-    ```java 
-    public interface SuperDate {
-        String returnDateString();
-    }
-    
-    public class TimePeriod implements SuperDate {
-        // standard methods.
-        
-        @Override
-        public String returnDateString() {
-            return toString();
-        }
-    }
-    
-    public class Date implements SuperDate {
-        // standard methods.
-        
-        @Override
-        public String returnDateString() {
-            return toString();
-        }
-    }
-    ```
-
-
 * **Diagram:**
 
   ![Dates UML](img/HighestTree-dates-class-diagram.svg)
@@ -251,95 +246,6 @@ implementation and consequences were whirling the use of the same.
 * **Implementation and classes:** The [Place](src/main/java/mesw/ads/highesttree/HighestTree/model/place/Location.java)
   in the model, the [Place](src/main/java/mesw/ads/highesttree/HighestTree/controller/location/LocationController.java)
   in the controller, and the [FXML](src/main/resources/fxml/displayPlaces.fxml) files that connect to the controller.
-
-    ````java
-    public class Location {
-        private int id;
-        private String name;
-        private String country;
-        private String district;
-        private String city;
-        private String street;
-        private String description;
-        private boolean isSensitive;
-    
-        // standard methods and getter and setters.
-    }
-    
-    public class LocationController implements Initializable {
-    
-        @FXML
-        private TextField placeName_txt;
-        @FXML
-        private TextField country_txt;
-        @FXML
-        private TextField district_txt;
-        @FXML
-        private TextArea descriptionTextArea;
-        @FXML
-        private TextField city_txt;
-        @FXML
-        private TextField street_txt;
-        @FXML
-        private ChoiceBox<String> sensitiveInformation_optn;
-    
-        private void changeScene(String SceneName, ActionEvent event) throws IOException {
-            // A method to change the scenes in the project.
-        }
-    
-        private void fillComboBox() {
-            // auxiliary method to fill the combo box.
-        }
-    
-        /**
-         * Called to initialize a controller after its root element has been
-         * completely processed.
-         *
-         * @param location  The location used to resolve relative paths for the root object, or
-         *                  <tt>null</tt> if the location is not known.
-         * @param resources The resources used to localize the root object, or <tt>null</tt> if
-         */
-        @Override
-        public void initialize(URL location, ResourceBundle resources) {
-            // Initialization method.
-        }
-    
-        private boolean setSensitivity(String sensitivity) {
-            // Auxiliary method.
-        }
-    
-        public void actionRegisterPlaceBtn(ActionEvent actionEvent) throws IOException {
-            // Button click handler.
-        }
-    
-        public void actionGoBackBtn(ActionEvent actionEvent) throws IOException {
-            // Button click handler.
-        }
-    
-        public void actionViewPlaces(ActionEvent actionEvent) throws IOException {
-            // Button click handler.
-        }
-    }
-    ````
-
-  ```XML
-  <?xml version="1.0" encoding="UTF-8"?>
-    
-    <!--the view-->
-    
-    <?import javafx.scene.control.Button?>
-    <?import javafx.scene.control.TextArea?>
-    <?import javafx.scene.layout.AnchorPane?>
-    <?import javafx.scene.text.*?>
-    <!--the connection to the controller-->
-    <AnchorPane xmlns:fx="http://javafx.com/fxml/1" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
-                minWidth="-Infinity" prefHeight="390.0" prefWidth="490.0" style="-fx-background-color: #2A363F;"
-                xmlns="http://javafx.com/javafx/17"
-                fx:controller="mesw.ads.highesttree.HighestTree.controller.database.ReaderController">
-    
-        <!--the file continues-->
-  </AnchorPane>
-  ```
 
 ### Data access objects (DAOs) and data transfer objects (DTOs)<a name="dao_dto"></a>
 
@@ -369,146 +275,7 @@ implementation and consequences were whirling the use of the same.
   [ReaderController.java](src/main/java/mesw/ads/highesttree/HighestTree/controller/database/ReaderController.java)
   class.
 
-````java
-public class LocationService {
-    private static Dao<Location> locationDao = new DaoLocation();
-    private static Location location;
-
-    public static void save(String name,
-                            String country,
-                            String district,
-                            String city,
-                            String street,
-                            String description,
-                            boolean isSensitive) {
-        location = new Location(name, country, district, city, street, description);
-        location.setSensitive(isSensitive);
-        locationDao.save(location);
-        // Register user on the file database
-        Writer.writeToFile("files/location.txt", location.toString());
-    }
-
-    public static Collection<Location> getAllLocations() {
-        return locationDao.getAll();
-    }
-
-    public static int saveLocation(Location location) {
-        validate(location);
-        return locationDao.save(location);
-    }
-
-    private static void validate(Location location) {
-        // Not implemented
-        if (location == null)
-            throw new NullPointerException();
-    }
-
-    public static List<String> getAllLocationsFromFileDatabase() {
-        // Reads user from file database
-        return Reader.readFromFile("files/location.txt");
-    }
-
-    public Location getLocation() {
-        return location;
-    }
-}
-
-public class DaoLocation implements Dao<Location> {
-
-    private List<Location> locationList = new LinkedList<>();
-
-    @Override
-    public Optional<Location> get(int id) {
-        return Optional.ofNullable(locationList.get(id));
-    }
-
-    @Override
-    public Collection<Location> getAll() {
-        return locationList.stream()
-                .filter(Objects::nonNull)
-                .collect(Collectors.collectingAndThen(Collectors.toList(), Collections::unmodifiableList));
-    }
-
-    @Override
-    public int save(Location location) {
-        locationList.add(location);
-        int index = locationList.size() - 1;
-        location.setId(index);
-        return index;
-    }
-
-    @Override
-    public void update(Location location) {
-        locationList.set(location.getId(), location);
-    }
-
-    @Override
-    public void delete(Location location) {
-        locationList.set(location.getId(), null);
-    }
-}
-
-public interface Dao<T> {
-
-    Optional<T> get(int id);
-
-    Collection<T> getAll();
-
-    int save(T t);
-
-    void update(T t);
-
-    void delete(T t);
-}
-
-public class LocationController implements Initializable {
-
-    // attributes and methods
-
-    public void actionRegisterPlaceBtn(ActionEvent actionEvent) throws IOException {
-        try {
-            String name = placeName_txt.getText();
-            String country = country_txt.getText();
-            String district = district_txt.getText();
-            String city = city_txt.getText();
-            String street = street_txt.getText();
-            String description = descriptionTextArea.getText();
-            String isSensitive = sensitiveInformation_optn.getSelectionModel().getSelectedItem();
-            boolean sensitivity = this.setSensitivity(isSensitive);
-
-            // Service saves location
-            LocationService.save(name, country, district, city, street, description, sensitivity);
-
-            this.changeScene("/fxml/displayPlaces.fxml", actionEvent);
-
-        } catch (Exception e) {
-            e.printStackTrace();
-            this.changeScene(ERROR_SCREEN, actionEvent);
-        }
-
-    }
-
-    // the class continues
-}
-
-public class ReaderController implements Initializable {
-
-    // attributes and methods
-
-    @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
-        List<String> data = LocationService.getAllLocationsFromFileDatabase();
-        for (String element : data) {
-            placesTextArea.appendText(element);
-            placesTextArea.appendText("\n");
-        }
-    }
-
-    // the class continues
-}
-````
-
-### Composite Pattern
+### Composite Pattern<a name="composite_pattern"></a>
 
 Thinking on the problem of how to compile a genealogy tree, either to show/export, edit or perform any other kind of
 operation that might come up as a future feature, the composite is a structural pattern that enables and enhances those
@@ -526,20 +293,20 @@ pattern is implemented in our model. The classes were laid out but we did not se
 implementation of the ‘ad hoc’ pattern. Still, we believe that laying out the foundation for this type of structure can
 help to refactor in the future, either towards this or another kind of structure.
 
-### Template Method
+### Template Method<a name="template_method"></a>
 
 The template method was applied in the controller section of our MVC. The intent is to have the controller for the page
 to call in the same methods in sequenced order, but, those methods have to be adapted for the specific views. In our
 MVC, the controllers are specific for ‘Person’ ‘Location’ and ‘Event’ and contain almost identical steps with some minor
 differences.
 
-### Filter Pattern
+### Filter Pattern<a name="fileter_pattern"></a>
 
 Filter pattern or Criteria pattern was chosen as a way to query a set of objects using different criteria and being able
 to chain those criteria through logical operations. This type of design pattern comes under structural pattern as this
 pattern combines multiple criteria to obtain single criteria.
 
-### 3.2. Design Problems<a name="design_problems"></a>
+### 3.2. Design Problems<a name="design_problemes"></a>
 
 ### Persons and their Relationships to another<a name="persons"></a>
 
