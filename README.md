@@ -11,10 +11,11 @@
         - [3. 1. 2. Refactor and code smells](#refactor_and_code_smells)
         - [3. 1. 3. Second approach](#second_approach)
     - [3. 2. Patterns](#patterns)
-        - [Persons and their Relationships to another](#persons)
         - [Date, time periods and super dates](#dates)
         - [Model-View-Controller (MVC)](#mvc)
-        - [Model-View-Controller-Service (MVCS), data access objects (DAOs) and data transfer objects (DTOs)](#mvcs)
+        - [Data access objects (DAOs) and data transfer objects (DTOs)](#dao_dto)
+    - [3. 3. Design Problems](#design_problemes)
+        - [Persons and their Relationships to another](#persons)
         - [Granularity of the fields](#granularity)
         - [Granularity of the fields](#composite)
 
@@ -175,48 +176,6 @@ to be identified the correct approach.
 
 For the eventual patterns used in this project, the group shall include detailed descriptions of the problems,
 implementation and consequences were whirling the use of the same.
-
-### Persons and their Relationships to another<a name="persons"></a>
-
-* **Problem:** Design the Person-Relationships without redundancies
-* **classes:** [Person.java](src/main/java/mesw/ads/highesttree/HighestTree/model/Person.java)
-* **Solution:** Each Person Object is associated to its parents and its spouses.
-* **Consequences:**
-    * The Family Tree is easy to traverse bottom-up (get the ancestors of a person) but more difficult to traverse
-      top-down (get the children of a person), because a person only knows about its parents but not its children.
-* **Implementation:** In the code snippet bellow you can observe a method that allows to get all the accessors of a
-  person, the same logic can be applied to the partners (spouses, boyfriend, etc...) of the person.
-  ```java
-  public class Person {
-  private int id;
-  private String firstName;
-  private String lastName;
-  private String nationality;
-  private LinkedList<Event> events;
-  private Source source;
-  private String description;
-  private LinkedList<Person> parents;
-  private LinkedList<Person> partner;
-  private boolean sensitive;
-
-  // standard constructors and getters and setters.
-
-    public static LinkedList<Person> getAncestors(Person targetPerson, LinkedList<Person> ancestors) {
-        if (targetPerson.getParents() != null) { 
-            for (Person parent : targetPerson.getParents()) { 
-                ancestors.add(parent);
-                ancestors = getAncestors(parent, ancestors); 
-            } 
-        } 
-      return ancestors; 
-    }
-  // other methods of the class.
-  }
-  ```
-
-* **Diagram:**
-
-  ![Person UML](img/Person_UML.png)
 
 ### Date, time periods and super dates<a name="dates"></a>
 
@@ -382,7 +341,7 @@ implementation and consequences were whirling the use of the same.
   </AnchorPane>
   ```
 
-### Model-View-Controller-Service (MVCS), data access objects (DAOs) and data transfer objects (DTOs)<a name="mvcs"></a>
+### Data access objects (DAOs) and data transfer objects (DTOs)<a name="dao_dto"></a>
 
 * **Problem:** In order to display users, places, events, ... we need to write and reed to something that can hold
   data (a database, and Excel file or text files).
@@ -549,6 +508,54 @@ public class ReaderController implements Initializable {
 }
 ````
 
+### Composite Pattern
+
+Thinking on the problem of how to compile a genealogy tree, either to show/export, edit or perform any other kind of
+operation that might come up as a future feature, the composite is a structural pattern that enables and enhances those
+possibilities. In our project, this pattern was tough as a solution for the relationship between person class. Looking
+at what we intended to do versus the ‘ad hoc’ implementation of a composite pattern, it was not clear on how to fit the
+pattern. The first question is, in our model, what would make a container and what would be a leaf? Leaves are a
+terminal element, and in our case it was not obvious how a relationship node ends, meaning, when entering a record it is
+not clear if a person will be an ‘end node’ on a tree or if will span new relationships. So ‘person’ class has to be a
+container (aka composite) in the ‘composite’ paradigm, because it is an element that has sub-elements, in this case, of
+the same type. Composite ables us to treat individual objects and compositions of objects uniformly, meaning we can
+‘spread out’ methods through all person objects that could be called for in a structural way, as an example, to show or
+edit a field on all known descendants of a given person. We would be applying the pattern to only one class, so it is
+not difficult to define an interface since methods are all alike. In the end we can not securely say that the composite
+pattern is implemented in our model. The classes were laid out but we did not see an end to the full structural
+implementation of the ‘ad hoc’ pattern. Still, we believe that laying out the foundation for this type of structure can
+help to refactor in the future, either towards this or another kind of structure.
+
+### Template Method
+
+The template method was applied in the controller section of our MVC. The intent is to have the controller for the page
+to call in the same methods in sequenced order, but, those methods have to be adapted for the specific views. In our
+MVC, the controllers are specific for ‘Person’ ‘Location’ and ‘Event’ and contain almost identical steps with some minor
+differences.
+
+### Filter Pattern
+
+Filter pattern or Criteria pattern was chosen as a way to query a set of objects using different criteria and being able
+to chain those criteria through logical operations. This type of design pattern comes under structural pattern as this
+pattern combines multiple criteria to obtain single criteria.
+
+### 3.2. Design Problems<a name="design_problems"></a>
+
+### Persons and their Relationships to another<a name="persons"></a>
+
+* **Problem:** Design the Person-Relationships without redundancies
+* **classes:** [Person.java](src/main/java/mesw/ads/highesttree/HighestTree/model/Person.java)
+* **Solution:** Each Person Object is associated to its parents and its spouses.
+* **Consequences:**
+    * The Family Tree is easy to traverse bottom-up (get the ancestors of a person) but more difficult to traverse
+      top-down (get the children of a person), because a person only knows about its parents but not its children.
+* **Implementation:** In the code snippet bellow you can observe a method that allows to get all the accessors of a
+  person, the same logic can be applied to the partners (spouses, boyfriend, etc...) of the person.
+
+* **Diagram:**
+
+  ![Person UML](img/Person_UML.png)
+
 ### Granularity of the fields<a name="granularity"></a>
 
 * **Problem:** We might not know from the start, what are the fields of some objects. For example, "I might not know
@@ -660,19 +667,3 @@ public class LocationService {
     }
 }
 ````
-
-### Composite Pattern
-
-Thinking on the problem of how to compile a genealogy tree, either to show/export, edit or perform any other kind of operation that might come up as a future feature, the composite is a structural pattern that enables and enhances those possibilities. 
-In our project, this pattern was tough as a solution for the relationship between person class. Looking at what we intended to do versus the ‘ad hoc’ implementation of a composite pattern, it was not clear on how to fit the pattern. The first question is, in our model, what would make a container and what would be a leaf? Leaves are a terminal element, and in our case it was not obvious how a relationship node ends, meaning, when entering a record it is not clear if a person will be an ‘end node’ on a tree or if will span new relationships. So ‘person’ class has to be a container (aka composite) in the ‘composite’ paradigm, because it is an element that has sub-elements, in this case, of the same type. 
-Composite ables us to treat individual objects and compositions of objects uniformly, meaning we can ‘spread out’ methods through all person objects that could be called for in a structural way, as an example, to show or edit a field on all known descendants of a given person.
-We would be applying the pattern to only one class, so it is not difficult to define an interface since methods are all alike.
-In the end we can not securely say that the composite pattern is implemented in our model. The classes were laid out but we did not see an end to the full structural implementation of the ‘ad hoc’ pattern. Still, we believe that laying out the foundation for this type of structure can help to refactor in the future, either towards this or another kind of structure.
-
-### Template Method
-The template method was applied in the controller section of our MVC. The intent is to have the controller for the page to call in the same methods in sequenced order, but, those methods have to be adapted for the specific views. In our MVC, the controllers are specific for ‘Person’ ‘Location’ and ‘Event’ and contain almost identical steps with some minor differences. 
-
-### Filter Pattern
-
-Filter pattern or Criteria pattern was chosen as a way to query a set of objects using different criteria and being able to chain those criteria through logical operations. This type of design pattern comes under structural pattern as this pattern combines multiple criteria to obtain single criteria.
-
