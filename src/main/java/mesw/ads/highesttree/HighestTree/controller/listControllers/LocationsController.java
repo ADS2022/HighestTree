@@ -2,9 +2,11 @@ package mesw.ads.highesttree.HighestTree.controller.listControllers;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import mesw.ads.highesttree.HighestTree.Main;
 import mesw.ads.highesttree.HighestTree.controller.ListController;
 import mesw.ads.highesttree.HighestTree.model.Location;
 import mesw.ads.highesttree.HighestTree.model.database.export.ExportVisitor;
@@ -28,6 +30,8 @@ public class LocationsController extends ListController {
     private TableView<Location> tableView;
     @FXML
     private TableColumn<Location, String> tableColDescription;
+    @FXML
+    private Button btnLocationNew, btnLocationEdit, btnLocationDelete;
 
 
     // METHODS
@@ -41,6 +45,10 @@ public class LocationsController extends ListController {
         // Detects selection changes and shows the person's details when there is a change.
         tableView.getSelectionModel().selectedItemProperty().addListener(
                 (observable, oldValue, newValue) -> showDetails(newValue));
+
+        btnLocationNew.setVisible(!Main.isReadOnly);
+        btnLocationEdit.setVisible(!Main.isReadOnly);
+        btnLocationDelete.setVisible(!Main.isReadOnly);
     }
 
     private Collection<Location> parseLocationList() {

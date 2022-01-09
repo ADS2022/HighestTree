@@ -2,9 +2,11 @@ package mesw.ads.highesttree.HighestTree.controller.listControllers;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import mesw.ads.highesttree.HighestTree.Main;
 import mesw.ads.highesttree.HighestTree.controller.ListController;
 import mesw.ads.highesttree.HighestTree.model.Person;
 import mesw.ads.highesttree.HighestTree.model.database.export.ExportVisitor;
@@ -28,7 +30,8 @@ public class PersonsController extends ListController {
     private TableView<Person> tableView;
     @FXML
     private TableColumn<Person, String> tableColFirstName, tableColLastName;
-
+    @FXML
+    private Button btnPersonEdit, btnPersonDelete, btnPersonNew;
 
     // METHODS
 
@@ -42,6 +45,10 @@ public class PersonsController extends ListController {
         // Detects selection changes and shows the person's details when there is a change.
         tableView.getSelectionModel().selectedItemProperty().addListener(
                 (observable, oldValue, newValue) -> showDetails(newValue));
+
+        btnPersonEdit.setVisible(!Main.isReadOnly);
+        btnPersonDelete.setVisible(!Main.isReadOnly);
+        btnPersonNew.setVisible(!Main.isReadOnly);
     }
 
     private Collection<Person> parsePersonList() {
