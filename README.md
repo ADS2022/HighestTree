@@ -18,11 +18,9 @@
         - [Template Method](#template_method)
         - [Filter Pattern](#fileter_pattern)
         - [Visitor and strategy patterns to export files](#visitor_and_strategy)
-    - [3. 3. Design Problems](#design_problemes)
         - [Persons and their Relationships to another](#persons)
-        - [Granularity of the fields](#granularity)
-        - [Granularity of the fields](#composite)
-
+    - [3. 3. Future works](#future_work)
+  
 ## How to run the project
 
 HighestTree project can be executed on IntelliJ IDEA built-in tools or called using the command line. At start-up, a
@@ -46,7 +44,7 @@ Genealogy is a long-term research goal with built-in short-term steps. Its main 
 background in time and geography. It's a research objective where the user can add more information while maintaining
 the links between individuals, places, and events.
 
-The team views on the model could is a representation of the relationship between two (or more) persons in two ways:
+The team has modeled the relationship between two (or more) persons in two ways:
 horizontally, as in married, or had children with; and vertically as in "child of," "parent to," "adopted by". A brief
 example of the type of ramifications that can occur is presented in the following image.
 
@@ -201,33 +199,30 @@ implementation and consequences were whirling the use of the same.
 
 * **Problem:** A person can be born on a specific date or in on a time period. For example, an individual could be born
   in 1578 or in the XVI century (between 1501 and 1600).
-* **Classes:** [Date.java](src/main/java/mesw/ads/highesttree/HighestTree/model/Date.java)
-  , [SuperDate.java](src/main/java/mesw/ads/highesttree/HighestTree/model/SuperDate.java)
-  and [TimePeriod.java](src/main/java/mesw/ads/highesttree/HighestTree/model/TimePeriod.java)
-* **Solution:**
+* **The pattern:**
     * There is an interface called SuperDate and two classes called Date and TimePeriod. Those classes implement
       SuperDate and when creating an object that requires a date (for example an Event) it is possible to create a date
       or a time period.
         * This solution implements the [*template method*](https://refactoring.guru/design-patterns/template-method)
           pattern by breaking down the date-time period logic into a series of two steps, and turning these steps into a
           method and then call those methods inside a single template method.
-* **Problems:**
+* **Implementation:** In the code snippet bellow you can observe the SuperDate interface that exposes
+  a ```returnDateString();``` method that forces the Date.java and TimePeriod.java classes to return or a date or of a
+  time period. The classes of the method are [Date.java](src/main/java/mesw/ads/highesttree/HighestTree/model/Date.java)
+  , [SuperDate.java](src/main/java/mesw/ads/highesttree/HighestTree/model/SuperDate.java)
+  and [TimePeriod.java](src/main/java/mesw/ads/highesttree/HighestTree/model/TimePeriod.java).
+
+  ![Dates UML](img/HighestTree-dates-class-diagram.svg)
+* **Consequences:**
     * One of the problems that we can encounter is the violation of the Liskov Substitution Principle by suppressing a
       default step implementation via a subclass and the maintainability of the code. If any changes to the method need
       to be made, it can get harder to maintain the more differences there are.
-* **Implementation:** In the code snippet bellow you can observe the SuperDate interface that exposes
-  a ```returnDateString();``` method that forces the Date.java and TimePeriod.java classes to return or a date or of a
-  time period.
-
-* **Diagram:**
-
-  ![Dates UML](img/HighestTree-dates-class-diagram.svg)
 
 ### Model-View-Controller (MVC)<a name="mvc"></a>
 
 * **Problem:** We need to have a constantly evolving graphical user interface so the user can preform the CRUD
   operations, as well as interact with our system.
-* **Solution:**
+* **The pattern:**
     * The MVC divides an interactive application into three parts. The model contains the core functionality and data (
       all of the classes in the model package). Views display information to the user (the FXML resources). The
       controllers handle user input (the controller's package). Views and controllers together comprise the user
@@ -238,21 +233,21 @@ implementation and consequences were whirling the use of the same.
           interface and the model.
     * The solution divides the interactive application into three decoupled parts: processing, input, and output. Ensure
       the consistency of the three parts with the help of a change propagation mechanism.
-* **Problems:** The most significant problems consist in the increased complexity (if you have 1 model class, you need
-  to create two more classes...in our system for six classes, we need to make 12 more classes minimum), and a
-  potentially excessive number of updates. If I change one model behavior, I might have to change more than one class,
-  which happens because of the intimate connection between views and controllers (close coupling of views and
-  controllers to the model and between them).
-* **Implementation and classes:** The [Place](src/main/java/mesw/ads/highesttree/HighestTree/model/Location.java)
+* **Implementation:** The [Place](src/main/java/mesw/ads/highesttree/HighestTree/model/Location.java)
   in the model,
   the [Place](src/main/java/mesw/ads/highesttree/HighestTree/controller/recordControllers/LocationController.java)
   in the controller, and the [FXML](src/main/resources/fxml/displayPlaces.fxml) files that connect to the controller.
+* **Consequences:** The most significant problems consist in the increased complexity (if you have 1 model class, you
+  need to create two more classes...in our system for six classes, we need to make 12 more classes minimum), and a
+  potentially excessive number of updates. If I change one model behavior, I might have to change more than one class,
+  which happens because of the intimate connection between views and controllers (close coupling of views and
+  controllers to the model and between them).
 
 ### Data access objects (DAOs) and data transfer objects (DTOs)<a name="dao_dto"></a>
 
 * **Problem:** In order to display users, places, events, ... we need to write and reed to something that can hold
   data (a database, and Excel file or text files).
-* **Solution:**
+* **The pattern:**
     * We are adding another layer to the MVC model, a service. The service layer is an abstraction over domain logic. It
       defines the application's boundary with a layer of services that establishes a set of available operations and
       coordinates the application's response in each process. The service layer is an architectural pattern applied
@@ -265,8 +260,6 @@ implementation and consequences were whirling the use of the same.
           modules of your application.
         * DAO is an abbreviation for Data Access Object, so it should encapsulate the logic for retrieving, saving, and
           updating data in your data storage (a database, a file system, whatever).
-* **Problems:** They are the same as the MVC, they basically consist in added complexity, and they might lead to loss in
-  performance and close coupling between the different modules.
 * **Implementation and classes:**
   the [LocationController.java](src/main/java/mesw/ads/highesttree/HighestTree/controller/listControllers/LocationsController.java)
   , [LocationService.java](src/main/java/mesw/ads/highesttree/HighestTree/service/LocationService.java), the
@@ -275,6 +268,8 @@ implementation and consequences were whirling the use of the same.
   and [Writer](src/main/java/mesw/ads/highesttree/HighestTree/model/database/Writer.java) classes, and the
   [ReaderController.java](src/main/java/mesw/ads/highesttree/HighestTree/controller/database/ReaderController.java)
   class.
+* **Consequences:** They are the same as the MVC, they basically consist in added complexity, and they might lead to
+  loss in performance and close coupling between the different modules.
 
 ### Composite Pattern<a name="composite_pattern"></a>
 
@@ -309,53 +304,39 @@ pattern combines multiple criteria to obtain single criteria.
 
 ### Visitor and strategy patterns to export files<a name="visitor_and_strategy"></a>
 
-* **Problem:** It is necessary a way to export to different files formats different parts of the system. For example,
-  the system should be able to export the several persons in the database both to XML and CSV formats.
-* **classes:**
-  The [ExportVisitor.java](src/main/java/mesw/ads/highesttree/HighestTree/model/database/export/ExportVisitor.java)
-  class and the [Visitor.java](src/main/java/mesw/ads/highesttree/HighestTree/model/database/export/Visitor.java)
-  interface.
-* **Solution:** The solution consists in applying the visitor pattern plus with the strategy. The visitor pattern
+* **Problem:** It is necessary to find a way to export to different files formats different parts of the system. For
+  example, the system should be able to export the several persons in the database both to XML and CSV formats.
+* **The pattern:** The solution consists in applying the visitor pattern plus with the strategy. The visitor pattern
   consists of placing the new behavior into a separate class called visitor instead of integrating it into existing
   classes. The original object that has to perform the behavior is now passed to one of the visitor's methods as an
   argument, providing access to all necessary data as well as the strategy pattern which consists in taking a class that
   does something specific in a lot of different ways and extracting all of these algorithms into separate classes called
   strategies.
+* **Implementation:**
+  The [ExportVisitor.java](src/main/java/mesw/ads/highesttree/HighestTree/model/database/export/ExportVisitor.java)
+  class and the [Visitor.java](src/main/java/mesw/ads/highesttree/HighestTree/model/database/export/Visitor.java)
+  interface.
+
+  ![Visitor UML](img/Visitor.svg)
 * **Consequences:**
     * It is necessary to update all the visitors each time a class gets added to or removed from the element hierarchy.
       Also, a level of complexity added to the system that the strategy pattern might not entirely need.
-* **Diagram:**
-
-  ![Visitor UML](img/Visitor.svg)
-
-### 3.2. Design Problems<a name="design_problemes"></a>
-
-During the development of this project, the group encountered some difficulties worth mentioning. This chapter depicts
-the main challenges faced and how the team overcame them. This chapter regarding its organization it's pretty similar to
-the branch above, with a section explaining the problem, another explaining the solution, and other subtopics describing
-the classes involved.
 
 ### Persons and their Relationships to another<a name="persons"></a>
 
 * **Problem:** Design the Person-Relationships without redundancies
-* **classes:** [Person.java](src/main/java/mesw/ads/highesttree/HighestTree/model/Person.java)
-* **Solution:** Each Person Object is associated to its parents and its spouses.
-* **Consequences:**
-    * The Family Tree is easy to traverse bottom-up (get the ancestors of a person) but more difficult to traverse
-      top-down (get the children of a person), because a person only knows about its parents but not its children.
-* **Diagram:**
+* **The pattern:** Each Person Object is associated to its parents and its spouses.
+* **Implementation:** [Person.java](src/main/java/mesw/ads/highesttree/HighestTree/model/Person.java)
 
   ![Person UML](img/Person_UML.png)
 
-### Granularity of the fields<a name="granularity"></a>
+* **Consequences:**
+    * The Family Tree is easy to traverse bottom-up (get the ancestors of a person) but more difficult to traverse
+      top-down (get the children of a person), because a person only knows about its parents but not its children.
 
-* **Problem:** We might not know from the start, what are the fields of some objects. For example, "I might not know
-  what is the name of the street, the district or the city where my great-great-grandfather was born; however, I know
-  that he was born in England."
-* **Solution:**
-  Both on the model and on the service allow for the creation and editing the created objects.
-* **Problems:** Close coupling of the different modules as well as, if the system it's not prepared some exceptions
-  might be thrown, as well as an increase in complexity.
-* **Implementation:**
-  It is possible to check the implementation of this
-  on [this](src/main/java/mesw/ads/highesttree/HighestTree/model/Person.java) class.
+### 3.3. Future works<a name="future_work"></a>
+
+During the development of this project, the group encountered some difficulties, and issues that could not be addressed.
+This chapter depicts the future work and the ways on which the group could implement it. This chapter regarding its
+organization is pretty similar to the chapter above, with a section explaining the problem, another explaining the
+solution, and other subtopics describing the classes involved.
