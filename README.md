@@ -175,11 +175,11 @@ the KISS rule).
 
 * **Diagram second iteration:**
 
-![HighestTree-class-diagram_V1](img/HighestTree-class-diagram_V1.svg)
+![HighestTree-class-diagram_V1](img/HighestTree-class-diagram_V2.svg)
 
 * **Diagram third iteration:**
 
-![HighestTree-class-diagram_V2](img/HighestTree-class-diagram_V2.svg)
+![HighestTree-class-diagram_V2](img/HighestTree-class-diagram_V3.png)
 
 ### 3.2. Patterns<a name="patterns"></a>
 
