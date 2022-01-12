@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mesw.ads.highesttree.HighestTree.controller.listControllers.QueriesController">
+    <opaqueInsets>
+        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+    </opaqueInsets>
+    <children>
+        <SplitPane dividerPositions="0.1520979020979021" orientation="VERTICAL" prefHeight="448.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <items>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="40.0" prefWidth="578.0">
+                    <children>
+                        <Text layoutX="14.0" layoutY="27.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Query" wrappingWidth="78.93670272827148" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="14.0" />
+                        <Button fx:id="btnSceneHome" mnemonicParsing="false" onAction="#btnSceneHomePress" text="Home" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0" />
+                  <TextField layoutX="18.0" layoutY="44.0" prefHeight="25.0" prefWidth="585.0" />
+               </children>
+            </AnchorPane>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="269.0" prefWidth="578.0">
+               <children>
+                  <VBox alignment="CENTER" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                     <children>
+                        <AnchorPane VBox.vgrow="ALWAYS">
+                           <children>
+                              <TableView fx:id="tableView" prefHeight="286.0" prefWidth="240.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                <columns>
+                                  <TableColumn fx:id="tableColFirstName" prefWidth="167.0" text="Object Type" />
+                                  <TableColumn fx:id="tableColLastName" prefWidth="497.0" text="Main Inf." />
+                                    <TableColumn fx:id="tableColLastName1" prefWidth="75.0" text="Description" />
+                                </columns>
+                                 <columnResizePolicy>
+                                    <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                                 </columnResizePolicy>
+                              </TableView>
+                           </children>
+                        </AnchorPane>
+                        <AnchorPane VBox.vgrow="NEVER">
+                           <children>
+                              <HBox alignment="CENTER_RIGHT" AnchorPane.bottomAnchor="0.0">
+                                  <children>
+                                      <Button fx:id="btnExportXML" mnemonicParsing="false" onAction="#btnExportToXML" text="Export to XML" />
+                                      <Button fx:id="btnExportCSV" mnemonicParsing="false" onAction="#btnExportToCSV" text="Export to CSV" />
+                                      <Button fx:id="btnPersonEdit" mnemonicParsing="false" onAction="#btnPersonEditPress" text="Edit">
+                                          <HBox.margin>
+                                              <Insets left="5.0" right="5.0" />
+                                          </HBox.margin>
+                                      </Button>
+                                    <Button fx:id="btnPersonDelete" mnemonicParsing="false" onAction="#btnPersonDeletePress" text="Delete">
+                                       <HBox.margin>
+                                          <Insets left="5.0" right="5.0" />
+                                       </HBox.margin>
+                                    </Button>
+                                 </children>
+                                 <padding>
+                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                 </padding>
+                              </HBox>
+                           </children>
+                        </AnchorPane>
+                     </children>
+                  </VBox>
+               </children>
+            </AnchorPane>
+        </items>
+      </SplitPane>
+   </children>
+</AnchorPane>

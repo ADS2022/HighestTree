@@ -21,7 +21,7 @@ public class HomeController implements Initializable {
     private static final String ERROR_SCREEN = "/fxml/errorScreen1.fxml";
 
     @FXML
-    private Button btnPersonsMenu, btnEventsMenu, btnPlacesMenu;
+    private Button btnPersonsMenu, btnEventsMenu, btnPlacesMenu, btnQueriesMenu;
 
     @FXML
     private ToggleButton tglBtnReadOnly;
@@ -46,7 +46,7 @@ public class HomeController implements Initializable {
         }
     }
 
-    public void goToPersonsMenu(ActionEvent actionEvent) throws IOException {
+    public void goToMenu(ActionEvent actionEvent) throws IOException {
         try {
             if (actionEvent.getSource() == btnPersonsMenu) {
                 System.out.println("Changing to Persons scene");
@@ -58,6 +58,9 @@ public class HomeController implements Initializable {
             else if (actionEvent.getSource()==btnPlacesMenu){
                 System.out.println("Changing to Places scene");
                 changeScene("/fxml/LocationsView.fxml", actionEvent);
+            }else if (actionEvent.getSource()==btnQueriesMenu){
+                System.out.println("Changing to Queries scene");
+                changeScene("/fxml/QueriesView.fxml", actionEvent);
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -73,6 +76,7 @@ public class HomeController implements Initializable {
         window.setScene(MainScene);
         window.show();
     }
+
 
 
 }
