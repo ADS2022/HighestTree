@@ -34,10 +34,10 @@ public class Person {
     private String nationality;
     private Source source;
     private String description;
-    private LinkedList<Event> events = new LinkedList<>();
-    private LinkedList<Person> partner = new LinkedList<>();
-    private LinkedList<Person> parents = new LinkedList<>();
-    private LinkedList<Person> children = new LinkedList<>();
+    private LinkedList<Event> events = null;
+    private LinkedList<Person> partner = null;
+    private LinkedList<Person> parents = null;
+    private LinkedList<Person> children = null;
     private boolean sensitive;
 
     private static  String EMPTY = "<field is empty>";
