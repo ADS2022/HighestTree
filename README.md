@@ -271,18 +271,36 @@ implementation and consequences were whirling the use of the same.
 
 ### Composite Pattern<a name="composite_pattern"></a>
 
-The composite is a structural pattern that enables and enhances those possibilities to solve the problem of compiling the genealogy tree (to show, export, or perform other operations that might come up as a future feature). In our project, this pattern was challenging as a solution for the relationship between person class. Looking
-at what we intended to do versus the ‘ad hoc’ implementation of a composite pattern, it was unclear how to fit it. The first question is, in our model, what would make a container and what would be a leaf? Leaves are a
-Terminal element, and in our case, it was not obvious how a relationship node ends, meaning, when entering a record, it is
-not clear if a person will be an ‘end node’ on a tree or if it will span new relationships. So ‘person’ class has to be a
-container (aka composite) in the ‘composite’ paradigm because it is an element that has sub-elements, in this case, of
-the same type. Composite ables us to treat individual objects and compositions of objects uniformly, meaning we can
-‘spread out’ methods through all person objects that could be called for structurally, as an example, to show or
-edit a field on all known descendants of a given person. We would be applying the pattern to only one class, so it is
-not difficult to define an interface since methods are all alike. In the end, we can not securely say that the composite
-pattern is implemented in our model. The classes were laid out, but we did not see an end to the full structural
-implementation of the ‘ad hoc’ pattern. Still, we believe that laying out the foundation for this type of structure can
-help refactor in the future, either towards this or another kind of structure.
+* **Problem:** 
+How do we want to call or edit instances of ‘person’ that are, in some way, related to each other?
+
+
+* **The pattern:** 
+The short definition for composite patter we found most fitting is the one in geeksforgeeks: _“describes a group of objects that is treated the same way as a single instance of the same type of object”. 
+Composite pattern is typically used for hierarchical structures where it works these structures as if they were individual objects. Structurally, it has 3 core elements: 
+1.	Interface to describe operations that are common to both simple and complex elements of the tree.
+2.	A Leaf, basic element of a tree that doesn’t have sub-elements. An end node. 
+3.	The Container (aka composite), element that has sub-elements: leaves or other containers. 
+
+* **Implementation:** 
+The first question is, in our model, what would be a leaf?
+
+Leaves are terminal elements, and in our case, it was not obvious how a relationship node ends, meaning, when entering a record, it is not clear if a person will be an ‘end node’. We want to give the option for any ‘Person’ to be able to span new relationships. So ‘person’ class would have to be a container (aka composite) in the ‘composite’ paradigm.
+
+Composites enables us to treat webs of individual objects uniformly, meaning we can call out methods through all person objects that are structurally related.  As an example, when we need to show or edit a field on all known descendants of a given person.
+
+Person records were “connected” by giving each record a list of partners, parents, and children. Partners is a non-hierarchical relationship: if A was ever a partner of B, same thing applies the other way round. But we want to call that out just one time! So what can be done is, when we set person B as partner in instance A, the method in A calls the same method in B and sets itself as a partner. Same for parents and children. This was inspired in the composite and could be extended for all known types of relationships, e.g. setSister or setBrother.
+
+But what if we want to recall all relationships of a given record? That’s easy, we can call the list of children of instance A, and for each object in that entry we can ask to return their list of children. We can even choose how deep in the records do we want to go by setting a depth level in the number of iterations calls of list of objects that are children.
+
+Same technique can be used to get all ancestors, they’re spouses, or all ancestors and they’re spouses, ancestors spouses brothers and parents…
+
+So with partners, parents, and children lists we could even think on implementing a transversal relationship. How could that be useful? Let’ imagine that we have a record A whose father is unknow, but we just got a reference to an uncle. We do not need lists for all type of relationships, a setUncle method can create a ‘phantom’ instance if the father relationship is missing.
+
+In the end, we cannot say that the composite pattern is implemented ‘ad hoc’. We are applying the pattern with only one core element since we felt no need to define an interface, methods in person class are all alike. The solution that was thought was inspired in the composite pattern and we believe that laying out the foundation in this type of structure can reduce any refactoring cost that might be needed in the future.
+
+As it is presented, the system can set and get partners, parents, and children. getSuccessors and getAncestry methods were implemented in person class but are not integrated. These methods get all ancestor or successors records without an option to choose depth level.
+
 
 ### Template Method<a name="template_method"></a>
 
@@ -300,7 +318,8 @@ the pattern combines multiple criteria to obtain single criteria.
 
 * **Problem:** It is necessary to find a way to export to different files formats different parts of the system. For
   For example, the system should export several persons in the database to XML and CSV formats.
-* **The pattern:** The solution consists in applying the visitor pattern plus the strategy. The visitor pattern
+* **The pattern:** 
+*The solution consists in applying the visitor pattern plus the strategy. The visitor pattern
   consists of placing the new behavior into a separate class called visitor instead of integrating it into existing
   classes. The original object that has to perform the behavior is now passed to one of the visitor's methods (as the argument), providing access to all the necessary data and the strategy pattern methods. Those methods consist of taking classes that
   do something specific in many different ways and extracting all of those algorithms into separate classes called
