@@ -14,7 +14,7 @@
         - [Date, time periods and super dates](#dates)
         - [Model-View-Controller (MVC)](#mvc)
         - [Data access objects (DAOs) and data transfer objects (DTOs)](#dao_dto)
-        - [Template Method](#template_method)
+        - [Template Pattern for Controllers](#template_method)
         - [Queries](#queries)
         - [Visitor and strategy patterns to export files](#visitor_and_strategy)
         - [Singleton pattern to access data files](#singleton)
@@ -288,7 +288,7 @@ implementation and consequences were whirling the use of the same.
 * **Consequences:** They are the same as the MVC, they consist in added complexity, and they might lead to loss in
   performance and close coupling between the different modules.
 
-### Controllers<a name="template_method"></a>
+### Template Pattern for Controllers<a name="template_method"></a>
 
 * **Problem:** It is necessary to find a way to have the controller for a page to call the same methods in sequenced
   order, but those methods have to be adapted for specific views.
@@ -413,7 +413,7 @@ This chapter depicts the future work and how the group could implement it.
       Also, a level of complexity added to the system that the strategy pattern might not entirely need.
 
 
-### Family Tree with Composite Pattern?<a name="composite_pattern"></a>
+### Family Tree with Composite Pattern<a name="composite_pattern"></a>
 
 * **Problem:**
   How do we want to call or edit instances of ‘person’ that are, in some way, related to each other?
