@@ -21,7 +21,7 @@
         - [Singleton pattern to access data files](#singleton)
         - [Persons and their Relationships to another](#persons)
     - [3. 3. Future works](#future_work)
-        - [Export to a geneology tree to formats that allow graphical vizualization](graph_vizualization)
+        - [Export to a geneology tree to formats that allow graphical vizualization](#graph_vizualization)
 
 ## How to run the project
 
