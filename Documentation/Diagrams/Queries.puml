@@ -1,0 +1,43 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+interface Criteria{
++ meetCriteria() : List<Person>
+}
+
+class AndCriteria {
+criteria : Criteria
+otherCriteria : Criteria
++ meetCriteria() : List<Person>
+}
+
+class OrCriteria {
+criteria : Criteria
+otherCriteria : Criteria
++ meetCriteria() : List<Person>
+}
+
+class CriteriaFirstName {
++ CriteriaFirstName(name : String) : void
++ meetCriteria() : List<Person>
+}
+
+class CriteriaHasPartner {
++ meetCriteria() : List<Person>
+}
+note left:Concrete Criteria
+
+class CriteriaSpouses {
++ meetCriteria() : List<Person>
+}
+
+class AndCriteria implements Criteria
+class OrCriteria implements Criteria
+class CriteriaFirstName implements Criteria
+class CriteriaHasPartner implements Criteria
+class CriteriaSpouses implements Criteria
+
+
+Criteria --o AndCriteria
+OrCriteria o-- Criteria
+@enduml

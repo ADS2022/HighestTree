@@ -14,21 +14,34 @@
         - [Date, time periods and super dates](#dates)
         - [Model-View-Controller (MVC)](#mvc)
         - [Data access objects (DAOs) and data transfer objects (DTOs)](#dao_dto)
-        - [Composite Pattern](#composite_pattern)
         - [Template Method](#template_method)
-        - [Filter Pattern](#fileter_pattern)
+        - [Queries](#queries)
         - [Visitor and strategy patterns to export files](#visitor_and_strategy)
         - [Singleton pattern to access data files](#singleton)
         - [Persons and their Relationships to another](#persons)
     - [3. 3. Future works](#future_work)
         - [Export to a geneology tree to formats that allow graphical vizualization](#graph_vizualization)
-
+        - [Composite Pattern](#composite_pattern)
 ## How to run the project
 
 The highest tree project can be executed on IntelliJ IDEA built-in tools or called the command line. A home screen menu
 is displayed at a start-up where the user can browse through the system capabilities. If there is any problem opening or
 running the project, don't hesitate to contact us. To run correctly, it’s essential to import all the required maven
 dependencies.
+
+### How to run queries
+Queries can be defined as text. Right now the User Interface only supports connecting Queries via AND but the functionality and tests for OR queries exist.
+To this time the System supports the following query criteria:
+- firstName=[name]: lists all persons with the specified first name
+- lastName=[name]: lists all persons with the specified last name
+- hasPartner: lists all persons that have a partner
+- nationality=[nationality]: lists all persons with specified nationality
+- getPartners: lists the partners of the persons
+
+several criteria can be defined if connected with "&" (e.g. "firstName=James & hasPartner").
+
+! Order of the criteria is important. The system will first get persons with the first criteria and then query
+the results with the second criteria !
 
 ## Requirements
 
@@ -275,7 +288,132 @@ implementation and consequences were whirling the use of the same.
 * **Consequences:** They are the same as the MVC, they consist in added complexity, and they might lead to loss in
   performance and close coupling between the different modules.
 
-### Composite Pattern<a name="composite_pattern"></a>
+### Controllers<a name="template_method"></a>
+
+* **Problem:** It is necessary to find a way to have the controller for a page to call the same methods in sequenced
+  order, but those methods have to be adapted for specific views.
+* **The pattern:**
+  This solution implements the [*template method*](https://refactoring.guru/design-patterns/template-method). As it
+  says, the template method is a behavioral design pattern that defines the skeleton of an algorithm in the superclass
+  but lets subclasses override specific steps of the algorithm without changing its structure. The template method was
+  applied in the controller section of our MVC. The intent is to have the controller for the page to call in the same
+  methods in sequenced order, but those methods have to be adapted for the specific views. In our MVC, the controllers,
+  are specific for ‘Person’ ‘Location’ and ‘Event’ and contain almost identical steps with minor differences.
+* **Implementation:**
+  It is possible to observe this behavioral pattern on the MVC classes.
+
+* **Consequences:**
+    * One of the problems that we can encounter is the violation of the Liskov Substitution Principle by suppressing a
+      default step implementation via a subclass and the maintainability of the code. If any changes to the method need
+      to be made, it can get harder to maintain the more differences there are.
+
+### Queries<a name="queries"></a>
+
+* **Problem:** The system should be able to query existing individuals by filtering information using rules based on each of
+  the available fields and relationships. It should be possible to add more query criteria easily if needed and to combine several
+  criteria in different ways.
+* **The pattern:**
+    * Filter pattern or Criteria pattern was chosen to query a set of objects using different criteria and chaining them in a decoupled way through logical operations. This design pattern comes under structural pattern as this the pattern
+      combines multiple criteria to obtain a single criteria.
+  ![img.png](img.png)
+* **Implementation:**
+  It is possible to observe this pattern on the classes on the following package,
+  the [query](src/main/java/mesw/ads/highesttree/HighestTree/query), and on the test
+  class [FilterTests.java](src/test/java/FunctionalityTests/FilterTests.java).
+
+* **Consequences:**
+    * Addition of a large number of independent filters may reduce performance due to excessive computational overheads,
+      as such they are not appropriate for long-running computations.
+    * Makes it easy to add new criteria/filters without changing other classes
+
+### Visitor and strategy patterns to export files<a name="visitor_and_strategy"></a>
+
+* **Problem:** It is necessary to find a way to export to different files formats different parts of the system. For For
+  example, the system should export several persons in the database to XML and CSV formats.
+* **The pattern:**
+  *The solution consists in applying the visitor pattern plus the strategy. The visitor pattern consists of placing the
+  new behavior into a separate class called visitor instead of integrating it into existing classes. The original object
+  that has to perform the behavior is now passed to one of the visitor's methods (as the argument), providing access to
+  all the necessary data and the strategy pattern methods. Those methods consist of taking classes that do something
+  specific in many different ways and extracting all of those algorithms into separate classes called strategies.
+* **Implementation:**
+  It is possible to observe both of the patterns on the following two classes,
+  the [ExportVisitor.java](src/main/java/mesw/ads/highesttree/HighestTree/model/database/export/ExportVisitor.java)
+  class and the [Visitor.java](src/main/java/mesw/ads/highesttree/HighestTree/model/database/export/Visitor.java)
+  interface.
+
+  ![Visitor UML](img/Visitor.svg)
+* **Consequences:**
+    * It is necessary to update all the visitors each time a class gets added to or removed from the element hierarchy.
+      Also, a level of complexity added to the system that the strategy pattern might not entirely need.
+
+### Singleton pattern to access data files<a name="singleton"></a>
+
+* **Problem:** It is necessary to find a way to hold the information of our system. We could either use a traditional
+  database or write and read to data files (our approach).
+* **The pattern:** The solution consists in applying the singleton pattern. The Singleton pattern solves two problems
+  simultaneously; however, it violates the Single Responsibility Principle. The pattern works in the following way when
+  the developer creates the database writer object for a person, but after a while, he needs to create a new one;
+  instead of receiving a new object, he just utilizes the one already created. Another way to implement the singleton is
+  to provide a global access point to that instance. It is very similar to a global variable. Nevertheless, the
+  singleton protects that instance from being overwritten by other pieces of code. In the case of writing and reading
+  from files, it is possible to have the classical problem of readers and writers, and the singleton prevents it from
+  happening.
+* **Implementation:**
+  It is possible to observe the pattern in the readers and writers classes and where they are instantiated.
+  Namely: [ReaderClass.java]()
+  class and the [Writer.java](src/main/java/mesw/ads/highesttree/HighestTree/model/database/Writer.java)
+  and [PersonService.java](src/main/java/mesw/ads/highesttree/HighestTree/service/PersonService.java).
+* **Consequences:**
+    * The singleton violates the Single Responsibility Principle.
+    * The Singleton pattern can mask lousy design, such as when the program components know too much about each other.
+    * The pattern requires special treatment in a multithreaded environment so that multiple threads will not create a
+      singleton object several times.
+    * It is difficult to test the singleton.
+
+### Persons and their Relationships to another<a name="persons"></a>
+
+* **Problem:** Design the relationship between persons without data redundancies
+* **The pattern:** There is no pattern implemented “per se,” nevertheless, the group found it necessary to mention the
+  implementation of this feature. Each person's object is associated with its parents and partners. For example, a user
+  can have a wife (or husband). Furthermore, a user can have one or more children. The
+  description is similar to the model at the beginning of this file.
+* **Implementation:**
+  In the [Person.java](src/main/java/mesw/ads/highesttree/HighestTree/model/Person.java) class, the implementation of
+  the diagram below.
+
+  ![Person UML](img/Person_UML.png)
+
+* **Consequences:**
+    * The Family Tree is easy to traverse in any direction.
+
+### 3.3. Future works<a name="future_work"></a>
+
+During the development of this project, the group encountered some difficulties and issues that could not be addressed.
+This chapter depicts the future work and how the group could implement it.
+
+### Export to a geneology tree to formats that allow graphical vizualization<a name="graph_vizualization"></a>
+
+* **Problem:** The system can export the genealogy information to formats that allow a graphical visualization (such as
+  the DOT language (Graphviz)).
+* **The pattern:** The solution applies the visitor pattern plus the strategy. The visitor pattern (precisely the same
+  as the export file problem)
+  consists of placing the new behavior into a separate class called visitor instead of integrating it into existing
+  classes. The original object that has to perform the behavior is now passed to one of the visitor's methods (as the
+  argument), providing access to all the necessary data and the strategy pattern methods. Those methods consist of
+  taking classes that do something specific in many different ways and extracting all of those algorithms into separate
+  classes called strategies.
+
+* **Implementation:**
+  Despite not being implemented yet, the implementation would be v ery similar to the implantation of the visitor +
+  strategy pattern described above on the visitor and strategy patterns to export files.
+
+* **Consequences:**
+    * It is necessary to update all the visitors each time a class gets added to or removed from the element hierarchy.
+      Also, a level of complexity added to the system that the strategy pattern might not entirely need.
+
+
+### Family Tree with Composite Pattern?<a name="composite_pattern"></a>
 
 * **Problem:**
   How do we want to call or edit instances of ‘person’ that are, in some way, related to each other?
@@ -329,127 +467,3 @@ can reduce any refactoring cost that might be needed in the future.
 As it is presented, the system can set and get partners, parents, and children. getSuccessors and getAncestry methods
 were implemented in person class but are not integrated. These methods get all ancestor or successors records without an
 option to choose depth level.
-
-### Template Method<a name="template_method"></a>
-
-* **Problem:** It is necessary to find a way to have the controller for a page to call the same methods in sequenced
-  order, but those methods have to be adapted for specific views.
-* **The pattern:**
-  This solution implements the [*template method*](https://refactoring.guru/design-patterns/template-method). As it
-  says, the template method is a behavioral design pattern that defines the skeleton of an algorithm in the superclass
-  but lets subclasses override specific steps of the algorithm without changing its structure. The template method was
-  applied in the controller section of our MVC. The intent is to have the controller for the page to call in the same
-  methods in sequenced order, but those methods have to be adapted for the specific views. In our MVC, the controllers,
-  are specific for ‘Person’ ‘Location’ and ‘Event’ and contain almost identical steps with minor differences.
-* **Implementation:**
-  It is possible to observe this behavioral pattern on the MVC classes.
-
-* **Consequences:**
-    * One of the problems that we can encounter is the violation of the Liskov Substitution Principle by suppressing a
-      default step implementation via a subclass and the maintainability of the code. If any changes to the method need
-      to be made, it can get harder to maintain the more differences there are.
-
-### Filter Pattern<a name="fileter_pattern"></a>
-
-* **Problem:** The system is able to query existing individuals by filtering information using rules based on each of
-  the available fields and relationships.
-* **The pattern:**
-    * Filter pattern or Criteria pattern was chosen to query a set of objects using different criteria and chain those
-      criteria through logical operations. This design pattern comes under structural pattern as this the pattern
-      combines multiple criteria to obtain single criteria.
-* **Implementation:**
-  It is possible to observe this pattern on the classes on the following package,
-  the [query](src/main/java/mesw/ads/highesttree/HighestTree/query), and on the test
-  class [FilterTests.java](src/test/java/FunctionalityTests/FilterTests.java).
-
-* **Consequences:**
-    * Addition of a large number of independent filters may reduce performance due to excessive computational overheads,
-      as such they are not appropriate for long-running computations.
-
-### Visitor and strategy patterns to export files<a name="visitor_and_strategy"></a>
-
-* **Problem:** It is necessary to find a way to export to different files formats different parts of the system. For For
-  example, the system should export several persons in the database to XML and CSV formats.
-* **The pattern:**
-  *The solution consists in applying the visitor pattern plus the strategy. The visitor pattern consists of placing the
-  new behavior into a separate class called visitor instead of integrating it into existing classes. The original object
-  that has to perform the behavior is now passed to one of the visitor's methods (as the argument), providing access to
-  all the necessary data and the strategy pattern methods. Those methods consist of taking classes that do something
-  specific in many different ways and extracting all of those algorithms into separate classes called strategies.
-* **Implementation:**
-  It is possible to observe both of the patterns on the following two classes,
-  the [ExportVisitor.java](src/main/java/mesw/ads/highesttree/HighestTree/model/database/export/ExportVisitor.java)
-  class and the [Visitor.java](src/main/java/mesw/ads/highesttree/HighestTree/model/database/export/Visitor.java)
-  interface.
-
-  ![Visitor UML](img/Visitor.svg)
-* **Consequences:**
-    * It is necessary to update all the visitors each time a class gets added to or removed from the element hierarchy.
-      Also, a level of complexity added to the system that the strategy pattern might not entirely need.
-
-### Singleton pattern to access data files<a name="singleton"></a>
-
-* **Problem:** It is necessary to find a way to hold the information of our system. We could either use a traditional
-  database or write and read to data files (our approach).
-* **The pattern:** The solution consists in applying the singleton pattern. The Singleton pattern solves two problems
-  simultaneously; however, it violates the Single Responsibility Principle. The pattern works in the following way when
-  the developer creates the database writer object for a person, but after a while, he needs to create a new one;
-  instead of receiving a new object, he just utilizes the one already created. Another way to implement the singleton is
-  to provide a global access point to that instance. It is very similar to a global variable. Nevertheless, the
-  singleton protects that instance from being overwritten by other pieces of code. In the case of writing and reading
-  from files, it is possible to have the classical problem of readers and writers, and the singleton prevents it from
-  happening.
-* **Implementation:**
-  It is possible to observe the pattern in the readers and writers classes and where they are instantiated.
-  Namely: [ReaderClass.java]()
-  class and the [Writer.java](src/main/java/mesw/ads/highesttree/HighestTree/model/database/Writer.java)
-  and [PersonService.java](src/main/java/mesw/ads/highesttree/HighestTree/service/PersonService.java).
-* **Consequences:**
-    * The singleton violates the Single Responsibility Principle.
-    * The Singleton pattern can mask lousy design, such as when the program components know too much about each other.
-    * The pattern requires special treatment in a multithreaded environment so that multiple threads will not create a
-      singleton object several times.
-    * It is difficult to test the singleton.
-
-### Persons and their Relationships to another<a name="persons"></a>
-
-* **Problem:** Design the relationship between persons without data redundancies
-* **The pattern:** There is no pattern implemented “per se,” nevertheless, the group found it necessary to mention the
-  implementation of this feature. Each person's object is associated with its parents and partners. For example, a user
-  can have a wife (or husband). Furthermore, a user can have one or two children, and it can also have parents. The
-  description is similar to the model at the beginning of this file.
-* **Implementation:**
-  In the [Person.java](src/main/java/mesw/ads/highesttree/HighestTree/model/Person.java) class, the implementation of
-  the diagram below.
-
-  ![Person UML](img/Person_UML.png)
-
-* **Consequences:**
-    * The Family Tree is easy to traverse bottom-up (get the ancestors of a person) but more difficult to traverse
-      top-down (get the children of a person), because a person only knows about their parents but not its children.
-
-### 3.3. Future works<a name="future_work"></a>
-
-During the development of this project, the group encountered some difficulties and issues that could not be addressed.
-This chapter depicts the future work and how the group could implement it.
-
-### Export to a geneology tree to formats that allow graphical vizualization<a name="graph_vizualization"></a>
-
-* **Problem:** The system can export the genealogy information to formats that allow a graphical visualization (such as
-  the DOT language (Graphviz)).
-* **The pattern:** The solution applies the visitor pattern plus the strategy. The visitor pattern (precisely the same
-  as the export file problem)
-  consists of placing the new behavior into a separate class called visitor instead of integrating it into existing
-  classes. The original object that has to perform the behavior is now passed to one of the visitor's methods (as the
-  argument), providing access to all the necessary data and the strategy pattern methods. Those methods consist of
-  taking classes that do something specific in many different ways and extracting all of those algorithms into separate
-  classes called strategies.
-
-* **Implementation:**
-  Despite not being implemented yet, the implementation would be v ery similar to the implantation of the visitor +
-  strategy pattern described above on the visitor and strategy patterns to export files.
-
-* **Consequences:**
-    * It is necessary to update all the visitors each time a class gets added to or removed from the element hierarchy.
-      Also, a level of complexity added to the system that the strategy pattern might not entirely need.
-
