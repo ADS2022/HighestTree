@@ -18,14 +18,16 @@
         - [Template Method](#template_method)
         - [Filter Pattern](#fileter_pattern)
         - [Visitor and strategy patterns to export files](#visitor_and_strategy)
+        - [Singleton pattern to access data files](#singleton)
         - [Persons and their Relationships to another](#persons)
     - [3. 3. Future works](#future_work)
-  
+        - [Export to a geneology tree to formats that allow graphical vizualization](#graph_vizualization)
+
 ## How to run the project
 
-HighestTree project can be executed on IntelliJ IDEA built-in tools or called using the command line. At start-up, a
-home screen menu is displayed where the user can browse through the system capabilities. If there is any problem opening
-or running the project, don't hesitate to contact us. To run properly, it’s essential to import all the required maven
+The highest tree project can be executed on IntelliJ IDEA built-in tools or called the command line. A home screen menu
+is displayed at a start-up where the user can browse through the system capabilities. If there is any problem opening or
+running the project, don't hesitate to contact us. To run correctly, it’s essential to import all the required maven
 dependencies.
 
 ## Requirements
@@ -45,21 +47,21 @@ background in time and geography. It's a research objective where the user can a
 the links between individuals, places, and events.
 
 The team has modeled the relationship between two (or more) persons in two ways:
-horizontally, as in married, or had children with; and vertically as in "child of," "parent to," "adopted by". A brief
-example of the type of ramifications that can occur is presented in the following image.
+horizontally, as in married, or had children with; and vertically as in "child of," "parent to," "adopted by.” A brief
+example of the ramifications that can occur is presented in the following image.
 
 ![FamilyTreeExample](img/FamilyTreeExample.png)
 
 A problem that can occur in the usage of the model is data redundancy, primarily when adding relationships between two (
-or more people), or when creating a place and even when creating events. In our project, we tried to address this in the
-implementation, as described in the design section.
+or more people), or when creating a place and events. Our project tried to address this in the implementation, as
+described in the design section.
 
-A challenge that was identified beforehand is related to the “date” field. A record (person or event) can have a known
-specific date, or the user can only have a reference for a generic period. For example, we might know our exact birth
-date, however, I’ts unknown precisely when Humanity invented the wheel. Historians only know that it was in the 4th
-century BC and that qualifies as a period. A user might know that his great-grandmother was born in the 19th century,
-however, he knows for sure that his mother was born on the 3rd of December,1969. Our system should be able to record
-either specific dates or periods, as requested in the requirements listed below.
+A challenge identified beforehand is related to the “date” field. A record (person or event) can have a known specific
+date, or the user can only have a reference for a generic period. For example, we might know our exact birth date,
+however, I’ts unknown precisely when Humanity invented the wheel. Historians only know that it was in the 4th century BC
+and that qualifies as a period. A user might know that his great-grandmother was born in the 19th century, however, he
+knows for sure that his mother was born on the 3rd of December,1969. Our system should be able to record either specific
+dates or periods, as requested in the requirements listed below.
 
 One other trial that will be faced is that the locations information might be incomplete. For example, the user doesn't
 know where a specific person relative from Italy natal city is, only that he or she is from Italy. When creating
@@ -117,43 +119,43 @@ the available fields and relationships.
 **SReq_20**    It is possible to add different export formats to the system.
 
 **SReq_21**    The system can export the genealogy information to formats that allow a graphical visualization (such as
-the DOT language (graphviz)).
+the DOT language (Graphviz)).
 
 **SReq_22**    Any field in a record can be set as sensitive information, and decide when exporting if sensitive
 information should be part of the output or not.
 
-**SReq_23**    When exporting, the system as a choice to output, or not, fields marked as sensitive information.
+**SReq_23**    When exporting, the system chooses to output, or not, fields marked as sensitive information.
 
-**SReq_24**    System can be used in view-only mode.
+**The user can use SReq_24**    System in view-only mode.
 
-**SReq_25**    System can be used in edit-mode.
+**The user can use SReq_25**    System in edit-mode.
 
 ## 3. Design<a name="design"></a>
 
-This section exposes the design decisions made during the ongoing phases of development of this project.
+This section exposes the design decisions made during this project’s ongoing phases of development.
 
 ### 3.1. Domain<a name="domain"></a>
 
 #### 3.1.1 First approach<a name="first_approach"></a>
 
-As a first step into the solution, the group modeled the classes in a database manner, while discussing the
-implementation, kinds of relationships, and possible patterns that could be applied.
+As a first step into the solution, the group modeled the classes in a database manner while discussing the
+implementation, kinds of relationships, and possible patterns that the user could apply.
 
-Additionally, some time was spent thinking about the solution to SReq_11 "System can insert dates onto records as a time
-period or a specific date." The solution that was devised was a superClass that can take two dates as parameters, but
-the user can insert only one date if the specific date is known. For a time period, the user can add two partial, or
-complete, dates.
+Additionally, some time was spent thinking about the solution to SReq_11 "System can insert dates onto records as a
+period or a specific date." The solution devised was a superClass that can take two dates as parameters, but the user
+can insert only one date if the specific date is known. The user can add two partial or complete dates for a time
+period.
 
 In this phase, the group also discussed options to store queries for SReq_16 "The system can save queries to be reused."
-As a simple solution, a specific classes for storing and calling query strings.
+As a simple solution, specific classes for storing and calling query strings.
 
-As a result one can see the main components of our system as described in the image below.
+As a result, one can see the main components of our system as described in the image below.
 
 ![Classes_BL1_Freeze_Classes_4](img/Classes_BL1_Freeze_Classes_4.drawio.svg)
 
 ### 3.1.2 Refactor and code smells<a name="refactor_and_code_smells"></a>
 
-As the good practices say, we should write code and then refactor it. We found several codes smells. A PowerPoint
+As the good practices say, we should write code and then refactor it. We found several code smells. A PowerPoint
 presentation regarding them can be accessed throw
 this [link](https://docs.google.com/presentation/d/1SnStiRzLfbJ_3eKdzlC02kBM3T-gWlUZPRKwiSLjrH4/edit#slide=id.gfc000407e6_0_27)
 .
@@ -163,14 +165,14 @@ this [link](https://docs.google.com/presentation/d/1SnStiRzLfbJ_3eKdzlC02kBM3T-g
 After refactoring the code to solve the code smells, we developed our model's second iteration (and third iteration). On
 the consequence iterations, we tried to solve the primitive obsession, long parameter list, and the redundancy that
 our (original model had) and that we constantly used across our model classes. We tried to divide the attributes (for
-example) in the package "Place" in the class "Location" we split the several attributes into several objects like "
+example) in the package "Place" in the class "Location" we split the several features into several objects like "
 Country," "Street," and others. We were solving the primitive obsession and resolving a redundancy issue. However, some
-connections between classes (the multiplicity) did not justify the effort of creating an extra object to model the
-object. So we iterate to the third iteration of our model, where we tried even further to remove redundancies between
-classes (as it can be seen again in the Place package). Another thing that we modeled was the iteration between Person
-and Events. The second iteration implemented an intermediate object representing the connection between those two core
-classes. However, we could replace the additional effort (creating that object) with a relationship between them and a
-multiplicity of one to many. The third iteration removes the "extra effort" of creating objects to simplify our model (
+connections between classes (the assortment) did not justify the effort of creating an extra object to model the object.
+So we iterate to the third iteration of our model, where we tried even further to remove redundancies between classes (
+as it can be seen again in the Place package). Another thing that we modeled was the iteration between Person and
+Events. The second iteration implemented an intermediate object representing the connection between those two core
+classes. However, we could replace the additional effort (creating that object) with a relationship between them and
+diversity of one to many. The third iteration removes the "extra effort" of creating objects to simplify our model (
 the KISS rule).
 
 * **Diagram second iteration:**
@@ -186,29 +188,32 @@ the KISS rule).
 This section presents the study of the design patterns considered for this project.
 
 The group first started by looking at the system's requirements versus the patterns given in class. Having identified
-some patterns that might be useful for the case in study, we proceeded to investigate further on the mentioned patterns.
+some patterns that might be useful for the study case, we proceeded to investigate further on the mentioned patterns.
 
-In this round of implementation, group B elected several problems for the use of design patterns. The group focused
-mainly on the relationship tree between 'person' records. Several design patterns were studied and discussed. It has yet
-to be identified the correct approach.
+In this round of implementation, group B elected several problems for using design patterns. The group focused mainly on
+the relationship tree between 'person' records. Several design patterns were studied and discussed. It has yet to be
+identified the correct approach.
 
 For the eventual patterns used in this project, the group shall include detailed descriptions of the problems,
 implementation and consequences were whirling the use of the same.
 
 ### Date, time periods and super dates<a name="dates"></a>
 
-* **Problem:** A person can be born on a specific date or in on a time period. For example, an individual could be born
-  in 1578 or in the XVI century (between 1501 and 1600).
+* **Problem:** A person can be born on a specific date or in a time period. For example, an individual could be born in
+  1578 or the XVI century (between 1501 and 1600).
 * **The pattern:**
-    * There is an interface called SuperDate and two classes called Date and TimePeriod. Those classes implement
-      SuperDate and when creating an object that requires a date (for example an Event) it is possible to create a date
-      or a time period.
+    * There is an interface called SuperDate (the equivalent, but not quite the same as the abstract class) and two
+      classes called Date and TimePeriod (the concrete classes). Those classes implement SuperDate, and when creating an
+      object that requires a date (for example, an Event), it is possible to create a date or a time period.
         * This solution implements the [*template method*](https://refactoring.guru/design-patterns/template-method)
-          pattern by breaking down the date-time period logic into a series of two steps, and turning these steps into a
-          method and then call those methods inside a single template method.
-* **Implementation:** In the code snippet bellow you can observe the SuperDate interface that exposes
+          pattern by breaking down the date-time period logic into a series of two steps, turning these steps into a
+          method, and then calling those methods inside a single template method. As it says, the template method is a
+          behavioral design pattern that defines the skeleton of an algorithm in the superclass but lets subclasses
+          override specific steps of the algorithm without changing its structure.
+* **Implementation:** In the classes mentioned below you can observe the SuperDate interface that exposes
   a ```returnDateString();``` method that forces the Date.java and TimePeriod.java classes to return or a date or of a
-  time period. The classes of the method are [Date.java](src/main/java/mesw/ads/highesttree/HighestTree/model/Date.java)
+  time period. The classes related to the pattern
+  are [Date.java](src/main/java/mesw/ads/highesttree/HighestTree/model/Date.java)
   , [SuperDate.java](src/main/java/mesw/ads/highesttree/HighestTree/model/SuperDate.java)
   and [TimePeriod.java](src/main/java/mesw/ads/highesttree/HighestTree/model/TimePeriod.java).
 
@@ -220,17 +225,16 @@ implementation and consequences were whirling the use of the same.
 
 ### Model-View-Controller (MVC)<a name="mvc"></a>
 
-* **Problem:** We need to have a constantly evolving graphical user interface so the user can preform the CRUD
+* **Problem:** We need to have a constantly evolving graphical user interface so the user can perform the CRUD
   operations, as well as interact with our system.
 * **The pattern:**
     * The MVC divides an interactive application into three parts. The model contains the core functionality and data (
       all of the classes in the model package). Views display information to the user (the FXML resources). The
       controllers handle user input (the controller's package). Views and controllers together comprise the user
       interface.
-        * Another concern is the fact that GUI is constantly being improved/changed. However, changes to a user
-          interface must not affect an application's core functionality, which is generally independent of its
-          presentation and changes less frequently. A change-propagation mechanism ensures consistency between the user
-          interface and the model.
+        * Another concern is that GUI is constantly being improved/changed. However, user-interface changes must not
+          affect an application's core functionality, which is generally independent of its presentation and changes
+          less frequently. A change-propagation mechanism ensures consistency between the user interface and the model.
     * The solution divides the interactive application into three decoupled parts: processing, input, and output. Ensure
       the consistency of the three parts with the help of a change propagation mechanism.
 * **Implementation:** The [Place](src/main/java/mesw/ads/highesttree/HighestTree/model/Location.java)
@@ -238,7 +242,7 @@ implementation and consequences were whirling the use of the same.
   the [Place](src/main/java/mesw/ads/highesttree/HighestTree/controller/recordControllers/LocationController.java)
   in the controller, and the [FXML](src/main/resources/fxml/displayPlaces.fxml) files that connect to the controller.
 * **Consequences:** The most significant problems consist in the increased complexity (if you have 1 model class, you
-  need to create two more classes...in our system for six classes, we need to make 12 more classes minimum), and a
+  need to create two more classes...in our system for 6 classes, we need to make 12 more classes minimum), and a
   potentially excessive number of updates. If I change one model behavior, I might have to change more than one class,
   which happens because of the intimate connection between views and controllers (close coupling of views and
   controllers to the model and between them).
@@ -246,74 +250,135 @@ implementation and consequences were whirling the use of the same.
 ### Data access objects (DAOs) and data transfer objects (DTOs)<a name="dao_dto"></a>
 
 * **Problem:** In order to display users, places, events, ... we need to write and reed to something that can hold
-  data (a database, and Excel file or text files).
+  data (a database, an Excel file, or text files).
 * **The pattern:**
     * We are adding another layer to the MVC model, a service. The service layer is an abstraction over domain logic. It
       defines the application's boundary with a layer of services that establishes a set of available operations and
-      coordinates the application's response in each process. The service layer is an architectural pattern applied
-      within the service-orientation design paradigm, which aims to organize the services, within a service inventory,
-      into a set of logical layers. Services categorized into a particular layer share functionality; it helps reduce
-      the conceptual overhead related to managing the service inventory, as the services belonging to the same layer
-      address a smaller set of activities.
+      coordinates the application's response in each process. The service layer is an architectural pattern applied The
+      service-orientation design paradigm aims to organize the services within a service inventory into a set of logical
+      layers. Services categorized into a particular layer share functionality; it helps reduce the conceptual overhead
+      of managing the service inventory. The services belonging to the same layer address a smaller set of activities.
     * We need to create DTOs and DAOs to implement this pattern correctly.
         * DTO is an abbreviation for Data Transfer Object, so it is used to transfer the data between classes and
-          modules of your application.
+          modules of the application.
         * DAO is an abbreviation for Data Access Object, so it should encapsulate the logic for retrieving, saving, and
-          updating data in your data storage (a database, a file system, whatever).
+          updating data in the data storage (a database, a file system, whatever).
 * **Implementation and classes:**
-  the [LocationController.java](src/main/java/mesw/ads/highesttree/HighestTree/controller/listControllers/LocationsController.java)
+  The
+  classes [LocationController.java](src/main/java/mesw/ads/highesttree/HighestTree/controller/listControllers/LocationsController.java)
   , [LocationService.java](src/main/java/mesw/ads/highesttree/HighestTree/service/LocationService.java), the
   [DaoLocation.java](src/main/java/mesw/ads/highesttree/HighestTree/model/dao/DaoLocation.java) and the Dao interface,
   as well as the [Reader](src/main/java/mesw/ads/highesttree/HighestTree/model/database/Reader.java)
   and [Writer](src/main/java/mesw/ads/highesttree/HighestTree/model/database/Writer.java) classes, and the
   [ReaderController.java](src/main/java/mesw/ads/highesttree/HighestTree/controller/database/ReaderController.java)
-  class.
-* **Consequences:** They are the same as the MVC, they basically consist in added complexity, and they might lead to
-  loss in performance and close coupling between the different modules.
+  class are examples where it is possible to find evidences of this architectural pattern.
+* **Consequences:** They are the same as the MVC, they consist in added complexity, and they might lead to loss in
+  performance and close coupling between the different modules.
 
 ### Composite Pattern<a name="composite_pattern"></a>
 
-Thinking on the problem of how to compile a genealogy tree, either to show/export, edit or perform any other kind of
-operation that might come up as a future feature, the composite is a structural pattern that enables and enhances those
-possibilities. In our project, this pattern was tough as a solution for the relationship between person class. Looking
-at what we intended to do versus the ‘ad hoc’ implementation of a composite pattern, it was not clear on how to fit the
-pattern. The first question is, in our model, what would make a container and what would be a leaf? Leaves are a
-terminal element, and in our case it was not obvious how a relationship node ends, meaning, when entering a record it is
-not clear if a person will be an ‘end node’ on a tree or if will span new relationships. So ‘person’ class has to be a
-container (aka composite) in the ‘composite’ paradigm, because it is an element that has sub-elements, in this case, of
-the same type. Composite ables us to treat individual objects and compositions of objects uniformly, meaning we can
-‘spread out’ methods through all person objects that could be called for in a structural way, as an example, to show or
-edit a field on all known descendants of a given person. We would be applying the pattern to only one class, so it is
-not difficult to define an interface since methods are all alike. In the end we can not securely say that the composite
-pattern is implemented in our model. The classes were laid out but we did not see an end to the full structural
-implementation of the ‘ad hoc’ pattern. Still, we believe that laying out the foundation for this type of structure can
-help to refactor in the future, either towards this or another kind of structure.
+* **Problem:**
+  How do we want to call or edit instances of ‘person’ that are, in some way, related to each other?
+
+
+* **The pattern:**
+  The short definition for composite patter we found most fitting is the one in geeksforgeeks: _“describes a group of
+  objects that is treated the same way as a single instance of the same type of object”. Composite pattern is typically
+  used for hierarchical structures where it works these structures as if they were individual objects. Structurally, it
+  has 3 core elements:
+
+1. Interface to describe operations that are common to both simple and complex elements of the tree.
+2. A Leaf, basic element of a tree that doesn’t have sub-elements. An end node.
+3. The Container (aka composite), element that has sub-elements: leaves or other containers.
+
+* **Implementation:**
+  The first question is, in our model, what would be a leaf?
+
+Leaves are terminal elements, and in our case, it was not obvious how a relationship node ends, meaning, when entering a
+record, it is not clear if a person will be an ‘end node’. We want to give the option for any ‘Person’ to be able to
+span new relationships. So ‘person’ class would have to be a container (aka composite) in the ‘composite’ paradigm.
+
+Composites enables us to treat webs of individual objects uniformly, meaning we can call out methods through all person
+objects that are structurally related. As an example, when we need to show or edit a field on all known descendants of a
+given person.
+
+Person records were “connected” by giving each record a list of partners, parents, and children. Partners is a
+non-hierarchical relationship: if A was ever a partner of B, same thing applies the other way round. But we want to call
+that out just one time! So what can be done is, when we set person B as partner in instance A, the method in A calls the
+same method in B and sets itself as a partner. Same for parents and children. This was inspired in the composite and
+could be extended for all known types of relationships, e.g. setSister or setBrother.
+
+But what if we want to recall all relationships of a given record? That’s easy, we can call the list of children of
+instance A, and for each object in that entry we can ask to return their list of children. We can even choose how deep
+in the records do we want to go by setting a depth level in the number of iterations calls of list of objects that are
+children.
+
+Same technique can be used to get all ancestors, they’re spouses, or all ancestors and they’re spouses, ancestors
+spouses brothers and parents…
+
+So with partners, parents, and children lists we could even think on implementing a transversal relationship. How could
+that be useful? Let’ imagine that we have a record A whose father is unknow, but we just got a reference to an uncle. We
+do not need lists for all type of relationships, a setUncle method can create a ‘phantom’ instance if the father
+relationship is missing.
+
+In the end, we cannot say that the composite pattern is implemented ‘ad hoc’. We are applying the pattern with only one
+core element since we felt no need to define an interface, methods in person class are all alike. The solution that was
+thought was inspired in the composite pattern and we believe that laying out the foundation in this type of structure
+can reduce any refactoring cost that might be needed in the future.
+
+As it is presented, the system can set and get partners, parents, and children. getSuccessors and getAncestry methods
+were implemented in person class but are not integrated. These methods get all ancestor or successors records without an
+option to choose depth level.
 
 ### Template Method<a name="template_method"></a>
 
-The template method was applied in the controller section of our MVC. The intent is to have the controller for the page
-to call in the same methods in sequenced order, but, those methods have to be adapted for the specific views. In our
-MVC, the controllers are specific for ‘Person’ ‘Location’ and ‘Event’ and contain almost identical steps with some minor
-differences.
+* **Problem:** It is necessary to find a way to have the controller for a page to call the same methods in sequenced
+  order, but those methods have to be adapted for specific views.
+* **The pattern:**
+  This solution implements the [*template method*](https://refactoring.guru/design-patterns/template-method). As it
+  says, the template method is a behavioral design pattern that defines the skeleton of an algorithm in the superclass
+  but lets subclasses override specific steps of the algorithm without changing its structure. The template method was
+  applied in the controller section of our MVC. The intent is to have the controller for the page to call in the same
+  methods in sequenced order, but those methods have to be adapted for the specific views. In our MVC, the controllers,
+  are specific for ‘Person’ ‘Location’ and ‘Event’ and contain almost identical steps with minor differences.
+* **Implementation:**
+  It is possible to observe this behavioral pattern on the MVC classes.
+
+* **Consequences:**
+    * One of the problems that we can encounter is the violation of the Liskov Substitution Principle by suppressing a
+      default step implementation via a subclass and the maintainability of the code. If any changes to the method need
+      to be made, it can get harder to maintain the more differences there are.
 
 ### Filter Pattern<a name="fileter_pattern"></a>
 
-Filter pattern or Criteria pattern was chosen as a way to query a set of objects using different criteria and being able
-to chain those criteria through logical operations. This type of design pattern comes under structural pattern as this
-pattern combines multiple criteria to obtain single criteria.
+* **Problem:** The system is able to query existing individuals by filtering information using rules based on each of
+  the available fields and relationships.
+* **The pattern:**
+    * Filter pattern or Criteria pattern was chosen to query a set of objects using different criteria and chain those
+      criteria through logical operations. This design pattern comes under structural pattern as this the pattern
+      combines multiple criteria to obtain single criteria.
+* **Implementation:**
+  It is possible to observe this pattern on the classes on the following package,
+  the [query](src/main/java/mesw/ads/highesttree/HighestTree/query), and on the test
+  class [FilterTests.java](src/test/java/FunctionalityTests/FilterTests.java).
+
+* **Consequences:**
+    * Addition of a large number of independent filters may reduce performance due to excessive computational overheads,
+      as such they are not appropriate for long-running computations.
 
 ### Visitor and strategy patterns to export files<a name="visitor_and_strategy"></a>
 
-* **Problem:** It is necessary to find a way to export to different files formats different parts of the system. For
-  example, the system should be able to export the several persons in the database both to XML and CSV formats.
-* **The pattern:** The solution consists in applying the visitor pattern plus with the strategy. The visitor pattern
-  consists of placing the new behavior into a separate class called visitor instead of integrating it into existing
-  classes. The original object that has to perform the behavior is now passed to one of the visitor's methods as an
-  argument, providing access to all necessary data as well as the strategy pattern which consists in taking a class that
-  does something specific in a lot of different ways and extracting all of these algorithms into separate classes called
-  strategies.
+* **Problem:** It is necessary to find a way to export to different files formats different parts of the system. For For
+  example, the system should export several persons in the database to XML and CSV formats.
+* **The pattern:**
+  *The solution consists in applying the visitor pattern plus the strategy. The visitor pattern consists of placing the
+  new behavior into a separate class called visitor instead of integrating it into existing classes. The original object
+  that has to perform the behavior is now passed to one of the visitor's methods (as the argument), providing access to
+  all the necessary data and the strategy pattern methods. Those methods consist of taking classes that do something
+  specific in many different ways and extracting all of those algorithms into separate classes called strategies.
 * **Implementation:**
-  The [ExportVisitor.java](src/main/java/mesw/ads/highesttree/HighestTree/model/database/export/ExportVisitor.java)
+  It is possible to observe both of the patterns on the following two classes,
+  the [ExportVisitor.java](src/main/java/mesw/ads/highesttree/HighestTree/model/database/export/ExportVisitor.java)
   class and the [Visitor.java](src/main/java/mesw/ads/highesttree/HighestTree/model/database/export/Visitor.java)
   interface.
 
@@ -322,21 +387,69 @@ pattern combines multiple criteria to obtain single criteria.
     * It is necessary to update all the visitors each time a class gets added to or removed from the element hierarchy.
       Also, a level of complexity added to the system that the strategy pattern might not entirely need.
 
+### Singleton pattern to access data files<a name="singleton"></a>
+
+* **Problem:** It is necessary to find a way to hold the information of our system. We could either use a traditional
+  database or write and read to data files (our approach).
+* **The pattern:** The solution consists in applying the singleton pattern. The Singleton pattern solves two problems
+  simultaneously; however, it violates the Single Responsibility Principle. The pattern works in the following way when
+  the developer creates the database writer object for a person, but after a while, he needs to create a new one;
+  instead of receiving a new object, he just utilizes the one already created. Another way to implement the singleton is
+  to provide a global access point to that instance. It is very similar to a global variable. Nevertheless, the
+  singleton protects that instance from being overwritten by other pieces of code. In the case of writing and reading
+  from files, it is possible to have the classical problem of readers and writers, and the singleton prevents it from
+  happening.
+* **Implementation:**
+  It is possible to observe the pattern in the readers and writers classes and where they are instantiated.
+  Namely: [ReaderClass.java]()
+  class and the [Writer.java](src/main/java/mesw/ads/highesttree/HighestTree/model/database/Writer.java)
+  and [PersonService.java](src/main/java/mesw/ads/highesttree/HighestTree/service/PersonService.java).
+* **Consequences:**
+    * The singleton violates the Single Responsibility Principle.
+    * The Singleton pattern can mask lousy design, such as when the program components know too much about each other.
+    * The pattern requires special treatment in a multithreaded environment so that multiple threads will not create a
+      singleton object several times.
+    * It is difficult to test the singleton.
+
 ### Persons and their Relationships to another<a name="persons"></a>
 
-* **Problem:** Design the Person-Relationships without redundancies
-* **The pattern:** Each Person Object is associated to its parents and its spouses.
-* **Implementation:** [Person.java](src/main/java/mesw/ads/highesttree/HighestTree/model/Person.java)
+* **Problem:** Design the relationship between persons without data redundancies
+* **The pattern:** There is no pattern implemented “per se,” nevertheless, the group found it necessary to mention the
+  implementation of this feature. Each person's object is associated with its parents and partners. For example, a user
+  can have a wife (or husband). Furthermore, a user can have one or two children, and it can also have parents. The
+  description is similar to the model at the beginning of this file.
+* **Implementation:**
+  In the [Person.java](src/main/java/mesw/ads/highesttree/HighestTree/model/Person.java) class, the implementation of
+  the diagram below.
 
   ![Person UML](img/Person_UML.png)
 
 * **Consequences:**
     * The Family Tree is easy to traverse bottom-up (get the ancestors of a person) but more difficult to traverse
-      top-down (get the children of a person), because a person only knows about its parents but not its children.
+      top-down (get the children of a person), because a person only knows about their parents but not its children.
 
 ### 3.3. Future works<a name="future_work"></a>
 
-During the development of this project, the group encountered some difficulties, and issues that could not be addressed.
-This chapter depicts the future work and the ways on which the group could implement it. This chapter regarding its
-organization is pretty similar to the chapter above, with a section explaining the problem, another explaining the
-solution, and other subtopics describing the classes involved.
+During the development of this project, the group encountered some difficulties and issues that could not be addressed.
+This chapter depicts the future work and how the group could implement it.
+
+### Export to a geneology tree to formats that allow graphical vizualization<a name="graph_vizualization"></a>
+
+* **Problem:** The system can export the genealogy information to formats that allow a graphical visualization (such as
+  the DOT language (Graphviz)).
+* **The pattern:** The solution applies the visitor pattern plus the strategy. The visitor pattern (precisely the same
+  as the export file problem)
+  consists of placing the new behavior into a separate class called visitor instead of integrating it into existing
+  classes. The original object that has to perform the behavior is now passed to one of the visitor's methods (as the
+  argument), providing access to all the necessary data and the strategy pattern methods. Those methods consist of
+  taking classes that do something specific in many different ways and extracting all of those algorithms into separate
+  classes called strategies.
+
+* **Implementation:**
+  Despite not being implemented yet, the implementation would be v ery similar to the implantation of the visitor +
+  strategy pattern described above on the visitor and strategy patterns to export files.
+
+* **Consequences:**
+    * It is necessary to update all the visitors each time a class gets added to or removed from the element hierarchy.
+      Also, a level of complexity added to the system that the strategy pattern might not entirely need.
+
