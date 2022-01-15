@@ -2,7 +2,6 @@ package mesw.ads.highesttree.HighestTree.model;
 
 import org.json.simple.JSONObject;
 
-import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Objects;
 import java.util.UUID;
@@ -34,10 +33,10 @@ public class Person {
     private String nationality;
     private Source source;
     private String description;
-    private LinkedList<Event> events = null;
-    private LinkedList<Person> partner = null;
-    private LinkedList<Person> parents = null;
-    private LinkedList<Person> children = null;
+    private LinkedList<Event> events = new LinkedList<>();
+    private LinkedList<Person> relationships = new LinkedList<>();
+    private LinkedList<Person> parents = new LinkedList<>();
+    private LinkedList<Person> children = new LinkedList<>();
     private boolean sensitive;
 
     private static  String EMPTY = "<field is empty>";
@@ -66,7 +65,7 @@ public class Person {
         setSource(source);
         setDescription(description);
         setParents(parents);
-        setPartner(relationships);
+        setRelationships(relationships);
         setSensitive(sensitive);
     }
 
@@ -194,22 +193,22 @@ public class Person {
 
 
     //    private LinkedList<Person> partner = null;
-    public void setPartner(Person e) {
-        e.partner.add(this);
-        partner.add(e);
+    public void setRelationships(Person e) {
+        e.relationships.add(this);
+        relationships.add(e);
     }
 
     public LinkedList<Person> getPartners() {
-        return partner;
+        return relationships;
     }
 
     public String getPartnersAsText() {
-        if (partner == null){
+        if (relationships == null){
             return EMPTY;
         }
         //TODO: Create method to return First Name + Last Name
         // of partner list as text
-        return partner.toString();
+        return relationships.toString();
     }
 
     //    private LinkedList<Person> children = null;
@@ -282,7 +281,7 @@ public class Person {
                 "," + source +
                 "," + description +
                 "," + parents +
-                "," + partner +
+                "," + relationships +
                 "," + sensitive;
     }
 
@@ -340,7 +339,7 @@ public class Person {
         jsonObject.put("source", source);
         jsonObject.put("description", description);
         jsonObject.put("events", events);
-        jsonObject.put("partner", partner);
+        jsonObject.put("partner", relationships);
         jsonObject.put("parents", parents);
         jsonObject.put("children", children);
         jsonObject.put("sensitive", sensitive);
@@ -355,7 +354,7 @@ public class Person {
         source = (Source) jsonObject.get("source");
         description = (String) jsonObject.get("description");
         events = (LinkedList<Event>) jsonObject.get("events");
-        partner = (LinkedList<Person>) jsonObject.get("partner");
+        relationships = (LinkedList<Person>) jsonObject.get("partner");
         parents = (LinkedList<Person>) jsonObject.get("parents");
         children = (LinkedList<Person>) jsonObject.get("children");
         sensitive = (boolean) jsonObject.get("sensitive");

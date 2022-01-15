@@ -56,7 +56,6 @@ public class PersonsController extends ListController {
     }
 
 
-
     public void btnPersonNewPress(ActionEvent actionEvent) throws IOException {
         System.out.println("Adding new Person record");
         changeScene("/fxml/PersonView.fxml", actionEvent);

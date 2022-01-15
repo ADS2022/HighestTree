@@ -50,10 +50,10 @@ public class FilterTests {
         person_5.setLastName("Maier");
         person_5.setNationality("germany");
 
-        person_1.setPartner(person_2);
+        person_1.setRelationships(person_2);
         person_1.setChildren(person_3);
         person_2.setChildren(person_3);
-        person_4.setPartner(person_5);
+        person_4.setRelationships(person_5);
 
         persons.add(person_1);
         persons.add(person_2);

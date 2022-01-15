@@ -200,7 +200,7 @@ class PersonTest {
                         true
                 )
         );
-        this.testPerson1.setPartner(testPerson2);
+        this.testPerson1.setRelationships(testPerson2);
         System.out.println("Number of relationships => " + this.testPerson1.getPartners().size());
 
         int expected = 2;
